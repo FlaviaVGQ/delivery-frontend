@@ -7,7 +7,7 @@ const App = () => {
     fetch('http://localhost:8000/login/api/exemplo/')
       .then(response => response.json())
       .then(data => setData(data))
-      .catch(error => console.error('Erro ao buscar dados:', error));
+      .catch(error => console.error('Erro ao buscar dadoss : ', error));
   }, []);
 
   return (
