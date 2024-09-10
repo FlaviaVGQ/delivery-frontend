@@ -1,0 +1,101 @@
+/* Estilos comuns para login e criação de usuário */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(246, 144, 61, 0.57); /* Cor de fundo */
+}
+
+/* Caixa de login/criação de usuário */
+.login-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 450px; /* Tamanho fixo para o container */
+    height: 500px;
+    text-align: center;
+}
+
+/* Logo */
+.login-logo {
+    width: 180px; /* Ajuste conforme necessário */
+    height: 180px; /* Ajuste conforme necessário */
+    border-radius: 50%; /* Faz o logo ficar redondo */
+    object-fit: cover; /* Garante que a imagem seja cortada para preencher o círculo */
+    margin-bottom: 20px;
+}
+
+/* Título do login/criação de usuário */
+.login-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Formulário de login/criação de usuário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grupo de campos de formulário */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Campos de entrada */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botão de login/criação de conta */
+.login-button {
+    background-color: rgba(255, 109, 0, 0.93);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: rgb(218, 76, 0);
+}
+
+/* Mensagem de login/criação de conta */
+.login-message {
+    margin-top: 10px;
+    color: #e74c3c;
+}
+
+/* Link para criar conta ou voltar ao login */
+.create-account {
+    margin-top: 15px;
+}
+
+.create-account a {
+    color: #df551a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.create-account a:hover {
+    text-decoration: underline;
+}
