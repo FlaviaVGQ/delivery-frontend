@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../fileService';
 import './index.css';
 import { FaUser, FaLock } from 'react-icons/fa';
@@ -9,18 +9,46 @@ const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-    const navigate = useNavigate(); // Definir o hook useNavigate
+    const [remainingTime, setRemainingTime] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (remainingTime > 0) {
+            const timer = setInterval(() => {
+                setRemainingTime(prev => prev - 1);
+            }, 1000);
+
+            return () => clearInterval(timer);
+        }
+    }, [remainingTime]);
+
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes}m ${secs}s`;
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
             const response = await login(username, password);
+
             if (response.success) {
                 setMessage('Login realizado com sucesso!');
-                navigate('/home'); // Redirecionar para a página inicial
+                navigate('/home');
+            } else if (response.remaining_time !== undefined) {
+                setRemainingTime(response.remaining_time);
+                setMessage(`Conta bloqueada.`);
             } else {
-                setMessage('Falha no login. Tente novamente.');
+
+                if (response.message.includes('Usuário não encontrado')) {
+                    setMessage('Usuário não encontrado. Verifique o nome de usuário e tente novamente.');
+                } else if (response.message.includes('Senha incorreta')) {
+                    setMessage('Senha incorreta. Verifique sua senha e tente novamente.');
+                } else {
+                    setMessage(response.message || 'Falha no login. Tente novamente.');
+                }
             }
         } catch (error) {
             setMessage('Ocorreu um erro durante o login.');
@@ -56,7 +84,15 @@ const LoginPage = () => {
                             placeholder="Digite sua senha"
                         />
                     </div>
-                    <button type="submit" className="login-button">Entrar</button>
+                    <button
+                        type="submit"
+                        className="login-button"
+                        disabled={remainingTime > 0}
+                    >
+                        {remainingTime > 0
+                            ? `Tente novamente em ${formatTime(remainingTime)}`
+                            : 'Entrar'}
+                    </button>
                 </form>
                 {message && <p className="login-message">{message}</p>}
                 <div className="create-account">

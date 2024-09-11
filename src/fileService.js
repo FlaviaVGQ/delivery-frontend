@@ -5,6 +5,10 @@ export const login = async (username, password) => {
         const response = await api.post('/login/', { username, password });
         return response.data;
     } catch (error) {
+        if (error.response && error.response.status === 403) {
+            console.log(error.response.data)
+            return error.response.data; // Retorna a resposta com tempo restante
+        }
         console.error('Erro ao fazer login: ', error);
         throw error;
     }
