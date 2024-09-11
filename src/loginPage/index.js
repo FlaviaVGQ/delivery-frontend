@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { fetchData } from '../fileService';
-import './index.css'; // Importando o arquivo CSS
-import { FaUser, FaLock } from 'react-icons/fa'; // Ícones de usuário e senha
-import { Link } from 'react-router-dom'; // Importando Link do react-router-dom para navegação
+import { login } from '../fileService';
+import './index.css';
+import { FaUser, FaLock } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -13,7 +13,7 @@ const LoginPage = () => {
         event.preventDefault();
 
         try {
-            const response = await fetchData();
+            const response = await login(username, password);
             if (response.success) {
                 setMessage('Login realizado com sucesso!');
             } else {
@@ -27,8 +27,7 @@ const LoginPage = () => {
     return (
         <div className="login-container">
             <div className="login-box">
-                <img src="/logo.png" alt="Logo" className="login-logo" /> {/* Imagem de logo */}
-                {/*<h1 className="login-title">Delivery Express</h1>*/}
+                <img src="/logo.png" alt="Logo" className="login-logo" />
                 <form onSubmit={handleSubmit} className="login-form">
                     <div className="form-group">
                         <label htmlFor="username"><FaUser /> Usuário</label>
@@ -57,8 +56,6 @@ const LoginPage = () => {
                     <button type="submit" className="login-button">Entrar</button>
                 </form>
                 {message && <p className="login-message">{message}</p>}
-
-                {/* Link para criar conta */}
                 <div className="create-account">
                     <p>Não tem uma conta? <Link to="/createUser">Criar conta</Link></p>
                 </div>

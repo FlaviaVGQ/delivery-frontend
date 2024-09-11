@@ -1,18 +1,21 @@
-// src/apiService.js
+import api from './api';
 
-const API_BASE_URL = 'http://localhost:8000/';
-
+export const login = async (username, password) => {
+    try {
+        const response = await api.post('/login/', { username, password });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao fazer login: ', error);
+        throw error;
+    }
+};
 
 export const fetchData = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}${'login/'}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
+        const response = await api.get('/data/');
+        return response.data;
     } catch (error) {
         console.error('Erro ao buscar dados: ', error);
-        throw error; // Re-throw error to be handled by the caller
+        throw error;
     }
 };
