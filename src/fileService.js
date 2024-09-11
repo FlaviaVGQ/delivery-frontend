@@ -19,3 +19,13 @@ export const fetchData = async () => {
         throw error;
     }
 };
+
+export const createUser = async (username, email, password) => {
+    try {
+        const response = await api.post('/create/', { username, email, password });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar usuário: ', error);
+        throw error;
+    }
+};
