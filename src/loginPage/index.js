@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import { login } from '../fileService';
 import './index.css';
 import { FaUser, FaLock } from 'react-icons/fa';
@@ -8,6 +9,7 @@ const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate(); // Definir o hook useNavigate
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -16,6 +18,7 @@ const LoginPage = () => {
             const response = await login(username, password);
             if (response.success) {
                 setMessage('Login realizado com sucesso!');
+                navigate('/home'); // Redirecionar para a página inicial
             } else {
                 setMessage('Falha no login. Tente novamente.');
             }
