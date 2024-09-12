@@ -1,0 +1,101 @@
+/* Estilos comuns para redefinição de senha */
+.reset-password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #b24e06; /* Cor de fundo igual ao botão */
+}
+
+/* Caixa de redefinição de senha */
+.reset-password-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 450px; /* Tamanho fixo para o container */
+    height: 500px;
+    text-align: center;
+}
+
+/* Logo */
+.reset-password-logo {
+    width: 180px; /* Ajuste conforme necessário */
+    height: 180px; /* Ajuste conforme necessário */
+    border-radius: 50%; /* Faz o logo ficar redondo */
+    object-fit: cover; /* Garante que a imagem seja cortada para preencher o círculo */
+    margin-bottom: 20px;
+}
+
+/* Título da redefinição de senha */
+.reset-password-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Formulário de redefinição de senha */
+.reset-password-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grupo de campos de formulário */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Campos de entrada */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botão de redefinição de senha */
+.reset-password-button {
+    background-color: #ff6d00; /* Cor do botão */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset-password-button:hover {
+    background-color: #e65100; /* Cor de hover do botão */
+}
+
+/* Mensagem de redefinição de senha */
+.reset-password-message {
+    margin-top: 10px;
+    color: #e74c3c; /* Cor da mensagem de erro */
+}
+
+/* Link para voltar ao login */
+.back-to-login {
+    margin-top: 15px;
+}
+
+.back-to-login a {
+    color: #df551a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+}

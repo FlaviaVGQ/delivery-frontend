@@ -97,6 +97,7 @@ const LoginPage = () => {
                 {message && <p className="login-message">{message}</p>}
                 <div className="create-account">
                     <p>Não tem uma conta? <Link to="/createUser">Criar conta</Link></p>
+                    <p><Link to="/forgotPassword">Esqueci minha senha</Link></p>
                 </div>
             </div>
         </div>
