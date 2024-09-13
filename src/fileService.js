@@ -50,28 +50,13 @@ const getCsrfToken = () => {
     return null;
 };
 
-export const changePassword = async (uidb64, token, newPassword) => {
+export const changePassword = async ( username, password) => {
     const csrfToken = getCsrfToken(); // Obtenha o token CSRF
 
     try {
-        const response = await fetch(`/reset-password/${uidb64}/${token}/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken, // Inclua o token CSRF no cabeçalho
-            },
-            body: JSON.stringify({ newPassword }),
-        });
-
-        if (!response.ok) {
-            // Lança um erro se a resposta não for bem-sucedida
-            const errorText = await response.text();
-            throw new Error(`Erro ${response.status}: ${errorText}`);
-        }
-
-        // Lê a resposta como JSON
-        const data = await response.json();
-        return data;
+        console.log(password)
+        const response = await api.post(`/resetpassword/`, { username, password});
+        return response.data;
     } catch (error) {
         console.error('Erro ao redefinir a senha:', error);
         throw error;
@@ -82,29 +67,11 @@ export const changePassword = async (uidb64, token, newPassword) => {
 ////////////////////////////////////////////////////////////
 
 export const sendResetPasswordEmail = async (emailOrUsername) => {
-    const csrfToken = getCsrfToken(); // Obtenha o token CSRF
-
     try {
-        const response = await fetch('/forgotpassword/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken, // Inclua o token CSRF no cabeçalho
-            },
-            body: JSON.stringify({ emailOrUsername }),
-        });
-
-        if (!response.ok) {
-            // Lança um erro se a resposta não for bem-sucedida
-            const errorText = await response.text();
-            throw new Error(`Erro ${response.status}: ${errorText}`);
-        }
-
-        // Lê a resposta como JSON
-        const data = await response.json();
-        return data;
+        const response = await api.post('/forgotpassword/', { emailOrUsername });
+        return response.data;
     } catch (error) {
         console.error('Erro ao enviar e-mail de recuperação:', error);
-        throw error; // Lança o erro para ser tratado externamente
+        throw error;
     }
 };

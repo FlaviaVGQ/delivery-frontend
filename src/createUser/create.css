@@ -14,7 +14,7 @@
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 450px; /* Tamanho fixo para o container */
-    height: 500px;
+    height: 550px;
     text-align: center;
 }
 
@@ -24,13 +24,13 @@
     height: 180px; /* Ajuste conforme necessário */
     border-radius: 50%; /* Faz o logo ficar redondo */
     object-fit: cover; /* Garante que a imagem seja cortada para preencher o círculo */
-    margin-bottom: 20px;
+    margin-bottom: -20px;
 }
 
 /* Título do login/criação de usuário */
 .login-title {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: -35px;
     color: #333;
 }
 
@@ -38,12 +38,14 @@
 .login-form {
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 
 /* Grupo de campos de formulário */
 .form-group {
     margin-bottom: 15px;
     text-align: left;
+    margin-top: -40px;
 }
 
 /* Labels */

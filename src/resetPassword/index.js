@@ -6,6 +6,7 @@ import { changePassword } from '../fileService'; // Certifique-se de que essa fu
 
 const ResetPasswordPage = () => {
     const { uidb64, token } = useParams(); // Use useParams para acessar os parâmetros da URL
+    const [username, setUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -19,8 +20,9 @@ const ResetPasswordPage = () => {
         }
 
         try {
-            await changePassword(uidb64, token, newPassword); // Passe uidb64 e token para a função
+            await changePassword(username, newPassword); // Passe username, uidb64 e token para a função
             setMessage('Senha alterada com sucesso!');
+            setUsername('');
             setNewPassword('');
             setConfirmPassword('');
         } catch (error) {
@@ -34,6 +36,18 @@ const ResetPasswordPage = () => {
                 <img src="/logo.png" alt="Logo" className="reset-password-logo" />
                 <h1 className="reset-password-title">Alterar Senha</h1>
                 <form onSubmit={handleSubmit} className="reset-password-form">
+                    <div className="form-group">
+                        <label htmlFor="username">Nome de Usuário</label>
+                        <input
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            className="input-field"
+                            placeholder="Digite seu nome de usuário"
+                        />
+                    </div>
                     <div className="form-group">
                         <label htmlFor="new-password"><FaLock /> Nova Senha</label>
                         <input

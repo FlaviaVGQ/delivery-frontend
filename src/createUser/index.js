@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './index.css'; 
-import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa'; 
+import './create.css';
+import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { createUser } from '../fileService';
 
 const CreateUserPage = () => {

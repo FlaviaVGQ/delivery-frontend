@@ -1,50 +1,59 @@
 import React, { useState } from 'react';
-import { sendResetPasswordEmail } from '../fileService'; // Supondo que você tenha uma função para enviar o e-mail
+import { sendResetPasswordEmail } from '../fileService'; // Função para enviar o e-mail de redefinição
 import { FaEnvelope } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // Importando Link do react-router-dom
-import './index.css';
+import { Link } from 'react-router-dom'; // Certifique-se de que esta importação está presente
+import './index.css'; // Importe o CSS atualizado
 
 const ForgotPasswordPage = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            console.log(emailOrUsername);
             const response = await sendResetPasswordEmail(emailOrUsername);
 
+            // Se for sucesso, define a mensagem e o tipo como 'success'
             if (response.success) {
                 setMessage('E-mail de recuperação enviado com sucesso. Verifique sua caixa de entrada.');
+                setMessageType('success');
             } else {
-                setMessage(response.message || 'Falha ao enviar e-mail de recuperação. Tente novamente.');
+                // Se houver algum erro, define a mensagem e o tipo como 'error'
+                setMessage(response.message);
+                setMessageType('error');
             }
         } catch (error) {
+            // Em caso de falha, define a mensagem e o tipo como 'error'
             setMessage('Ocorreu um erro ao tentar enviar o e-mail de recuperação.');
+            setMessageType('error');
         }
     };
 
     return (
-        <div className="login-container">
-            <div className="login-box">
+        <div className="forgot-password-container">
+            <div className="forgot-password-box">
                 <h2>Recuperação de Senha</h2>
-                <form onSubmit={handleSubmit} className="login-form">
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="emailOrUsername"><FaEnvelope /> E-mail ou Nome de Usuário</label>
+                        <label htmlFor="emailOrUsername">
+                            <FaEnvelope /> E-mail ou Nome de Usuário
+                        </label>
                         <input
                             type="text"
                             id="emailOrUsername"
                             value={emailOrUsername}
                             onChange={(e) => setEmailOrUsername(e.target.value)}
                             required
-                            className="input-field"
                             placeholder="Digite seu e-mail ou nome de usuário"
                         />
                     </div>
-                    <button type="submit" className="login-button">
-                        Enviar Instruções
-                    </button>
+                    <button type="submit">Enviar Instruções</button>
                 </form>
-                {message && <p className="login-message">{message}</p>}
+                {message && (
+                    <p className={`message ${messageType}`}>{message}</p>
+                )}
                 <div className="back-to-login">
                     <Link to="/">Voltar para Login</Link>
                 </div>
