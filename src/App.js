@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './loginPage';
 import CreateUserPage from './createUser';
 import ForgotPasswordPage from './forgotPassword';
-import ResetPasswordPage from './resetPassword'; // Certifique-se de que o caminho e nome estão corretos
+import ResetPasswordPage from './resetPassword'; 
 import HomePage from './homePage';
 
 const App = () => {

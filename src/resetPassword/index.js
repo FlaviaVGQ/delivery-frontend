@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './index.css';
 import { FaLock } from 'react-icons/fa';
-import { changePassword } from '../fileService'; // Certifique-se de que essa função está importada corretamente
+import { changePassword } from '../fileService'; 
 
 const ResetPasswordPage = () => {
-    const { uidb64, token } = useParams(); // Use useParams para acessar os parâmetros da URL
+    const { uidb64, token } = useParams(); 
     const [username, setUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,7 +20,7 @@ const ResetPasswordPage = () => {
         }
 
         try {
-            await changePassword(username, newPassword); // Passe username, uidb64 e token para a função
+            await changePassword(username, newPassword);
             setMessage('Senha alterada com sucesso!');
             setUsername('');
             setNewPassword('');
@@ -31,11 +31,11 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <div className="reset-password-container">
-            <div className="reset-password-box">
-                <img src="/logo.png" alt="Logo" className="reset-password-logo" />
-                <h1 className="reset-password-title">Alterar Senha</h1>
-                <form onSubmit={handleSubmit} className="reset-password-form">
+        <div className="reset-container">
+            <div className="reset-box">
+                <img src="/logo.png" alt="Logo" className="reset-logo" />
+                <h1 className="reset-title">Alterar Senha</h1>
+                <form onSubmit={handleSubmit} className="reset-form">
                     <div className="form-group">
                         <label htmlFor="username">Nome de Usuário</label>
                         <input
@@ -72,10 +72,10 @@ const ResetPasswordPage = () => {
                             placeholder="Confirme sua nova senha"
                         />
                     </div>
-                    <button type="submit" className="reset-password-button">Alterar Senha</button>
+                    <button type="submit" className="reset-button">Alterar Senha</button>
                 </form>
-                {message && <p className="reset-password-message">{message}</p>}
-                <div className="back-to-login">
+                {message && <p className="reset-message">{message}</p>}
+                <div className="back-login">
                     <p>Voltar ao login? <Link to="/">Ir para Login</Link></p>
                 </div>
             </div>

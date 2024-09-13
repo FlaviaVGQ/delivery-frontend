@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(163, 77, 0); /* Cor de fundo */
+    background-color: rgb(163, 77, 0); 
 }
 
 .forgot-password-box {
@@ -11,7 +11,7 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 450px; /* Tamanho fixo para o container */
+    width: 450px; 
     height: 400px;
     text-align: center;
 }
@@ -67,14 +67,13 @@ button:hover {
     text-align: center;
 }
 
-/* Estilo para mensagem de sucesso (verde) */
 .message.success {
     color: #155724;
     background-color: #d4edda;
     border: 1px solid #c3e6cb;
 }
 
-/* Estilo para mensagem de erro (vermelho) */
+
 .message.error {
     color: #9c3111;
     background-color: #f8d7da;

@@ -1,54 +1,50 @@
-/* Estilos comuns para login e criação de usuário */
-.login-container {
+.create-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(163, 77, 0); /* Cor de fundo */
+    background-color: rgb(163, 77, 0); 
 }
 
-/* Caixa de login/criação de usuário */
-.login-box {
+.create-box {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 450px; /* Tamanho fixo para o container */
-    height: 550px;
+    width: 450px; 
+    height: 650px;
     text-align: center;
 }
 
-/* Logo */
-.login-logo {
-    width: 180px; /* Ajuste conforme necessário */
-    height: 180px; /* Ajuste conforme necessário */
-    border-radius: 50%; /* Faz o logo ficar redondo */
-    object-fit: cover; /* Garante que a imagem seja cortada para preencher o círculo */
+.create-logo {
+    width: 180px; 
+    height: 180px; 
+    border-radius: 50%; 
+    object-fit: cover; 
     margin-bottom: -20px;
 }
 
-/* Título do login/criação de usuário */
-.login-title {
+
+.create-title {
     font-size: 24px;
     margin-bottom: -35px;
     color: #333;
 }
 
-/* Formulário de login/criação de usuário */
-.login-form {
+
+.create-form {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
 }
 
-/* Grupo de campos de formulário */
 .form-group {
     margin-bottom: 15px;
     text-align: left;
     margin-top: -40px;
 }
 
-/* Labels */
+
 .form-group label {
     display: block;
     margin-bottom: 5px;
@@ -56,7 +52,6 @@
     color: #555;
 }
 
-/* Campos de entrada */
 .input-field {
     width: 100%;
     padding: 10px;
@@ -65,8 +60,7 @@
     font-size: 16px;
 }
 
-/* Botão de login/criação de conta */
-.login-button {
+.create-button {
     background-color: rgba(255, 109, 0, 0.93);
     color: white;
     padding: 10px;
@@ -77,27 +71,26 @@
     transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
+.create-button:hover {
     background-color: rgb(218, 76, 0);
 }
 
-/* Mensagem de login/criação de conta */
-.login-message {
+
+.create-message {
     margin-top: 10px;
     color: #e74c3c;
 }
 
-/* Link para criar conta ou voltar ao login */
-.create-account {
+.return-login {
     margin-top: 15px;
 }
 
-.create-account a {
+.return-login a {
     color: #df551a;
     text-decoration: none;
     font-weight: bold;
 }
 
-.create-account a:hover {
+.return-login a:hover {
     text-decoration: underline;
 }

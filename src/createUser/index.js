@@ -25,11 +25,11 @@ const CreateUserPage = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-box">
-                <img src="/logo.png" alt="Logo" className="login-logo" /> {/* Imagem de logo */}
-                <h1 className="login-title">Criar Conta</h1>
-                <form onSubmit={handleSubmit} className="login-form">
+        <div className="create-container">
+            <div className="create-box">
+                <img src="/logo.png" alt="Logo" className="create-logo" /> {}
+                <h1 className="create-title">Criar Conta</h1>
+                <form onSubmit={handleSubmit} className="create-form">
                     <div className="form-group">
                         <label htmlFor="username"><FaUser /> Usuário</label>
                         <input
@@ -66,10 +66,10 @@ const CreateUserPage = () => {
                             placeholder="Digite sua senha"
                         />
                     </div>
-                    <button type="submit" className="login-button">Criar Conta</button>
+                    <button type="submit" className="create-button">Criar Conta</button>
                 </form>
-                {message && <p className="login-message">{message}</p>}
-                <div className="create-account">
+                {message && <p className="create-message">{message}</p>}
+                <div className="return-login">
                     <p>Já tem uma conta? <Link to="/">Voltar ao login</Link></p>
                 </div>
             </div>

@@ -95,7 +95,7 @@ const LoginPage = () => {
                     </button>
                 </form>
                 {message && <p className="login-message">{message}</p>}
-                <div className="create-account">
+                <div className="return-login">
                     <p>Não tem uma conta? <Link to="/createUser">Criar conta</Link></p>
                     <p><Link to="/forgotPassword">Esqueci minha senha</Link></p>
                 </div>
