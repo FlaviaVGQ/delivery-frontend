@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './loginPage';
 import CreateUserPage from './createUser';
 import ForgotPasswordPage from './forgotPassword';
-import ResetPasswordPage from './resetPassword'; 
+import ResetPasswordPage from './resetPassword';
 import HomePage from './homePage';
+import ProductsPage from "./productsPage";
 
 const App = () => {
     return (
@@ -15,6 +16,8 @@ const App = () => {
                 <Route path="/forgotPassword" element={<ForgotPasswordPage />} />
                 <Route path="/reset-password/:uidb64/:token" element={<ResetPasswordPage />} />
                 <Route path="/home" element={<HomePage />} />
+                <Route path="/products" element={<ProductsPage />} />
+
             </Routes>
         </Router>
     );

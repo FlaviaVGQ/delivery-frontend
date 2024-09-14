@@ -1,0 +1,256 @@
+/* Layout geral do container da página */
+.products-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe2c2;
+}
+
+/* Estilização do cabeçalho da página */
+.page-header {
+    background-color: #ff6d00;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19);
+}
+
+.page-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 0;
+    margin-left: 20px;
+}
+
+/* Estilização da navegação do cabeçalho */
+.page-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.page-nav ul li {
+    margin-left: 20px;
+}
+
+.page-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Georgia', serif;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.page-nav ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Layout do conteúdo principal da página */
+.products-page-main {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+    font-family: 'Verdana', sans-serif;
+    position: relative; /* Ensure positioning context */
+}
+
+/* Títulos e parágrafos */
+.products-page-title h1 {
+    color: #333;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.products-page-title p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Seção de busca e filtros */
+.search-filter-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.search-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.search-filter-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ff6d00;
+    margin-right: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    flex: 1;
+}
+
+.search-icon {
+    color: #ff6d00;
+    margin-right: 5px;
+}
+
+/* Botões de filtro */
+.filter-buttons {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button.active {
+    background-color: #ff4b00;
+}
+
+.filter-button:hover {
+    background-color: #ff4b00;
+}
+
+/* Botão principal para adicionar produtos */
+.products-actions .primary-button {
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.products-actions .primary-button:hover {
+    background-color: #ff4b00;
+}
+
+/* Container das categorias e produtos */
+.categories-container {
+    margin-top: 20px;
+}
+
+.category-container {
+    margin-bottom: 20px;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-actions .category-edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ff6d00;
+}
+
+.category-products {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.product-details {
+    flex: 1;
+}
+
+.product-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-button, .view-button, .delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ff6d00;
+}
+
+.edit-button:hover {
+    color: #ff4b00;
+}
+
+.view-button:hover {
+    color: #ff4b00;
+}
+
+.delete-button:hover {
+    color: #ff4b00;
+}
+
+/* Botão para adicionar nova categoria */
+.add-category-button {
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-category-button:hover {
+    background-color: #ff4b00;
+}
+
+/* Rodapé da página */
+.page-footer {
+    background-color: #ff6d00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+}
