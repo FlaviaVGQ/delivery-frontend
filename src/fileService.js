@@ -82,3 +82,16 @@ export const sendCategory = async (category, userId) => {
         throw error;
     }
 };
+
+
+// No fileService.js
+export const fetchCategoriesByUser = async (userId) => {
+    try {
+        const response = await api.get(`/category/`, { params: { user_id: userId } });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar categorias: ', error);
+        throw error;
+    }
+};
+

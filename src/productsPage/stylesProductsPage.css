@@ -2,7 +2,7 @@
 .products-page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Faz o container ocupar pelo menos a altura da janela */
     font-family: 'Arial', sans-serif;
     background-color: #ffe2c2;
 }
@@ -54,11 +54,9 @@
 
 /* Layout do conteúdo principal da página */
 .products-page-main {
-    flex: 1;
+    flex: 1; /* Faz o conteúdo principal ocupar todo o espaço disponível */
     padding: 40px;
     background-color: #ffffff;
-    font-family: 'Verdana', sans-serif;
-    position: relative; /* Ensure positioning context */
 }
 
 /* Títulos e parágrafos */
@@ -147,13 +145,29 @@
     background-color: #ff6d00;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
+    margin-top: 15px; 
+}
+
+.add-category-button{
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    margin-top: 15px; 
+
 }
 
 .products-actions .primary-button:hover {
@@ -173,14 +187,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.category-actions .category-edit {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: #ff6d00;
 }
 
 .category-products {
@@ -221,36 +227,27 @@
 }
 
 .view-button:hover {
-    color: #ff4b00;
+    color: #0056b3; /* Cor para o hover do botão de visualização */
 }
 
 .delete-button:hover {
-    color: #ff4b00;
+    color: #d9534f; /* Cor para o hover do botão de deletar */
 }
 
-/* Botão para adicionar nova categoria */
-.add-category-button {
-    background-color: #ff6d00;
-    color: white;
+/* Divider line between categories */
+.category-divider {
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
 }
 
-.add-category-button:hover {
-    background-color: #ff4b00;
-}
-
-/* Rodapé da página */
+/* Rodapé */
 .page-footer {
     background-color: #ff6d00;
     color: white;
     text-align: center;
-    padding: 10px;
-    font-size: 1rem;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: -200px; /* Faz o rodapé se manter na parte inferior */
 }

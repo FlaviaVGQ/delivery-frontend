@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
-import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaFilter, FaEllipsisV, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaFilter, FaEllipsisV } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
-const categories = ["Categoria 1", "Categoria 2", "Categoria 3"];
+import { fetchCategoriesByUser } from '../fileService'; // Importando a função do fileService
 
 const ProductsPage = () => {
     const navigate = useNavigate();
@@ -16,18 +15,38 @@ const ProductsPage = () => {
         { id: 6, name: "Exemplo de Produto 6", description: "Descrição do Produto 6", category: "Categoria 2" },
         { id: 7, name: "Exemplo de Produto 7", description: "Descrição do Produto 7", category: "Categoria 2" }
     ]);
+
+    const [categories, setCategories] = useState([]); // Lista de categorias
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState({ category: '' });
-    const [editingCategory, setEditingCategory] = useState(null);
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
+    const userId = localStorage.getItem('userId'); // Pega o userId do localStorage
+
+    // Busca categorias do usuário
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                if (userId) {
+                    const response = await fetchCategoriesByUser(userId); // Chama a função para buscar categorias
+                    setCategories(response);
+                    console.log('Categorias:', response); // Define as categorias
+                }
+            } catch (error) {
+                console.error("Erro ao buscar categorias: ", error);
+            }
+        };
+
+        fetchCategories();
+    }, [userId]);
+
     const handleAddProduct = () => {
-        // Function to add a new product
+        // Função para adicionar novo produto
     };
 
     const handleEditProduct = (id) => {
-        // Function to edit a product
+        // Função para editar produto
     };
 
     const handleDeleteProduct = (id) => {
@@ -40,109 +59,98 @@ const ProductsPage = () => {
     };
 
     const handleEditCategory = (category) => {
-        // Function to edit a category
-        setEditingCategory(category);
+        // Função para editar uma categoria
     };
-
-    const handleDeleteCategory = (category) => {
-        // Function to delete a category
-    };
-
 
     const handleGoToCategories = () => {
         navigate('/category'); // Redireciona para a página de categorias
     };
 
-    const filteredProducts = products
-    .filter(product => product.name.toLowerCase().includes(search.toLowerCase()) &&
-        (filter.category ? product.category === filter.category : true));
+    // Filtrar produtos
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(search.toLowerCase()) &&
+        (filter.category ? product.category === filter.category : true)
+    );
 
-// Organize products by categories
-const categorizedProducts = categories.reduce((acc, category) => {
-    acc[category] = filteredProducts.filter(product => product.category === category);
-    return acc;
-}, {});
+    // Organize products by categories
+    const categorizedProducts = categories.reduce((acc, category) => {
+        acc[category.name] = filteredProducts.filter(product => product.category === category.name);
+        return acc;
+    }, {});
 
-return (
-    <div className="products-page-container">
-        <header className="page-header">
-            <img src="/logo.png" alt="Logo" className="page-logo" />
-            <nav className="page-nav">
-                <ul>
-                    <li><a href="/home"><FaBoxOpen /> Voltar</a></li>
-                </ul>
-            </nav>
-        </header>
+    return (
+        <div className="products-page-container">
+            <header className="page-header">
+                <img src="/logo.png" alt="Logo" className="page-logo" />
+                <nav className="page-nav">
+                    <ul>
+                        <li><a href="/home"><FaBoxOpen /> Voltar</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-        <main className="products-page-main">
-            <div className="products-page-title">
-                <h1>Gerenciamento de Produtos</h1>
-                <p>Adicione, edite e exclua produtos do seu inventário.</p>
-            </div>
-
-            <div className="search-filter-section">
-                <div className="search-filter-bar">
-                    <button
-                        className="search-filter-toggle"
-                        onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-                    >
-                        <FaSearch />
-                    </button>
-
-                    <button
-                        className="search-filter-toggle"
-                        onClick={() => setIsFilterExpanded(!isFilterExpanded)}
-                    >
-                        <FaFilter />
-                    </button>
+            <main className="products-page-main">
+                <div className="products-page-title">
+                    <h1>Gerenciamento de Produtos</h1>
+                    <p>Adicione, edite e exclua produtos do seu inventário.</p>
                 </div>
 
-                {isSearchExpanded && (
-                    <div className="search-bar">
-                        <FaSearch className="search-icon" />
-                        <input
-                            type="text"
-                            placeholder="Pesquisar produtos..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="search-input"
-                        />
+                <div className="search-filter-section">
+                    <div className="search-filter-bar">
+                        <button
+                            className="search-filter-toggle"
+                            onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+                        >
+                            <FaSearch />
+                        </button>
+
+                        <button
+                            className="search-filter-toggle"
+                            onClick={() => setIsFilterExpanded(!isFilterExpanded)}
+                        >
+                            <FaFilter />
+                        </button>
                     </div>
-                )}
 
-                {isFilterExpanded && (
-                    <div className="filter-buttons">
-                        {categories.map(category => (
-                            <button
-                                key={category}
-                                className={`filter-button ${filter.category === category ? 'active' : ''}`}
-                                onClick={() => setFilter({ category: filter.category === category ? '' : category })}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-                )}
-            </div>
+                    {isSearchExpanded && (
+                        <div className="search-bar">
+                            <FaSearch className="search-icon" />
+                            <input
+                                type="text"
+                                placeholder="Pesquisar produtos..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="search-input"
+                            />
+                        </div>
+                    )}
 
-            <div className="products-actions">
-                <button className="primary-button" onClick={handleAddProduct}><FaPlus /> Adicionar Novo Produto</button>
-            </div>
+                    {isFilterExpanded && (
+                        <div className="filter-buttons">
+                            {categories.map(category => (
+                                <button
+                                    key={category.id}
+                                    className={`filter-button ${filter.category === category.name ? 'active' : ''}`}
+                                    onClick={() => setFilter({ category: filter.category === category.name ? '' : category.name })}
+                                >
+                                    {category.name}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
-            <div className="categories-container">
-                {categories.map(category => (
-                    categorizedProducts[category].length > 0 && (
-                        <div key={category} className="category-container">
-                            <div className="category-header">
-                                <h2>{category}</h2>
-                                <div className="category-actions">
-                                    <button className="category-edit" onClick={() => handleEditCategory(category)}>
-                                        <FaEllipsisV className="category-icon" />
-                                    </button>
-                                </div>
-                            </div>
+                <div className="products-actions">
+                    <button className="add-category-button" onClick={handleGoToCategories}><FaPlus /> Adicionar Categoria</button>
+                    <button className="primary-button" onClick={handleAddProduct}><FaPlus /> Adicionar Produto</button>
+                </div>
+
+                <div className="categories-container">
+                    {categories.map(category => (
+                        <div key={category.id} className="category-container">
+                            <h2>{category.name}</h2>
                             <div className="category-products">
-                                {categorizedProducts[category].map(product => (
+                                {categorizedProducts[category.name]?.map(product => (
                                     <div key={product.id} className="product-item">
                                         <div className="product-details">
                                             <h3>{product.name}</h3>
@@ -163,18 +171,17 @@ return (
                                     </div>
                                 ))}
                             </div>
+                            <hr className="category-divider" /> {/* Divider line between categories */}
                         </div>
-                    )
-                ))}
-                <button className="add-category-button" onClick={handleGoToCategories}><FaPlus /> Adicionar Categoria</button>
-            </div>
-        </main>
+                    ))}
+                </div>
+            </main>
 
-        <footer className="page-footer">
-            &copy; {new Date().getFullYear()} Don Lisita. Todos os direitos reservados.
-        </footer>
-    </div>
-);
+            <footer className="page-footer">
+                &copy; {new Date().getFullYear()} Don Lisita. Todos os direitos reservados.
+            </footer>
+        </div>
+    );
 };
 
 export default ProductsPage;
