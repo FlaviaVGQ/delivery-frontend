@@ -1,45 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
-import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaFilter, FaEllipsisV } from 'react-icons/fa';
+import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaFilter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { fetchCategoriesByUser } from '../fileService'; // Importando a função do fileService
+import { fetchCategoriesByUser, getProductsByUser } from '../fileService'; // Importando as funções do fileService
 
 const ProductsPage = () => {
     const navigate = useNavigate();
-    const [products, setProducts] = useState([
-        { id: 1, name: "Exemplo de Produto 1", description: "Descrição do Produto 1", category: "Categoria 1" },
-        { id: 2, name: "Exemplo de Produto 2", description: "Descrição do Produto 2", category: "Categoria 1" },
-        { id: 3, name: "Exemplo de Produto 3", description: "Descrição do Produto 3", category: "Categoria 1" },
-        { id: 4, name: "Exemplo de Produto 4", description: "Descrição do Produto 4", category: "Categoria 2" },
-        { id: 5, name: "Exemplo de Produto 5", description: "Descrição do Produto 5", category: "Categoria 2" },
-        { id: 6, name: "Exemplo de Produto 6", description: "Descrição do Produto 6", category: "Categoria 2" },
-        { id: 7, name: "Exemplo de Produto 7", description: "Descrição do Produto 7", category: "Categoria 2" }
-    ]);
-
-    const [categories, setCategories] = useState([]); // Lista de categorias
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState({ category: '' });
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
     const userId = localStorage.getItem('userId');
-    console.log(userId) // Pega o userId do localStorage
+    console.log("usuario", userId); // Pega o userId do localStorage
 
-    // Busca categorias do usuário
+    // Busca categorias e produtos do usuário
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchData = async () => {
             try {
                 if (userId) {
-                    const response = await fetchCategoriesByUser(userId); // Chama a função para buscar categorias
-                    setCategories(response);
-                    console.log('Categorias:', response); // Define as categorias
+                    const categoriesResponse = await fetchCategoriesByUser(userId); // Chama a função para buscar categorias
+                    setCategories(categoriesResponse);
+                    console.log('Categorias:', categoriesResponse); // Define as categorias
+
+                    const productsResponse = await getProductsByUser(userId); // Chama a função para buscar produtos
+                    setProducts(productsResponse);
+                    console.log('Produtos:', productsResponse); // Define os produtos
                 }
             } catch (error) {
-                console.error("Erro ao buscar categorias: ", error);
+                console.error("Erro ao buscar dados: ", error);
             }
         };
 
-        fetchCategories();
+        fetchData();
     }, [userId]);
 
     const handleEditProduct = (id) => {
@@ -55,13 +50,10 @@ const ProductsPage = () => {
         alert(`Visualizando Produto: ${product.name}\nDescrição: ${product.description}\nCategoria: ${product.category}`);
     };
 
-    const handleEditCategory = (category) => {
-        // Função para editar uma categoria
-    };
-
     const handleGoToCategories = () => {
         navigate('/category'); // Redireciona para a página de categorias
     };
+
     const handleAddProduct = () => {
         navigate('/addProduct'); // Redireciona para a página de adicionar produto
     };
@@ -152,6 +144,7 @@ const ProductsPage = () => {
                             <div className="category-products">
                                 {categorizedProducts[category.name]?.map(product => (
                                     <div key={product.id} className="product-item">
+                                        <img src={product.imagePath} alt={product.name} className="product-image" /> {/* Adicionando a imagem do produto */}
                                         <div className="product-details">
                                             <h3>{product.name}</h3>
                                             <p>{product.description}</p>

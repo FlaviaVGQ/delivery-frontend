@@ -6,8 +6,8 @@ import ForgotPasswordPage from './forgotPassword';
 import ResetPasswordPage from './resetPassword';
 import HomePage from './homePage';
 import ProductsPage from "./productsPage";
-import CategoryPage from './categoryPage'; 
-import AddProductPage from './addProductPage'; 
+import CategoryPage from './categoryPage';
+import AddProductPage from './addProductPage';
 
 const App = () => {
     return (
@@ -18,7 +18,7 @@ const App = () => {
                 <Route path="/forgotPassword" element={<ForgotPasswordPage />} />
                 <Route path="/reset-password/:uidb64/:token" element={<ResetPasswordPage />} />
                 <Route path="/home" element={<HomePage />} />
-                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/" element={<ProductsPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/addProduct" element={<AddProductPage />} />
 

@@ -152,7 +152,7 @@
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
-    margin-top: 15px; 
+    margin-top: 15px;
 }
 
 .add-category-button{
@@ -166,7 +166,7 @@
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
-    margin-top: 15px; 
+    margin-top: 15px;
 
 }
 
@@ -251,3 +251,15 @@
     margin-top: auto;
     margin-bottom: -200px; /* Faz o rodapé se manter na parte inferior */
 }
+
+.product-image {
+    width: 100px; /* Defina a largura desejada */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-right: 10px; /* Espaço entre a imagem e os detalhes do produto */
+    border-radius: 5px; /* Bordas arredondadas (opcional) */
+}
+.product-item {
+    display: flex; /* Permite alinhar a imagem e os detalhes horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+

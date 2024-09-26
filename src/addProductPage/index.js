@@ -42,6 +42,7 @@ const AddProductPage = () => {
         if (!image) newErrors.image = 'Imagem é obrigatória.';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0; // Retorna true se não houver erros
+
     };
 
     const handleSubmit = async (event) => {
@@ -55,7 +56,7 @@ const AddProductPage = () => {
                 image
             };
             console.log(productData);
-            await addProduct(productData); // Adiciona o produto
+            await addProduct(productData, userId); // Adiciona o produto
             navigate('/productPage'); // Redireciona para a página de produtos
         }
     };

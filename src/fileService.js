@@ -94,20 +94,27 @@ export const fetchCategoriesByUser = async (userId) => {
         throw error;
     }
 };
-
-
-export const addProduct = async (productData) => {
+export const addProduct = async (productData, userId) => {
     try {
         const formData = new FormData();
         formData.append('name', productData.name);
         formData.append('description', productData.description);
         formData.append('price', productData.price);
         formData.append('categoryId', productData.categoryId);
-        formData.append('image', productData.image);  // This is important
+        formData.append('image', productData.image);
 
+        // Incluindo o ID do usuário
+        if (userId) {
+            formData.append('userId', userId);  // Adicione esta linha se quiser enviar explicitamente
+        }
+
+        // Verifique o conteúdo do formData
+        console.log([...formData]);
+
+        // Envie o formData diretamente, sem o {}
         const response = await api.post('/addProduct/', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data',  // Set the correct content type
+                'Content-Type': 'multipart/form-data',
             },
         });
         return response.data;
@@ -116,3 +123,13 @@ export const addProduct = async (productData) => {
         throw error;
     }
 };
+export const getProductsByUser = async (userId) => {
+    try {
+        const response = await api.get(`/products/`, { params: { user_id: userId } });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar produtos: ', error);
+        throw error;
+    }
+};
+
