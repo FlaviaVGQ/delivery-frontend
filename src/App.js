@@ -6,6 +6,7 @@ import ForgotPasswordPage from './forgotPassword';
 import ResetPasswordPage from './resetPassword';
 import HomePage from './homePage';
 import ProductsPage from "./productsPage";
+import CategoryPage from './categoryPage'; 
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/reset-password/:uidb64/:token" element={<ResetPasswordPage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/products" element={<ProductsPage />} />
+                <Route path="/category" element={<CategoryPage />} />
 
             </Routes>
         </Router>

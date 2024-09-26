@@ -63,15 +63,22 @@ export const changePassword = async ( username, password) => {
     }
 };
 
-
-////////////////////////////////////////////////////////////
-
 export const sendResetPasswordEmail = async (emailOrUsername) => {
     try {
         const response = await api.post('/forgotpassword/', { emailOrUsername });
         return response.data;
     } catch (error) {
         console.error('Erro ao enviar e-mail de recuperação:', error);
+        throw error;
+    }
+};
+
+export const sendCategory = async (category, userId) => {
+    try {
+        const response = await api.post('/category/', { category, user_id: userId });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao enviar categoria e ID:', error);
         throw error;
     }
 };

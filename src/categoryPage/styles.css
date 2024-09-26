@@ -1,0 +1,116 @@
+/* Layout geral do container da página */
+.category-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe2c2;
+}
+
+/* Estilização do cabeçalho da página */
+.category-page-header {
+    background-color: #ff6d00;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19);
+}
+
+.category-page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-left: 20px;
+}
+
+/* Layout do conteúdo principal da página */
+.category-page-main {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+    font-family: 'Verdana', sans-serif;
+    position: relative;
+}
+
+/* Formulário de adicionar nova categoria */
+.category-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.category-form label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.category-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.category-form input:focus {
+    border-color: #ff6d00;
+}
+
+/* Botão de adicionar categoria */
+.category-form .submit-button {
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.category-form .submit-button:hover {
+    background-color: #ff4b00;
+}
+
+/* Mensagem de erro */
+.error-message {
+    color: #ff0000;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Botão para voltar à lista de produtos */
+.back-to-products-button {
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.back-to-products-button:hover {
+    background-color: #ff4b00;
+}
+
+/* Rodapé da página */
+.page-footer {
+    background-color: #ff6d00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
