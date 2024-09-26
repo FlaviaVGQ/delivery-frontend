@@ -1,116 +1,109 @@
-/* Layout geral do container da página */
-.category-page-container {
+/* Container principal */
+.create-category-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
-    background-color: #ffe2c2;
+    background-color: #ffe2c2; /* Cor de fundo da página */
 }
 
-/* Estilização do cabeçalho da página */
-.category-page-header {
-    background-color: #ff6d00;
-    color: white;
+/* Cabeçalho */
+.admin-homepage-header {
+    background-color: #ff6d00; /* Cor de fundo do cabeçalho */
+    color: white; /* Cor do texto */
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19); /* Sombra do cabeçalho */
 }
 
-.category-page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-    margin-left: 20px;
+.admin-homepage-logo {
+    width: 120px; /* Ajuste o tamanho conforme necessário */
+    height: 120px; /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover; /* Garante que a imagem se ajuste ao círculo */
+    padding: 0;
+    margin-left: 20px; /* Empurra o logo para a direita */
 }
 
-/* Layout do conteúdo principal da página */
-.category-page-main {
-    flex: 1;
-    padding: 40px;
-    background-color: #ffffff;
-    font-family: 'Verdana', sans-serif;
-    position: relative;
-}
-
-/* Formulário de adicionar nova categoria */
-.category-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.category-form label {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.category-form input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.category-form input:focus {
-    border-color: #ff6d00;
-}
-
-/* Botão de adicionar categoria */
-.category-form .submit-button {
-    background-color: #ff6d00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
-}
-
-.category-form .submit-button:hover {
-    background-color: #ff4b00;
-}
-
-/* Mensagem de erro */
-.error-message {
-    color: #ff0000;
-    font-size: 1rem;
-    margin-top: 10px;
-}
-
-/* Botão para voltar à lista de produtos */
-.back-to-products-button {
-    background-color: #ff6d00;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
+.admin-homepage-nav {
     display: flex;
     align-items: center;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
 }
 
-.back-to-products-button:hover {
-    background-color: #ff4b00;
+.nav-list {
+    list-style: none; /* Remove marcas de lista */
+    display: flex;
+    gap: 20px; /* Espaçamento entre os itens do menu */
+    margin: 0;
+    padding: 0;
 }
 
-/* Rodapé da página */
-.page-footer {
-    background-color: #ff6d00;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-size: 1rem;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.nav-list a {
+    text-decoration: none; /* Remove sublinhado */
+    color: #fafafa; /* Cor do texto do menu */
+    font-weight: bold; /* Negrito */
+    transition: color 0.3s ease; /* Transição suave */
+}
+
+.nav-list a:hover {
+    color: rgb(243, 182, 141); /* Cor ao passar o mouse */
+}
+
+/* Main content */
+.create-category-main {
+    flex-grow: 1; /* Permite que o conteúdo principal cresça */
+    display: flex; /* Flexbox para centralização */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* Estilo do contêiner do formulário */
+.form-container {
+    background-color: white; /* Cor de fundo do cartão */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    width: 400px; /* Largura fixa */
+    text-align: center; /* Centraliza o texto dentro do contêiner */
+    margin: 0 auto; /* Centraliza horizontalmente na tela */
+    display: flex; /* Flexbox para alinhamento */
+    flex-direction: column; /* Alinha itens na coluna */
+    align-items: center; /* Alinha itens ao centro */
+}
+
+/* Estilo do input */
+.category-input {
+    width: 100%; /* Largura total do contêiner */
+    padding: 10px; /* Espaçamento interno do campo */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-bottom: 20px; /* Espaçamento entre o input e o botão */
+}
+
+/* Estilo do botão */
+.create-category-button {
+    background-color: #ff6d00; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    padding: 12px 20px; /* Espaçamento interno do botão */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+/* Efeito hover no botão */
+.create-category-button:hover {
+    background-color: #e65100; /* Cor do botão ao passar o mouse */
+}
+
+/* Rodapé */
+.admin-homepage-footer {
+    background-color: #ff6d00; /* Cor de fundo do rodapé */
+    color: white; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+    padding: 15px; /* Espaçamento interno */
+    font-size: 0.9rem; /* Tamanho da fonte */
+    font-family: 'Verdana', sans-serif; /* Fonte do rodapé */
 }

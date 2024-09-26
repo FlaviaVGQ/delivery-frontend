@@ -1,33 +1,60 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { sendCategory } from '../fileService';
+import { FaUserCircle, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import './styles.css';
 
 const CreateCategory = () => {
     const [category, setCategory] = useState('');
     const userId = localStorage.getItem('userId');
-    console.log(userId) 
+
+    console.log(userId);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await sendCategory(category, userId); 
-            setCategory(''); 
+            await sendCategory(category, userId);
+            setCategory('');
         } catch (error) {
             console.error('Erro ao criar a categoria:', error);
         }
     };
+
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                placeholder="Nome da categoria"
-                required
-            />
-            <button type="submit">Criar Categoria</button>
-        </form>
+        <div className="create-category-page">
+            <header className="admin-homepage-header">
+                <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
+                <nav className="admin-homepage-nav">
+                    <ul className="nav-list">
+                        <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
+                        <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
+                        <li><Link to="/settings"><FaCog /> Configurações</Link></li>
+                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main className="create-category-main">
+                <div className="form-container">
+                    <h1>Criar Categoria</h1>
+                    <form onSubmit={handleSubmit} className="create-category-form">
+                        <input
+                            type="text"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            placeholder="Nome da categoria"
+                            required
+                            className="category-input"
+                        />
+                        <button type="submit" className="create-category-button">Criar Categoria</button>
+                    </form>
+                </div>
+            </main>
+
+            <footer className="admin-homepage-footer">
+                <p>&copy; 2024 Don Lisita | Todos os direitos reservados</p>
+            </footer>
+        </div>
     );
 };
 
