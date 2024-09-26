@@ -22,7 +22,8 @@ const ProductsPage = () => {
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
-    const userId = localStorage.getItem('userId'); // Pega o userId do localStorage
+    const userId = localStorage.getItem('userId');
+    console.log(userId) // Pega o userId do localStorage
 
     // Busca categorias do usuário
     useEffect(() => {
@@ -40,10 +41,6 @@ const ProductsPage = () => {
 
         fetchCategories();
     }, [userId]);
-
-    const handleAddProduct = () => {
-        // Função para adicionar novo produto
-    };
 
     const handleEditProduct = (id) => {
         // Função para editar produto
@@ -64,6 +61,9 @@ const ProductsPage = () => {
 
     const handleGoToCategories = () => {
         navigate('/category'); // Redireciona para a página de categorias
+    };
+    const handleAddProduct = () => {
+        navigate('/addProduct'); // Redireciona para a página de adicionar produto
     };
 
     // Filtrar produtos

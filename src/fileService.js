@@ -95,3 +95,24 @@ export const fetchCategoriesByUser = async (userId) => {
     }
 };
 
+
+export const addProduct = async (productData) => {
+    try {
+        const formData = new FormData();
+        formData.append('name', productData.name);
+        formData.append('description', productData.description);
+        formData.append('price', productData.price);
+        formData.append('categoryId', productData.categoryId);
+        formData.append('image', productData.image);  // This is important
+
+        const response = await api.post('/addProduct/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',  // Set the correct content type
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao adicionar produto: ', error);
+        throw error;
+    }
+};

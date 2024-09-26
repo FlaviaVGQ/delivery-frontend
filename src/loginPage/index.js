@@ -38,6 +38,9 @@ const LoginPage = () => {
                 setMessage('Login realizado com sucesso!');
                 console.log('Usuário:', response.username);
                 localStorage.setItem('username', response.username); 
+                localStorage.setItem('userId', response.userId);
+                const userId = localStorage.getItem('userId');
+                console.log('ID do usuário:', userId); 
                 navigate('/home');
             } else if (response.remaining_time !== undefined) {
                 setRemainingTime(response.remaining_time);

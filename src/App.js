@@ -7,6 +7,7 @@ import ResetPasswordPage from './resetPassword';
 import HomePage from './homePage';
 import ProductsPage from "./productsPage";
 import CategoryPage from './categoryPage'; 
+import AddProductPage from './addProductPage'; 
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/category" element={<CategoryPage />} />
+                <Route path="/addProduct" element={<AddProductPage />} />
 
             </Routes>
         </Router>
