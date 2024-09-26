@@ -1,0 +1,109 @@
+/* Container principal */
+.create-link-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe2c2; /* Cor de fundo da página */
+}
+
+/* Cabeçalho */
+.admin-homepage-header {
+    background-color: #ff6d00; /* Cor de fundo do cabeçalho */
+    color: white; /* Cor do texto */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19); /* Sombra do cabeçalho */
+}
+
+.admin-homepage-logo {
+    width: 120px; /* Ajuste o tamanho conforme necessário */
+    height: 120px; /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover; /* Garante que a imagem se ajuste ao círculo */
+    padding: 0;
+    margin-left: 20px; /* Empurra o logo para a direita */
+}
+
+.admin-homepage-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    list-style: none; /* Remove marcas de lista */
+    display: flex;
+    gap: 20px; /* Espaçamento entre os itens do menu */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    text-decoration: none; /* Remove sublinhado */
+    color: #fafafa; /* Cor do texto do menu */
+    font-weight: bold; /* Negrito */
+    transition: color 0.3s ease; /* Transição suave */
+}
+
+.nav-list a:hover {
+    color: rgb(243, 182, 141); /* Cor ao passar o mouse */
+}
+
+/* Main content */
+.create-link-main {
+    flex-grow: 1; /* Permite que o conteúdo principal cresça */
+    display: flex; /* Flexbox para centralização */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* Estilo do contêiner do formulário */
+.form-container {
+    background-color: white; /* Cor de fundo do cartão */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    width: 400px; /* Largura fixa */
+    text-align: center; /* Centraliza o texto dentro do contêiner */
+    margin: 0 auto; /* Centraliza horizontalmente na tela */
+    display: flex; /* Flexbox para alinhamento */
+    flex-direction: column; /* Alinha itens na coluna */
+    align-items: center; /* Alinha itens ao centro */
+}
+
+/* Estilo do input */
+.link-input {
+    width: 100%; /* Largura total do contêiner */
+    padding: 10px; /* Espaçamento interno do campo */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-bottom: 20px; /* Espaçamento entre o input e o botão */
+}
+
+/* Estilo do botão */
+.create-link-button {
+    background-color: #ff6d00; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    padding: 12px 20px; /* Espaçamento interno do botão */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+/* Efeito hover no botão */
+.create-link-button:hover {
+    background-color: #e65100; /* Cor do botão ao passar o mouse */
+}
+
+/* Rodapé */
+.admin-homepage-footer {
+    background-color: #ff6d00; /* Cor de fundo do rodapé */
+    color: white; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+    padding: 15px; /* Espaçamento interno */
+    font-size: 0.9rem; /* Tamanho da fonte */
+    font-family: 'Verdana', sans-serif; /* Fonte do rodapé */
+}

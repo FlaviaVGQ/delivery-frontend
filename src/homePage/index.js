@@ -35,12 +35,6 @@ const AdminHomePage = () => {
                         </Link>
                     </div>
 
-                    <div className="admin-homepage-card" id="manage-dishes">
-                        <h2><FaUtensils /> Gerenciar Pratos</h2>
-                        <p>Adicione, edite ou remova pratos do menu.</p>
-                        <button className="action-button">Gerenciar Pratos</button>
-                    </div>
-
                     <div className="admin-homepage-card" id="view-store">
                         <h2><FaStore /> Visualizar Loja</h2>
                         <p>Veja uma pré-visualização da loja online.</p>
@@ -50,14 +44,16 @@ const AdminHomePage = () => {
                     <div className="admin-homepage-card" id="generate-link">
                         <h2><FaLink /> Gerar Link de Compartilhamento</h2>
                         <p>Crie um link para compartilhar a loja com clientes.</p>
-                        <button className="action-button">Gerar Link</button>
+                        <Link to="/link">
+                            <button className="action-button">Gerar Link</button>
+                        </Link>
                     </div>
 
-                    <div className="admin-homepage-card" id="reports">
-                        <h2><FaChartBar /> Relatórios</h2>
-                        <p>Gere relatórios sobre vendas, produtos e desempenho.</p>
-                        <button className="action-button">Ver Relatórios</button>
-                    </div>
+                    {/*<div className="admin-homepage-card" id="reports">*/}
+                    {/*    <h2><FaChartBar /> Relatórios</h2>*/}
+                    {/*    <p>Gere relatórios sobre vendas, produtos e desempenho.</p>*/}
+                    {/*    <button className="action-button">Ver Relatórios</button>*/}
+                    {/*</div>*/}
 
                     <div className="admin-homepage-card" id="settings">
                         <h2><FaCog /> Configurações</h2>

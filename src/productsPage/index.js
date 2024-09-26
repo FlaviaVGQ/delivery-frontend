@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
-import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaFilter } from 'react-icons/fa';
+import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { fetchCategoriesByUser, getProductsByUser } from '../fileService'; // Importando as funções do fileService
 
@@ -9,9 +9,7 @@ const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
-    const [filter, setFilter] = useState({ category: '' });
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-    const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
     const userId = localStorage.getItem('userId');
     console.log("usuario", userId); // Pega o userId do localStorage
@@ -58,10 +56,9 @@ const ProductsPage = () => {
         navigate('/addProduct'); // Redireciona para a página de adicionar produto
     };
 
-    // Filtrar produtos
+    // Filtrar produtos pela pesquisa
     const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(search.toLowerCase()) &&
-        (filter.category ? product.category === filter.category : true)
+        product.name.toLowerCase().includes(search.toLowerCase())
     );
 
     // Organize products by categories
@@ -87,49 +84,17 @@ const ProductsPage = () => {
                     <p>Adicione, edite e exclua produtos do seu inventário.</p>
                 </div>
 
-                <div className="search-filter-section">
-                    <div className="search-filter-bar">
-                        <button
-                            className="search-filter-toggle"
-                            onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-                        >
-                            <FaSearch />
-                        </button>
-
-                        <button
-                            className="search-filter-toggle"
-                            onClick={() => setIsFilterExpanded(!isFilterExpanded)}
-                        >
-                            <FaFilter />
-                        </button>
+                <div className="search-section">
+                    <div className="search-bar">
+                        <FaSearch className="search-icon" />
+                        <input
+                            type="text"
+                            placeholder="Pesquisar produtos..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="search-input"
+                        />
                     </div>
-
-                    {isSearchExpanded && (
-                        <div className="search-bar">
-                            <FaSearch className="search-icon" />
-                            <input
-                                type="text"
-                                placeholder="Pesquisar produtos..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                className="search-input"
-                            />
-                        </div>
-                    )}
-
-                    {isFilterExpanded && (
-                        <div className="filter-buttons">
-                            {categories.map(category => (
-                                <button
-                                    key={category.id}
-                                    className={`filter-button ${filter.category === category.name ? 'active' : ''}`}
-                                    onClick={() => setFilter({ category: filter.category === category.name ? '' : category.name })}
-                                >
-                                    {category.name}
-                                </button>
-                            ))}
-                        </div>
-                    )}
                 </div>
 
                 <div className="products-actions">

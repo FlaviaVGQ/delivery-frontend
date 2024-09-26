@@ -8,6 +8,7 @@ import HomePage from './homePage';
 import ProductsPage from "./productsPage";
 import CategoryPage from './categoryPage';
 import AddProductPage from './addProductPage';
+import LinkPage from "./linkPage";
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/products/" element={<ProductsPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/addProduct" element={<AddProductPage />} />
+                <Route path="/link" element={<LinkPage />} />
 
             </Routes>
         </Router>
