@@ -117,4 +117,6 @@ button[type="submit"]:hover {
     padding: 15px; /* Espaçamento interno */
     font-size: 0.9rem; /* Tamanho da fonte */
     font-family: 'Verdana', sans-serif; /* Fonte do rodapé */
+    padding-top: 100px;
+    margin-top: 200px;
 }

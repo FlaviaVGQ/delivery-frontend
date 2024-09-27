@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { sendCategory } from '../fileService';
-import { FaUserCircle, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaUserCircle, FaCog, FaSignOutAlt, FaBoxOpen } from 'react-icons/fa';
 import './styles.css';
 
 const CreateCategory = () => {
@@ -29,7 +29,7 @@ const CreateCategory = () => {
                         <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
                         <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
                         <li><Link to="/settings"><FaCog /> Configurações</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
                     </ul>
                 </nav>
             </header>
@@ -52,7 +52,7 @@ const CreateCategory = () => {
             </main>
 
             <footer className="admin-homepage-footer">
-                <p>&copy; 2024 Don Lisita | Todos os direitos reservados</p>
+                <p>&copy; 2024 Delivery Express | Todos os direitos reservados</p>
             </footer>
         </div>
     );

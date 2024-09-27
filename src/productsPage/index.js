@@ -34,7 +34,6 @@ const ProductsPage = () => {
     }, [userId]);
 
     const handleEditProduct = (id) => {
-        // Implementar lógica para editar o produto
     };
 
     const handleDeleteProduct = (id) => {
@@ -54,12 +53,10 @@ const ProductsPage = () => {
         navigate('/addProduct');
     };
 
-    // Filtrar produtos pela pesquisa
     const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(search.toLowerCase())
     );
 
-    // Organizar produtos por categoria
     const categorizedProducts = categories.reduce((acc, category) => {
         acc[category.name] = filteredProducts.filter(product => product.category === category.name);
         return acc;
@@ -134,7 +131,7 @@ const ProductsPage = () => {
             </main>
 
             <footer className="page-footer">
-                &copy; {new Date().getFullYear()} Don Lisita. Todos os direitos reservados.
+                &copy; {new Date().getFullYear()} Delivery Express. Todos os direitos reservados.
             </footer>
         </div>
     );

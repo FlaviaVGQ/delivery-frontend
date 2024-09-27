@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { FaUserCircle, FaCog, FaSignOutAlt, FaClipboard } from 'react-icons/fa';
+import { FaUserCircle, FaCog, FaSignOutAlt, FaClipboard, FaBoxOpen} from 'react-icons/fa';
 import './linkpage.css';
 
 const LinkPage = () => {
@@ -10,13 +10,11 @@ const LinkPage = () => {
 
     useEffect(() => {
         if (userId) {
-            // Gerar o link do cardápio usando o ID do usuário
             const generatedLink = `${window.location.origin}/menu/${userId}`;
             setMenuLink(generatedLink);
         }
     }, [userId]);
 
-    // Função para copiar o link
     const handleCopyLink = () => {
         if (menuLink) {
             navigator.clipboard.writeText(menuLink)
@@ -34,7 +32,7 @@ const LinkPage = () => {
                         <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
                         <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
                         <li><Link to="/settings"><FaCog /> Configurações</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li><a href="/home"><FaBoxOpen /> Voltar</a></li>
                     </ul>
                 </nav>
             </header>
@@ -63,7 +61,7 @@ const LinkPage = () => {
             </main>
 
             <footer className="admin-homepage-footer">
-                <p>&copy; </p>
+                <p>&copy; 2024 Delivery Express | Todos os direitos reservados </p>
             </footer>
         </div>
     );

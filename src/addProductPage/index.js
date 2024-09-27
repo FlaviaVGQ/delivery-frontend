@@ -57,7 +57,7 @@ const AddProductPage = () => {
             };
             console.log(productData);
             await addProduct(productData, userId); // Adiciona o produto
-            navigate('/productPage'); // Redireciona para a página de produtos
+            navigate('/products'); // Redireciona para a página de produtos
         }
     };
 
@@ -132,7 +132,7 @@ const AddProductPage = () => {
 
             {/* Rodapé */}
             <footer className="admin-homepage-footer">
-                <p>&copy; 2024 Don Lisita | Todos os direitos reservados</p>
+                <p>&copy; 2024 Delivery Express. | Todos os direitos reservados</p>
             </footer>
         </div>
     );
