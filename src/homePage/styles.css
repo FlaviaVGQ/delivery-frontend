@@ -1,4 +1,3 @@
-/* Container principal */
 .admin-homepage-container {
     display: flex;
     flex-direction: column;
@@ -7,7 +6,6 @@
     background-color: #ffe2c2;
 }
 
-/* Cabeçalho */
 .admin-homepage-header {
     background-color: #ff6d00;
     color: white;
@@ -19,12 +17,12 @@
 }
 
 .admin-homepage-logo {
-    width: 120px; /* Ajuste o tamanho conforme necessário */
-    height: 120px; /* Ajuste o tamanho conforme necessário */
-    border-radius: 50%; /* Torna a imagem redonda */
-    object-fit: cover; /* Garante que a imagem se ajuste ao círculo */
+    width: 120px;
+    height: 120px; 
+    border-radius: 50%; 
+    object-fit: cover;
     padding: 0;
-    margin-left: 20px; /* Empurra o logo para a direita */
+    margin-left: 20px; 
 }
 
 .admin-homepage-nav {
@@ -51,7 +49,7 @@
     color: rgb(243, 182, 141);
 }
 
-/* Conteúdo Principal */
+
 .admin-homepage-main {
     flex-grow: 1;
     padding: 40px;
@@ -60,16 +58,16 @@
     align-items: center;
 }
 
-/* Grid com duas colunas */
+
 .admin-homepage-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+    grid-template-columns: repeat(2, 1fr); 
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Cartões */
+
 .admin-homepage-card {
     background-color: #ffffff;
     padding: 30px;
@@ -93,7 +91,7 @@
     margin-bottom: 20px;
 }
 
-/* Botão de ação */
+
 .action-button {
     background-color: #ff6d00;
     color: white;
@@ -109,7 +107,7 @@
     background-color: #e65100;
 }
 
-/* Rodapé */
+
 .admin-homepage-footer {
     background-color: #ff6d00;
     color: white;
@@ -119,7 +117,7 @@
     font-family: 'Verdana', sans-serif;
 }
 
-/* Cartões com ícones */
+
 .admin-homepage-card h2 {
     font-size: 20px;
     color: #333;

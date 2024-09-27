@@ -1,4 +1,3 @@
-// src/AdminHomePage.js
 import React from 'react';
 import './styles.css';
 import { FaUserCircle, FaCog, FaSignOutAlt, FaInfoCircle, FaBoxOpen, FaUtensils, FaStore, FaLink, FaChartBar } from 'react-icons/fa';

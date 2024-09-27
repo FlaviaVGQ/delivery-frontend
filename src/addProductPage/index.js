@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { fetchCategoriesByUser, addProduct } from '../fileService'; // Importando as funções
-import { FaUserCircle, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import './styles.css'; // Certifique-se de que o CSS está importado
+import { fetchCategoriesByUser, addProduct } from '../fileService'; 
+import { FaUserCircle, FaCog, FaSignOutAlt, FaBoxOpen } from 'react-icons/fa';
+import './styles.css'; 
 
 const AddProductPage = () => {
     const [name, setName] = useState('');
@@ -14,16 +14,16 @@ const AddProductPage = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
-    console.log(userId); // Pega o userId do localStorage
+    console.log(userId); 
 
-    // Busca categorias do usuário
+   
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 if (userId) {
-                    const response = await fetchCategoriesByUser(userId); // Chama a função para buscar categorias
+                    const response = await fetchCategoriesByUser(userId); 
                     setCategories(response);
-                    console.log('Categorias:', response); // Define as categorias
+                    console.log('Categorias:', response); 
                 }
             } catch (error) {
                 console.error("Erro ao buscar categorias: ", error);
@@ -41,7 +41,7 @@ const AddProductPage = () => {
         if (!categoryId) newErrors.categoryId = 'Categoria é obrigatória.';
         if (!image) newErrors.image = 'Imagem é obrigatória.';
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0; // Retorna true se não houver erros
+        return Object.keys(newErrors).length === 0; 
 
     };
 
@@ -56,14 +56,13 @@ const AddProductPage = () => {
                 image
             };
             console.log(productData);
-            await addProduct(productData, userId); // Adiciona o produto
-            navigate('/products'); // Redireciona para a página de produtos
+            await addProduct(productData, userId); 
+            navigate('/products'); 
         }
     };
 
     return (
         <div className="add-product-container">
-            {/* Cabeçalho */}
             <header className="admin-homepage-header">
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
@@ -71,7 +70,7 @@ const AddProductPage = () => {
                         <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
                         <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
                         <li><Link to="/settings"><FaCog /> Configurações</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
                     </ul>
                 </nav>
             </header>
@@ -129,8 +128,6 @@ const AddProductPage = () => {
                     <button type="submit">Adicionar Produto</button>
                 </form>
             </div>
-
-            {/* Rodapé */}
             <footer className="admin-homepage-footer">
                 <p>&copy; 2024 Delivery Express. | Todos os direitos reservados</p>
             </footer>

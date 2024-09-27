@@ -1,13 +1,12 @@
-/* Layout geral do container da página */
 .products-page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Faz o container ocupar pelo menos a altura da janela */
+    min-height: 100vh; 
     font-family: 'Arial', sans-serif;
     background-color: #ffe2c2;
 }
 
-/* Estilização do cabeçalho da página */
+
 .page-header {
     background-color: #ff6d00;
     color: white;
@@ -27,7 +26,7 @@
     margin-left: 20px;
 }
 
-/* Estilização da navegação do cabeçalho */
+
 .page-nav ul {
     display: flex;
     list-style: none;
@@ -52,14 +51,14 @@
     color: #ffcc00;
 }
 
-/* Layout do conteúdo principal da página */
+
 .products-page-main {
-    flex: 1; /* Faz o conteúdo principal ocupar todo o espaço disponível */
+    flex: 1; 
     padding: 40px;
     background-color: #ffffff;
 }
 
-/* Títulos e parágrafos */
+
 .products-page-title h1 {
     color: #333;
     font-size: 2.2rem;
@@ -72,7 +71,7 @@
     color: #666;
 }
 
-/* Seção de busca e filtros */
+
 .search-filter-section {
     display: flex;
     flex-direction: column;
@@ -115,7 +114,7 @@
     margin-right: 5px;
 }
 
-/* Botões de filtro */
+
 .filter-buttons {
     display: flex;
     gap: 5px;
@@ -140,7 +139,7 @@
     background-color: #ff4b00;
 }
 
-/* Botão principal para adicionar produtos */
+
 .products-actions .primary-button {
     background-color: #ff6d00;
     color: white;
@@ -174,7 +173,7 @@
     background-color: #ff4b00;
 }
 
-/* Container das categorias e produtos */
+
 .categories-container {
     margin-top: 20px;
 }
@@ -227,14 +226,14 @@
 }
 
 .view-button:hover {
-    color: #0056b3; /* Cor para o hover do botão de visualização */
+    color: #0056b3; 
 }
 
 .delete-button:hover {
-    color: #d9534f; /* Cor para o hover do botão de deletar */
+    color: #d9534f; 
 }
 
-/* Divider line between categories */
+
 .category-divider {
     border: none;
     height: 1px;
@@ -242,23 +241,23 @@
     margin: 20px 0;
 }
 
-/* Rodapé */
+
 .page-footer {
     background-color: #ff6d00;
     color: white;
     text-align: center;
     padding: 15px;
     margin-top: auto;
-    margin-bottom: -200px; /* Faz o rodapé se manter na parte inferior */
+    margin-bottom: -200px; 
 }
 
 .product-image {
-    width: 100px; /* Defina a largura desejada */
-    height: auto; /* Mantém a proporção da imagem */
-    margin-right: 10px; /* Espaço entre a imagem e os detalhes do produto */
-    border-radius: 5px; /* Bordas arredondadas (opcional) */
+    width: 100px; 
+    height: auto; 
+    margin-right: 10px; 
+    border-radius: 5px; 
 }
 .product-item {
-    display: flex; /* Permite alinhar a imagem e os detalhes horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
+    display: flex; 
+    align-items: center; 
 }

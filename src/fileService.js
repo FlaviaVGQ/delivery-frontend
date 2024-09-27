@@ -7,7 +7,7 @@ export const login = async (username, password) => {
     } catch (error) {
         if (error.response && error.response.status === 403) {
             console.log(error.response.data)
-            return error.response.data; // Retorna a resposta com tempo restante
+            return error.response.data; 
         }
         console.error('Erro ao fazer login: ', error);
         throw error;
@@ -51,7 +51,7 @@ const getCsrfToken = () => {
 };
 
 export const changePassword = async ( username, password) => {
-    const csrfToken = getCsrfToken(); // Obtenha o token CSRF
+    const csrfToken = getCsrfToken(); 
 
     try {
         console.log(password)
@@ -84,7 +84,6 @@ export const sendCategory = async (category, userId) => {
 };
 
 
-// No fileService.js
 export const fetchCategoriesByUser = async (userId) => {
     try {
         const response = await api.get(`/category/`, { params: { user_id: userId } });
@@ -103,15 +102,12 @@ export const addProduct = async (productData, userId) => {
         formData.append('categoryId', productData.categoryId);
         formData.append('image', productData.image);
 
-        // Incluindo o ID do usuário
+        
         if (userId) {
-            formData.append('userId', userId);  // Adicione esta linha se quiser enviar explicitamente
-        }
-
-        // Verifique o conteúdo do formData
+            formData.append('userId', userId);  
+        }     
         console.log([...formData]);
 
-        // Envie o formData diretamente, sem o {}
         const response = await api.post('/addProduct/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',

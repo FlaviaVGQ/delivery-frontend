@@ -1,10 +1,9 @@
-/* Estilos para a página de redefinição de senha */
 .reset-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(163, 77, 0); /* Cor de fundo */
+    background-color: rgb(163, 77, 0); 
 }
 
 .reset-box {

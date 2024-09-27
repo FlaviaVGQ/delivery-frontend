@@ -19,10 +19,10 @@ const csrfToken = getCsrfToken();
 
 axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
-// Interceptor para incluir o token nas requisições
+
 api.interceptors.request.use(config => {
     const token = localStorage.getItem('token');
-    console.log(token) // Obtenha o token do localStorage
+    console.log(token) 
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
