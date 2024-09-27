@@ -2,30 +2,28 @@ import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
 import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { fetchCategoriesByUser, getProductsByUser } from '../fileService'; // Importando as funções do fileService
+import { fetchCategoriesByUser, getProductsByUser } from '../fileService';
 
 const ProductsPage = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
-    const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
     const userId = localStorage.getItem('userId');
-    console.log("usuario", userId); // Pega o userId do localStorage
+    console.log("usuario", userId);
 
-    // Busca categorias e produtos do usuário
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (userId) {
-                    const categoriesResponse = await fetchCategoriesByUser(userId); // Chama a função para buscar categorias
+                    const categoriesResponse = await fetchCategoriesByUser(userId);
                     setCategories(categoriesResponse);
-                    console.log('Categorias:', categoriesResponse); // Define as categorias
+                    console.log('Categorias:', categoriesResponse);
 
-                    const productsResponse = await getProductsByUser(userId); // Chama a função para buscar produtos
+                    const productsResponse = await getProductsByUser(userId);
                     setProducts(productsResponse);
-                    console.log('Produtos:', productsResponse); // Define os produtos
+                    console.log('Produtos:', productsResponse);
                 }
             } catch (error) {
                 console.error("Erro ao buscar dados: ", error);
@@ -36,7 +34,7 @@ const ProductsPage = () => {
     }, [userId]);
 
     const handleEditProduct = (id) => {
-        // Função para editar produto
+        // Implementar lógica para editar o produto
     };
 
     const handleDeleteProduct = (id) => {
@@ -49,11 +47,11 @@ const ProductsPage = () => {
     };
 
     const handleGoToCategories = () => {
-        navigate('/category'); // Redireciona para a página de categorias
+        navigate('/category');
     };
 
     const handleAddProduct = () => {
-        navigate('/addProduct'); // Redireciona para a página de adicionar produto
+        navigate('/addProduct');
     };
 
     // Filtrar produtos pela pesquisa
@@ -61,7 +59,7 @@ const ProductsPage = () => {
         product.name.toLowerCase().includes(search.toLowerCase())
     );
 
-    // Organize products by categories
+    // Organizar produtos por categoria
     const categorizedProducts = categories.reduce((acc, category) => {
         acc[category.name] = filteredProducts.filter(product => product.category === category.name);
         return acc;
@@ -109,11 +107,11 @@ const ProductsPage = () => {
                             <div className="category-products">
                                 {categorizedProducts[category.name]?.map(product => (
                                     <div key={product.id} className="product-item">
-                                        <img src={product.imagePath} alt={product.name} className="product-image" /> {/* Adicionando a imagem do produto */}
+                                        <img src={product.imagePath} alt={product.name} className="product-image" />
                                         <div className="product-details">
                                             <h3>{product.name}</h3>
                                             <p>{product.description}</p>
-                                            <p><strong>Categoria:</strong> {product.category}</p>
+                                            <p className="product-price">R$ {product.price}</p>
                                         </div>
                                         <div className="product-buttons">
                                             <button className="edit-button" onClick={() => handleEditProduct(product.id)}>
@@ -129,7 +127,7 @@ const ProductsPage = () => {
                                     </div>
                                 ))}
                             </div>
-                            <hr className="category-divider" /> {/* Divider line between categories */}
+                            <hr className="category-divider" />
                         </div>
                     ))}
                 </div>
