@@ -261,3 +261,68 @@
     display: flex; 
     align-items: center; 
 }
+
+.modal-overlay {
+    position: fixed; /* Fixa o modal na tela */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    z-index: 1000; /* Coloca o modal acima de outros elementos */
+}
+
+.modal-content {
+    background-color: #fff; /* Fundo branco para o modal */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+    max-width: 400px; /* Largura máxima do modal */
+    width: 90%; /* Largura padrão */
+    display: flex;
+    flex-direction: column; /* Coloca os elementos na vertical */
+    align-items: center; /* Centraliza horizontalmente */
+}
+
+.modal-content h2 {
+    margin: 0 0 10px; /* Margem inferior do título */
+}
+
+.modal-content p {
+    margin: 0 0 20px; /* Margem inferior do parágrafo */
+}
+
+.button-container {
+    display: flex; /* Para alinhar os botões horizontalmente */
+    justify-content: center; /* Centraliza os botões */
+    width: 100%; /* Para garantir que ocupem toda a largura disponível */
+}
+
+.button {
+    flex: 1; /* Faz com que ambos os botões ocupem a mesma largura */
+    margin: 0 5px; /* Espaçamento entre os botões */
+    padding: 10px; /* Padding dos botões */
+    cursor: pointer; /* Cursor de pointer para interatividade */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove borda padrão */
+    border-radius: 5px; /* Cantos arredondados */
+}
+
+.button-confirm {
+    background-color: #f44336; /* Cor de fundo do botão "Sim" */
+}
+
+.button-confirm:hover {
+    background-color: #d32f2f; /* Efeito de hover no botão "Sim" */
+}
+
+.button-cancel {
+    background-color: #f44336; /* Cor de fundo do botão "Cancelar" */
+}
+
+.button-cancel:hover {
+    background-color: #d32f2f; /* Efeito de hover no botão "Cancelar" */
+}

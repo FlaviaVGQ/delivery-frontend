@@ -128,4 +128,13 @@ export const getProductsByUser = async (userId) => {
         throw error;
     }
 };
+export const deleteProduct = async (id) => {
+    try {
+        const response = await api.delete(`/deleteProduct/${id}/`); 
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao excluir produto: ', error);
+        throw error;
+    }
+};
 

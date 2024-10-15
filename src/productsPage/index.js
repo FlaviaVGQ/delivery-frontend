@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
 import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { fetchCategoriesByUser, getProductsByUser } from '../fileService';
+import { fetchCategoriesByUser, getProductsByUser, deleteProduct  } from '../fileService';
 
 const ProductsPage = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [productIdToDelete, setProductIdToDelete] = useState(null);
+    const [productNameToDelete, setProductNameToDelete] = useState('');
 
     const userId = localStorage.getItem('userId');
     console.log("usuario", userId);
@@ -36,7 +39,7 @@ const ProductsPage = () => {
     const handleEditProduct = (id) => {
     };
 
-    const handleDeleteProduct = (id) => {
+    const handleDeleteProducts = (id) => {
         const filteredProducts = products.filter(product => product.id !== id);
         setProducts(filteredProducts);
     };
@@ -61,6 +64,43 @@ const ProductsPage = () => {
         acc[category.name] = filteredProducts.filter(product => product.category === category.name);
         return acc;
     }, {});
+
+    /*
+    const handleDeleteProduct = async (id) => {
+        try {
+            await deleteProduct(id); // Call the delete service with the product ID
+            const filteredProducts = products.filter(product => product.id !== id);
+            setProducts(filteredProducts); // Update the product list in the UI
+        } catch (error) {
+            console.error("Erro ao excluir o produto: ", error);
+        }
+    };
+    
+    */
+
+    const handleDeleteProduct = async (id) => {
+        try {
+            await deleteProduct(id); // Chama o serviço para remover o produto do banco de dados
+            const filteredProducts = products.filter(product => product.id !== id);
+            setProducts(filteredProducts); // Atualiza a lista de produtos na interface
+            setShowModal(false); // Fecha o modal
+        } catch (error) {
+            console.error("Erro ao excluir o produto: ", error);
+        }
+    };
+
+    const openModal = (id, name) => {
+        setProductIdToDelete(id);
+        setProductNameToDelete(name);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setProductIdToDelete(null);
+        setProductNameToDelete('');
+    };
+
 
     return (
         <div className="products-page-container">
@@ -117,7 +157,7 @@ const ProductsPage = () => {
                                             <button className="view-button" onClick={() => handleViewProduct(product)}>
                                                 <FaEye className="product-icon" />
                                             </button>
-                                            <button className="delete-button" onClick={() => handleDeleteProduct(product.id)}>
+                                            <button className="delete-button" onClick={() => openModal(product.id, product.name)}>
                                                 <FaTrash className="product-icon" />
                                             </button>
                                         </div>
@@ -128,6 +168,16 @@ const ProductsPage = () => {
                         </div>
                     ))}
                 </div>
+                {showModal && (
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                            <h2>Confirmar Exclusão</h2>
+                            <p>Você tem certeza que deseja excluir o produto "{productNameToDelete}"?</p>
+                            <button className="button-confirm" onClick={() => handleDeleteProduct(productIdToDelete)}>Sim</button>
+                            <button className="button-confirm" onClick={closeModal}>Cancelar</button>
+                        </div>
+                    </div>
+                )}
             </main>
 
             <footer className="page-footer">
