@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Sistema Delivery Express
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O Sistema Delivery Express é uma plataforma web de delivery desenvolvida para gerenciar e otimizar o processo de pedidos e entregas de restaurantes. Ele abrange desde o recebimento do pedido até a entrega ao cliente, integrando funções como gestão de pedidos, rastreamento de entregas e comunicação com o cliente, proporcionando uma experiência eficiente e satisfatória para ambos os lados.
 
-## Available Scripts
+Este projeto foi criado como parte da disciplina de Gerência de Projetos na UEBP, com o objetivo de praticar a gestão de atividades e demandas de um projeto desde o início. Ele envolve todas as etapas de desenvolvimento de um projeto, incluindo:
 
-In the project directory, you can run:
+- Planejamento da ideia
+- Elaboração da documentação do projeto
+- Uso de ferramentas de gerenciamento e organização das atividades para a equipe
+- Configuração das tecnologias utilizadas
+- Desenvolvimento completo do Frontend, Backend e integração com o banco de dados
 
-### `npm start`
+## Status
+Em desenvolvimento.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Repositórios
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Frontend : https://github.com/FlaviaVGQ/delivery-frontend
+- Backend : https://github.com/FlaviaVGQ/delivery-backend
 
-### `npm test`
+## Tecnologias e ferramentas envolvidas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para o desenvolvimento do Frontend, foram utilizadas as seguintes tecnologias e ferramentas:
 
-### `npm run build`
+- JavaScript
+- React
+- HTML
+- CSS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Para conseguir acessar e rodar o projeto
+Para rodar o projeto, siga os seguintes passos:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1 - Clone o repositório do GitHub para uma IDE de sua preferência.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2 - No terminal, execute o comando 'npm start' para iniciar o projeto.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Observação: É possível que seja necessário instalar algumas dependências. Para isso, utilize o comando 'npm install' antes de iniciar o projeto.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
