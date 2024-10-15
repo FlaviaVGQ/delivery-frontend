@@ -9,6 +9,7 @@ import ProductsPage from "./productsPage";
 import CategoryPage from './categoryPage';
 import AddProductPage from './addProductPage';
 import LinkPage from "./linkPage";
+import EditProductPage from './editProductPage';
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path="/addProduct" element={<AddProductPage />} />
                 <Route path="/deleteProduct" element={<ProductsPage />} />
                 <Route path="/link" element={<LinkPage />} />
+                <Route path="/editProduct/:id" element={<EditProductPage />} />
 
             </Routes>
         </Router>

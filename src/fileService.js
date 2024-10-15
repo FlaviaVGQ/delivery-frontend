@@ -138,3 +138,23 @@ export const deleteProduct = async (id) => {
     }
 };
 
+export const getProductById = async (id) => {
+    try {
+        const response = await api.get(`/products/${id}/`); // Altere o endpoint conforme necessário
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar produto: ', error);
+        throw error;
+    }
+};
+
+export const updateProduct = async (id, productData) => {
+    try {
+        const response = await api.put(`/editProduct/${id}/`, productData); // Altere o endpoint conforme necessário
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao atualizar produto: ', error);
+        throw error;
+    }
+};
+

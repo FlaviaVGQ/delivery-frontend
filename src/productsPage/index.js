@@ -37,8 +37,8 @@ const ProductsPage = () => {
     }, [userId]);
 
     const handleEditProduct = (id) => {
+        navigate(`/editProduct/${id}`); 
     };
-
     const handleDeleteProducts = (id) => {
         const filteredProducts = products.filter(product => product.id !== id);
         setProducts(filteredProducts);
