@@ -10,6 +10,8 @@ import CategoryPage from './categoryPage';
 import AddProductPage from './addProductPage';
 import LinkPage from "./linkPage";
 import EditProductPage from './editProductPage';
+import MenuPage from "./menuPage/menuPage";
+import RestaurantPage from "./restaurantPage";
 
 const App = () => {
     return (
@@ -26,6 +28,8 @@ const App = () => {
                 <Route path="/deleteProduct" element={<ProductsPage />} />
                 <Route path="/link" element={<LinkPage />} />
                 <Route path="/editProduct/:id" element={<EditProductPage />} />
+                <Route path="/menu/:userId" element={<MenuPage />} />
+                <Route path="/restaurante" element={<RestaurantPage />} />
 
             </Routes>
         </Router>

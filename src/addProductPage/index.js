@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { fetchCategoriesByUser, addProduct } from '../fileService'; 
-import { FaUserCircle, FaCog, FaSignOutAlt, FaBoxOpen } from 'react-icons/fa';
-import './styles.css'; 
+import { fetchCategoriesByUser, addProduct } from '../fileService';
+import {FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome} from 'react-icons/fa';
+import './styles.css';
 
 const AddProductPage = () => {
     const [name, setName] = useState('');
@@ -14,16 +14,16 @@ const AddProductPage = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
-    console.log(userId); 
+    console.log(userId);
 
-   
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 if (userId) {
-                    const response = await fetchCategoriesByUser(userId); 
+                    const response = await fetchCategoriesByUser(userId);
                     setCategories(response);
-                    console.log('Categorias:', response); 
+                    console.log('Categorias:', response);
                 }
             } catch (error) {
                 console.error("Erro ao buscar categorias: ", error);
@@ -41,7 +41,7 @@ const AddProductPage = () => {
         if (!categoryId) newErrors.categoryId = 'Categoria é obrigatória.';
         if (!image) newErrors.image = 'Imagem é obrigatória.';
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0; 
+        return Object.keys(newErrors).length === 0;
 
     };
 
@@ -56,8 +56,8 @@ const AddProductPage = () => {
                 image
             };
             console.log(productData);
-            await addProduct(productData, userId); 
-            navigate('/products'); 
+            await addProduct(productData, userId);
+            navigate('/products');
         }
     };
 
@@ -67,10 +67,10 @@ const AddProductPage = () => {
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
-                        <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
-                        <li><Link to="/settings"><FaCog /> Configurações</Link></li>
-                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
+                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome/> Início</Link></li>
+                        <li><a href="/products"><FaBoxOpen/> Voltar</a></li>
+                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>

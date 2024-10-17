@@ -1,19 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
-import { FaUserCircle, FaCog, FaSignOutAlt, FaInfoCircle, FaBoxOpen, FaUtensils, FaStore, FaLink, FaChartBar } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import {
+    FaUserCircle,
+    FaCog,
+    FaSignOutAlt,
+    FaInfoCircle,
+    FaBoxOpen,
+    FaStore,
+    FaLink,
+    FaHome
+} from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { getProductsByUser } from '../fileService'; // Importa a função do seu arquivo de serviços
 
 const AdminHomePage = () => {
+    const [menuLink, setMenuLink] = useState('');
+    const userId = localStorage.getItem('userId');
+    const navigate = useNavigate(); // Hook para navegação
+
+    useEffect(() => {
+        if (userId) {
+            const generatedLink = `${window.location.origin}/menu/${userId}`;
+            setMenuLink(generatedLink);
+        }
+    }, [userId]);
+
+    const handleViewStore = async () => {
+        try {
+            const products = await getProductsByUser(userId); // Busca os produtos
+            // Passa os produtos para a nova página
+            navigate(`/menu/${userId}`, { state: { products } });
+        } catch (error) {
+            console.error('Erro ao carregar produtos: ', error);
+            // Trate o erro conforme necessário (ex: mostrar mensagem de erro ao usuário)
+        }
+    };
+
     return (
         <div className="admin-homepage-container">
             <header className="admin-homepage-header">
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
-                        <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
-                        <li><Link to="/settings"><FaCog /> Configurações</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome/> Início</Link></li>
+                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>
@@ -21,9 +52,11 @@ const AdminHomePage = () => {
             <main className="admin-homepage-main">
                 <section className="admin-homepage-grid">
                     <div className="admin-homepage-card" id="restaurant-info">
-                        <h2><FaInfoCircle /> Informações do Restaurante</h2>
+                        <h2><FaInfoCircle/> Informações do Restaurante</h2>
                         <p>Atualize os detalhes do restaurante como endereço e horário de funcionamento.</p>
-                        <button className="action-button">Atualizar Informações</button>
+                        <Link to="/restaurante">
+                            <button className="action-button">Atualizar Informações</button>
+                        </Link>
                     </div>
 
                     <div className="admin-homepage-card" id="manage-products">
@@ -37,7 +70,12 @@ const AdminHomePage = () => {
                     <div className="admin-homepage-card" id="view-store">
                         <h2><FaStore /> Visualizar Loja</h2>
                         <p>Veja uma pré-visualização da loja online.</p>
-                        <button className="action-button">Visualizar Loja</button>
+                        <button
+                            className="action-button"
+                            onClick={handleViewStore} // Chama a função de redirecionamento
+                        >
+                            Visualizar Loja
+                        </button>
                     </div>
 
                     <div className="admin-homepage-card" id="generate-link">
@@ -47,12 +85,6 @@ const AdminHomePage = () => {
                             <button className="action-button">Gerar Link</button>
                         </Link>
                     </div>
-
-                    {/*<div className="admin-homepage-card" id="reports">*/}
-                    {/*    <h2><FaChartBar /> Relatórios</h2>*/}
-                    {/*    <p>Gere relatórios sobre vendas, produtos e desempenho.</p>*/}
-                    {/*    <button className="action-button">Ver Relatórios</button>*/}
-                    {/*</div>*/}
 
                     <div className="admin-homepage-card" id="settings">
                         <h2><FaCog /> Configurações</h2>

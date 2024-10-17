@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
-import { FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import {FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaUserCircle, FaHome, FaSignOutAlt} from 'react-icons/fa';
+import {Link, useNavigate} from 'react-router-dom';
 import { fetchCategoriesByUser, getProductsByUser, deleteProduct  } from '../fileService';
 
 const ProductsPage = () => {
@@ -37,7 +37,7 @@ const ProductsPage = () => {
     }, [userId]);
 
     const handleEditProduct = (id) => {
-        navigate(`/editProduct/${id}`); 
+        navigate(`/editProduct/${id}`);
     };
     const handleDeleteProducts = (id) => {
         const filteredProducts = products.filter(product => product.id !== id);
@@ -75,7 +75,7 @@ const ProductsPage = () => {
             console.error("Erro ao excluir o produto: ", error);
         }
     };
-    
+
     */
 
     const handleDeleteProduct = async (id) => {
@@ -107,8 +107,10 @@ const ProductsPage = () => {
             <header className="page-header">
                 <img src="/logo.png" alt="Logo" className="page-logo" />
                 <nav className="page-nav">
-                    <ul>
-                        <li><a href="/home"><FaBoxOpen /> Voltar</a></li>
+                    <ul className="nav-list">
+                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome/> Início</Link></li>
+                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>
@@ -121,7 +123,7 @@ const ProductsPage = () => {
 
                 <div className="search-section">
                     <div className="search-bar">
-                        <FaSearch className="search-icon" />
+                    <FaSearch className="search-icon" />
                         <input
                             type="text"
                             placeholder="Pesquisar produtos..."
