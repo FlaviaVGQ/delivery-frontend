@@ -34,34 +34,20 @@ export const createUser = async (username, email, password) => {
     }
 };
 
-
-const getCsrfToken = () => {
-    const name = 'csrftoken=';
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-    return null;
-};
-
-export const changePassword = async ( username, password) => {
-    const csrfToken = getCsrfToken(); 
+export const changePassword = async (token, password) => {
 
     try {
-        console.log(password)
-        const response = await api.post(`/resetpassword/`, { username, password});
+        // Certifique-se de que o token esteja sendo passado corretamente na URL
+        const response = await api.post(`/reset-password/${token}/`, { password });
         return response.data;
     } catch (error) {
         console.error('Erro ao redefinir a senha:', error);
         throw error;
     }
 };
+
+
+
 
 export const sendResetPasswordEmail = async (emailOrUsername) => {
     try {

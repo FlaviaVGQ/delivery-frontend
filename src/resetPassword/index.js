@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import './index.css';
 import { FaLock } from 'react-icons/fa';
-import { changePassword } from '../fileService'; 
+import { changePassword } from '../fileService'; // Certifique-se de que esta função está definida corretamente
 
 const ResetPasswordPage = () => {
-    const { uidb64, token } = useParams(); 
-    const [username, setUsername] = useState('');
+    const {token } = useParams();
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState('');
+    const navigate = useNavigate(); // Substituindo useHistory
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (newPassword !== confirmPassword) {
             setMessage('As senhas não correspondem.');
+            setMessageType('error');
             return;
         }
 
         try {
-            await changePassword(username, newPassword);
-            setMessage('Senha alterada com sucesso!');
-            setUsername('');
-            setNewPassword('');
-            setConfirmPassword('');
+            const response = await changePassword(token, newPassword); // Passando o token e a nova senha
+            if (response.success) {
+                setMessage('Senha alterada com sucesso!');
+                setMessageType('success');
+                setNewPassword('');
+                setConfirmPassword('');
+                setTimeout(() => {
+                    navigate('/'); // Redirecionar para a página de login após alguns segundos
+                }, 3000);
+            } else {
+                setMessage(response.message || 'Ocorreu um erro ao alterar a senha.');
+                setMessageType('error');
+            }
         } catch (error) {
-            setMessage('Ocorreu um erro ao alterar a senha.');
+            setMessage('Ocorreu um erro ao alterar a senha. Tente novamente mais tarde.');
+            setMessageType('error');
         }
     };
 
@@ -36,18 +47,6 @@ const ResetPasswordPage = () => {
                 <img src="/logo.png" alt="Logo" className="reset-logo" />
                 <h1 className="reset-title">Alterar Senha</h1>
                 <form onSubmit={handleSubmit} className="reset-form">
-                    <div className="form-group">
-                        <label htmlFor="username">Nome de Usuário</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                            className="input-field"
-                            placeholder="Digite seu nome de usuário"
-                        />
-                    </div>
                     <div className="form-group">
                         <label htmlFor="new-password"><FaLock /> Nova Senha</label>
                         <input
@@ -74,7 +73,11 @@ const ResetPasswordPage = () => {
                     </div>
                     <button type="submit" className="reset-button">Alterar Senha</button>
                 </form>
-                {message && <p className="reset-message">{message}</p>}
+                {message && (
+                    <p className={`reset-message ${messageType}`}>
+                        {message}
+                    </p>
+                )}
                 <div className="back-login">
                     <p>Voltar ao login? <Link to="/">Ir para Login</Link></p>
                 </div>
