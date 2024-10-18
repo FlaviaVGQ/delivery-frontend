@@ -7,7 +7,7 @@ export const login = async (username, password) => {
     } catch (error) {
         if (error.response && error.response.status === 403) {
             console.log(error.response.data)
-            return error.response.data; 
+            return error.response.data;
         }
         console.error('Erro ao fazer login: ', error);
         throw error;
@@ -88,10 +88,10 @@ export const addProduct = async (productData, userId) => {
         formData.append('categoryId', productData.categoryId);
         formData.append('image', productData.image);
 
-        
+
         if (userId) {
-            formData.append('userId', userId);  
-        }     
+            formData.append('userId', userId);
+        }
         console.log([...formData]);
 
         const response = await api.post('/addProduct/', formData, {
@@ -116,7 +116,7 @@ export const getProductsByUser = async (userId) => {
 };
 export const deleteProduct = async (id) => {
     try {
-        const response = await api.delete(`/deleteProduct/${id}/`); 
+        const response = await api.delete(`/deleteProduct/${id}/`);
         return response.data;
     } catch (error) {
         console.error('Erro ao excluir produto: ', error);
@@ -140,6 +140,22 @@ export const updateProduct = async (id, productData) => {
         return response.data;
     } catch (error) {
         console.error('Erro ao atualizar produto: ', error);
+        throw error;
+    }
+};
+
+export const saveCompanyInfo = async (userId, name, openingHours, address, contact) => {
+    try {
+        const response = await api.post('/company-info/', {
+            user_id: userId,  // Passando o userId
+            name,
+            opening_hours: openingHours,
+            address,
+            contact,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao salvar informações da empresa:', error);
         throw error;
     }
 };

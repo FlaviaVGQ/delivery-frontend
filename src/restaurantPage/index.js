@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './restaurantPage.css';
-import { FaSignOutAlt, FaUserCircle, FaUpload,FaHome } from "react-icons/fa";
+import { FaSignOutAlt, FaUserCircle, FaUpload, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Slider } from '@mui/material';
+import { saveCompanyInfo } from '../fileService';  // Importação da função saveCompanyInfo
 
 const RestaurantPage = () => {
     const [restaurantData, setRestaurantData] = useState({
@@ -74,9 +75,23 @@ const RestaurantPage = () => {
             reader.readAsDataURL(file);
         }
     };
-    const handleSave = () => {
+
+    const handleSave = async () => {
         setIsEditing(false);
-        // Aqui seria o local para enviar os dados atualizados para o servidor
+        const { name, address, phone, hours } = restaurantData;
+
+        try {
+            await saveCompanyInfo(
+                userId,  // Passando o userId aqui
+                name,
+                `${hours[0]}:00 - ${hours[1]}:00`, // Formatação dos horários para passar na função
+                address,
+                phone
+            );
+            console.log('Informações da empresa salvas com sucesso!');
+        } catch (error) {
+            console.error('Erro ao salvar informações da empresa:', error);
+        }
     };
 
     return (
@@ -96,7 +111,6 @@ const RestaurantPage = () => {
                 <div className="restaurant-info">
                     <h2>Informações do Restaurante</h2>
 
-                    {/* Seção de imagem */}
                     <div className="form-group">
                         {isEditing ? (
                             <div
@@ -211,7 +225,6 @@ const RestaurantPage = () => {
                                 <p>{restaurantData.description}</p>
                             )}
                         </div>
-
 
                         {isEditing && (
                             <button type="button" className="save-button" onClick={handleSave}>
