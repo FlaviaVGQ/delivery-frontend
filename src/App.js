@@ -12,6 +12,7 @@ import LinkPage from "./linkPage";
 import EditProductPage from './editProductPage';
 import MenuPage from "./menuPage/menuPage";
 import RestaurantPage from "./restaurantPage";
+import CartPage from "./cartPage";
 
 const App = () => {
     return (
@@ -30,6 +31,7 @@ const App = () => {
                 <Route path="/editProduct/:id" element={<EditProductPage />} />
                 <Route path="/menu/:userId" element={<MenuPage />} />
                 <Route path="/restaurante" element={<RestaurantPage />} />
+                <Route path="/cartPage" element={<CartPage />} />
 
             </Routes>
         </Router>

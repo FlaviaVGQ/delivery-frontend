@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch, FaShoppingCart } from 'react-icons/fa';
-import { getProductsByUser } from '../fileService'; // Importe a função
+import { getProductsByUser } from '../fileService';
 import './menuPage.css';
-
-const Cover = () => {
-    return (
-        <div className="menu-cover">
-            <img src="/logo.png" alt="Logo" className="menu-cover-logo" />
-            <h1 className="menu-cover-title">Nome do Restaurante</h1>
-        </div>
-    );
-};
 
 const MenuPage = () => {
     const location = useLocation();
@@ -23,10 +14,9 @@ const MenuPage = () => {
 
     useEffect(() => {
         if (userId) {
-            // Chama a função getProductsByUser para obter os produtos do usuário
             getProductsByUser(userId)
                 .then((fetchedProducts) => {
-                    setProducts(fetchedProducts); // Atualiza o estado com os produtos
+                    setProducts(fetchedProducts); 
                 })
                 .catch((error) => {
                     console.error('Erro ao carregar os produtos:', error);
@@ -51,18 +41,20 @@ const MenuPage = () => {
         navigate(-1);
     };
 
+    const handleCheckout = () => {
+        navigate('/cartPage', { state: { cart } });
+    };
+
     return (
         <div className="menu-page-container">
             <header className="menu-page-header">
                 <img src="/logo.png" alt="Logo" className="menu-logo" />
-
-                <div className="cart-icon">
+                <h1 className="menu-cover-title">Nome do Restaurante</h1>
+                <div className="cart-icon" onClick={handleCheckout}>
                     <FaShoppingCart />
-                    <span className="cart-count">{cart.length}</span> {/* Contador de itens no carrinho */}
+                    <span className="cart-count">{cart.length}</span>
                 </div>
             </header>
-
-            <Cover /> {/* Capa do cardápio */}
 
             <main className="menu-main-content">
                 <div className="menu-actions">
@@ -94,8 +86,8 @@ const MenuPage = () => {
                                             <img src={product.image} alt={product.name} className="product-image" />
                                             <div className="product-info">
                                                 <h2 className="product-name">{product.name}</h2>
-                                                <p className="product-description">{product.description}</p>
-                                                <p className="product-price">R$ {product.price}</p>
+                                                <p className="product-description">Descrição: {product.description}</p>
+                                                <p className="product-price">Preço: R$ {product.price}</p>
                                             </div>
                                             <button
                                                 className="add-to-cart-button"
@@ -112,11 +104,10 @@ const MenuPage = () => {
                         <p className="no-products-message">Não há produtos disponíveis.</p>
                     )}
                 </div>
+                <button onClick={handleCheckout} className="checkout-button">
+                    Finalizar Compra
+                </button>
             </main>
-
-            <footer className="menu-page-footer">
-                <p>&copy; 2024 Delivery Express | Todos os direitos reservados</p>
-            </footer>
         </div>
     );
 };
