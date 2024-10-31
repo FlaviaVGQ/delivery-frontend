@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaTrash, FaBoxOpen, FaMinus, FaPlus } from "react-icons/fa"; // Importa o ícone de carrinho
+import { Link, useLocation } from 'react-router-dom';
+import { FaShoppingCart, FaTrash, FaBoxOpen, FaMinus, FaPlus } from "react-icons/fa";
 import "./cartPage.css";
 
 const CartPage = () => {
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: "Nome do Produto 1", price: 10.0, quantity: 1, image: "item-image.jpg" },
-        { id: 2, name: "Nome do Produto 2", price: 20.0, quantity: 1, image: "item-image.jpg" },
-    ]);
-
+    const location = useLocation();
+    const [cartItems, setCartItems] = useState(
+        location.state?.cart.map(item => ({
+            ...item,
+            quantity: item.quantity || 1 
+        })) || []
+    );
     const [observation, setObservation] = useState("");
 
     const handleRemoveItem = (id) => {
@@ -37,9 +39,15 @@ const CartPage = () => {
     };
 
     const calculateTotal = () => {
-        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+        return cartItems
+            .reduce((total, item) => {
+                const price = parseFloat(item.price) || 0;
+                const quantity = parseInt(item.quantity) || 1;
+                return total + (price * quantity);
+            }, 0)
+            .toFixed(2);
     };
-
+    
     return (
         <div className="cart-page-container">
             <header className="cart-page-header">
@@ -53,7 +61,7 @@ const CartPage = () => {
                     </ul>
                 </nav>
             </header>
-
+    
             <div className="cart-items-container">
                 {cartItems.length === 0 ? (
                     <div className="empty-cart-message">
@@ -66,14 +74,16 @@ const CartPage = () => {
                                 <img src={item.image} alt={item.name} className="cart-item-image" />
                                 <div className="cart-item-details">
                                     <p className="cart-item-name">{item.name}</p>
-                                    <p className="cart-item-price">R$ {item.price.toFixed(2)}</p>
+                                    <p className="cart-item-price">
+                                        R$ {Number(item.price).toFixed(2)}
+                                    </p>
                                 </div>
                             </div>
                             <div className="cart-item-quantity">
                                 <button className="quantity-button" onClick={() => handleDecreaseQuantity(item.id)}>
                                     <FaMinus />
                                 </button>
-                                <span className="quantity-value">{item.quantity}</span>
+                                <span className="quantity-value">{item.quantity}</span> 
                                 <button className="quantity-button" onClick={() => handleIncreaseQuantity(item.id)}>
                                     <FaPlus />
                                 </button>
@@ -89,7 +99,7 @@ const CartPage = () => {
                     ))
                 )}
             </div>
-
+    
             {cartItems.length > 0 && (
                 <div className="cart-summary">
                     <div className="cart-summary-item">

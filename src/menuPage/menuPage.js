@@ -37,10 +37,6 @@ const MenuPage = () => {
         setCart(prevCart => [...prevCart, product]);
     };
 
-    const handleBack = () => {
-        navigate(-1);
-    };
-
     const handleCheckout = () => {
         navigate('/cartPage', { state: { cart } });
     };
@@ -59,7 +55,6 @@ const MenuPage = () => {
             <main className="menu-main-content">
                 <div className="menu-actions">
                     <h1 className="menu-title">Cardápio</h1>
-
                     <div className="header-right">
                         <div className="search-bar">
                             <input
