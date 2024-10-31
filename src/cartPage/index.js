@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaTrash, FaBoxOpen, FaMinus, FaPlus } from "react-icons/fa";
 import "./cartPage.css";
 
 const CartPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [cartItems, setCartItems] = useState(
         location.state?.cart.map(item => ({
             ...item,
@@ -46,6 +47,16 @@ const CartPage = () => {
                 return total + (price * quantity);
             }, 0)
             .toFixed(2);
+    };
+
+    const handleCheckout = () => {
+        // Navigate to the checkout page with cart items and observation
+        navigate("/checkoutPage", {
+            state: {
+                cartItems: cartItems,
+                observation: observation
+            }
+        });
     };
     
     return (
@@ -115,7 +126,7 @@ const CartPage = () => {
                             className="observation-textarea"
                         />
                     </div>
-                    <button className="checkout-button">Finalizar Compra</button>
+                    <button className="checkout-button" onClick={handleCheckout}>Finalizar Compra</button>
                 </div>
             )}
         </div>
