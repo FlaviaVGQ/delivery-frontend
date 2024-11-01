@@ -70,7 +70,7 @@ const AddProductPage = () => {
                         <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
                         <li><Link to="/home"><FaHome/> Início</Link></li>
                         <li><a href="/products"><FaBoxOpen/> Voltar</a></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>

@@ -110,7 +110,7 @@ const ProductsPage = () => {
                     <ul className="nav-list">
                         <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
                         <li><Link to="/home"><FaHome/> Início</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>
@@ -123,7 +123,7 @@ const ProductsPage = () => {
 
                 <div className="search-section">
                     <div className="search-bar">
-                    <FaSearch className="search-icon" />
+                        <FaSearch className="search-icon"/>
                         <input
                             type="text"
                             placeholder="Pesquisar produtos..."
@@ -135,8 +135,9 @@ const ProductsPage = () => {
                 </div>
 
                 <div className="products-actions">
-                    <button className="add-category-button" onClick={handleGoToCategories}><FaPlus /> Adicionar Categoria</button>
-                    <button className="primary-button" onClick={handleAddProduct}><FaPlus /> Adicionar Produto</button>
+                    <button className="add-category-button" onClick={handleGoToCategories}><FaPlus/> Adicionar Categoria
+                    </button>
+                    <button className="primary-button" onClick={handleAddProduct}><FaPlus/> Adicionar Produto</button>
                 </div>
 
                 <div className="categories-container">
@@ -146,27 +147,31 @@ const ProductsPage = () => {
                             <div className="category-products">
                                 {categorizedProducts[category.name]?.map(product => (
                                     <div key={product.id} className="product-item">
-                                        <img src={product.imagePath} alt={product.name} className="product-image" />
+                                        {/* Renderize a imagem aqui */}
+                                        <img src={product.image || '/default-image.png'} alt={product.name}
+                                             className="product-image"/>
                                         <div className="product-details">
                                             <h3>{product.name}</h3>
                                             <p>{product.description}</p>
                                             <p className="product-price">R$ {product.price}</p>
                                         </div>
                                         <div className="product-buttons">
-                                            <button className="edit-button" onClick={() => handleEditProduct(product.id)}>
-                                                <FaEdit className="product-icon" />
+                                            <button className="edit-button"
+                                                    onClick={() => handleEditProduct(product.id)}>
+                                                <FaEdit className="product-icon"/>
                                             </button>
                                             <button className="view-button" onClick={() => handleViewProduct(product)}>
-                                                <FaEye className="product-icon" />
+                                                <FaEye className="product-icon"/>
                                             </button>
-                                            <button className="delete-button" onClick={() => openModal(product.id, product.name)}>
-                                                <FaTrash className="product-icon" />
+                                            <button className="delete-button"
+                                                    onClick={() => openModal(product.id, product.name)}>
+                                                <FaTrash className="product-icon"/>
                                             </button>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <hr className="category-divider" />
+                            <hr className="category-divider"/>
                         </div>
                     ))}
                 </div>
@@ -175,7 +180,9 @@ const ProductsPage = () => {
                         <div className="modal-content">
                             <h2>Confirmar Exclusão</h2>
                             <p>Você tem certeza que deseja excluir o produto "{productNameToDelete}"?</p>
-                            <button className="button-confirm" onClick={() => handleDeleteProduct(productIdToDelete)}>Sim</button>
+                            <button className="button-confirm"
+                                    onClick={() => handleDeleteProduct(productIdToDelete)}>Sim
+                            </button>
                             <button className="button-confirm" onClick={closeModal}>Cancelar</button>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import './index.css';
+import './reset.css';
 import { FaLock } from 'react-icons/fa';
 import { changePassword } from '../fileService'; // Certifique-se de que esta função está definida corretamente
 

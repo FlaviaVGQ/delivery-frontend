@@ -3,7 +3,7 @@ import './restaurantPage.css';
 import { FaSignOutAlt, FaUserCircle, FaUpload, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Slider } from '@mui/material';
-import { saveCompanyInfo } from '../fileService';  // Importação da função saveCompanyInfo
+import { saveCompanyInfo, getCompanyByUser } from '../fileService';
 
 const RestaurantPage = () => {
     const [restaurantData, setRestaurantData] = useState({
@@ -12,30 +12,49 @@ const RestaurantPage = () => {
         phone: '',
         hours: [8, 20],
         description: 'Restaurante ...',
-        image: '/default-restaurant.jpg',
+        image: null, // Inicialmente null para imagens
     });
 
     const [isEditing, setIsEditing] = useState(false);
-    const [imagePreview, setImagePreview] = useState(restaurantData.image);
+    const [imagePreview, setImagePreview] = useState(null);
     const [dragging, setDragging] = useState(false);
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchRestaurantData = async () => {
-            // Simular fetch dos dados do restaurante do servidor
+            try {
+                const response = await getCompanyByUser(userId);
+                const { name, address, contact, opening_hours, description, image } = response.data;
+
+                setRestaurantData({
+                    name: name || '',
+                    address: address || '',
+                    phone: contact || '',
+                    hours: opening_hours ? opening_hours.split(' - ').map(h => parseInt(h, 10)) : [0, 0],
+                    description: description || '',
+                    image: image || null, // Mantenha como null se não houver imagem
+                });
+
+                setImagePreview(image || '/default-restaurant.jpg'); // Use uma imagem padrão se não houver imagem
+            } catch (error) {
+                console.error('Erro ao buscar informações do restaurante:', error);
+            }
         };
+
         fetchRestaurantData();
     }, [userId]);
 
     const handlePhoneChange = (e) => {
         let value = e.target.value.replace(/\D/g, '');
+
         if (value.length > 10) {
-            value = value.replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, '($1) $2 $3-$4');
+            value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         } else if (value.length > 6) {
             value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
         } else if (value.length > 2) {
             value = value.replace(/(\d{2})(\d{0,4})/, '($1) $2');
         }
+
         setRestaurantData(prevData => ({ ...prevData, phone: value }));
     };
 
@@ -49,7 +68,21 @@ const RestaurantPage = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: reader.result }));
+                setRestaurantData(prevData => ({ ...prevData, image: file })); // Armazena o arquivo
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setDragging(false);
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+                setRestaurantData(prevData => ({ ...prevData, image: file })); // Armazena o arquivo
             };
             reader.readAsDataURL(file);
         }
@@ -62,31 +95,19 @@ const RestaurantPage = () => {
 
     const handleDragLeave = () => setDragging(false);
 
-    const handleDrop = (e) => {
-        e.preventDefault();
-        setDragging(false);
-        const file = e.dataTransfer.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: reader.result }));
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
     const handleSave = async () => {
         setIsEditing(false);
-        const { name, address, phone, hours } = restaurantData;
+        const { name, address, phone, hours, description, image } = restaurantData;
 
         try {
             await saveCompanyInfo(
-                userId,  // Passando o userId aqui
+                userId,
                 name,
-                `${hours[0]}:00 - ${hours[1]}:00`, // Formatação dos horários para passar na função
+                `${hours[0]}:00 - ${hours[1]}:00`,
                 address,
-                phone
+                phone,
+                description,
+                image
             );
             console.log('Informações da empresa salvas com sucesso!');
         } catch (error) {
@@ -102,7 +123,7 @@ const RestaurantPage = () => {
                     <ul className="nav-list">
                         <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
                         <li><Link to="/home"><FaHome /> Início</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
                     </ul>
                 </nav>
             </header>
@@ -120,20 +141,20 @@ const RestaurantPage = () => {
                                 onDrop={handleDrop}
                             >
                                 <input type="file" accept="image/*" onChange={handleImageChange}
-                                       style={{display: 'none'}} id="imageInput"/>
+                                       style={{ display: 'none' }} id="imageInput" />
                                 <label htmlFor="imageInput">
                                     <div className="upload-area">
                                         {imagePreview ? (
-                                            <img src={imagePreview} alt="imagem" className="restaurant-image-preview"/>
+                                            <img src={imagePreview} alt="imagem" className="restaurant-image-preview" />
                                         ) : (
-                                            <FaUpload className="upload-icon"/>
+                                            <FaUpload className="upload-icon" />
                                         )}
                                         <p>{imagePreview ? 'Alterar Imagem' : 'Arraste ou clique para enviar uma imagem'}</p>
                                     </div>
                                 </label>
                             </div>
                         ) : (
-                            <img src="/logo.png" alt="imagem" className="restaurant-image"/>
+                            <img src={imagePreview || '/default-restaurant.jpg'} alt="imagem" className="restaurant-image" />
                         )}
                     </div>
                     <form className="restaurant-form">
@@ -144,7 +165,7 @@ const RestaurantPage = () => {
                                     type="text"
                                     name="name"
                                     value={restaurantData.name}
-                                    onChange={(e) => setRestaurantData({...restaurantData, name: e.target.value})}
+                                    onChange={(e) => setRestaurantData({ ...restaurantData, name: e.target.value })}
                                     required
                                 />
                             ) : (
@@ -159,7 +180,7 @@ const RestaurantPage = () => {
                                     type="text"
                                     name="address"
                                     value={restaurantData.address}
-                                    onChange={(e) => setRestaurantData({...restaurantData, address: e.target.value})}
+                                    onChange={(e) => setRestaurantData({ ...restaurantData, address: e.target.value })}
                                     required
                                 />
                             ) : (
@@ -194,11 +215,11 @@ const RestaurantPage = () => {
                                         min={0}
                                         max={24}
                                         marks={[
-                                            {value: 0, label: '00:00'},
-                                            {value: 6, label: '06:00'},
-                                            {value: 12, label: '12:00'},
-                                            {value: 18, label: '18:00'},
-                                            {value: 24, label: '24:00'},
+                                            { value: 0, label: '00:00' },
+                                            { value: 6, label: '06:00' },
+                                            { value: 12, label: '12:00' },
+                                            { value: 18, label: '18:00' },
+                                            { value: 24, label: '24:00' },
                                         ]}
                                     />
                                     <div className="time-range">
@@ -242,7 +263,7 @@ const RestaurantPage = () => {
             </main>
 
             <footer className="restaurant-page-footer">
-                <p>&copy; 2024 Delivery Express | Todos os direitos reservados</p>
+                <p>&copy; 2024 Don Lisita. Todos os direitos reservados.</p>
             </footer>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './homePage.css';
 import {
     FaUserCircle,
     FaCog,
@@ -44,7 +44,7 @@ const AdminHomePage = () => {
                     <ul className="nav-list">
                         <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
                         <li><Link to="/home"><FaHome/> Início</Link></li>
-                        <li><Link to="/logout" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>

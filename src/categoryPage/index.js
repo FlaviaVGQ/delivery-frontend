@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { sendCategory } from '../fileService';
 import { FaUserCircle, FaCog, FaSignOutAlt, FaBoxOpen } from 'react-icons/fa';
-import './styles.css';
+import './category.css';
 
 const CreateCategory = () => {
     const [category, setCategory] = useState('');
@@ -26,10 +26,11 @@ const CreateCategory = () => {
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><span className="user-info"><FaUserCircle /> Usuário</span></li>
-                        <li><Link to="/profile"><FaUserCircle /> Perfil</Link></li>
-                        <li><Link to="/settings"><FaCog /> Configurações</Link></li>
-                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
+                        <li><span className="user-info"><FaUserCircle/> Usuário</span></li>
+                        <li><Link to="/profile"><FaUserCircle/> Perfil</Link></li>
+                        <li><Link to="/settings"><FaCog/> Configurações</Link></li>
+                        <li><a href="/products"><FaBoxOpen/> Voltar</a></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
             </header>

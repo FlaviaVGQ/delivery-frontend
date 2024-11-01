@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { sendResetPasswordEmail } from '../fileService';
 import { FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import './index.css';
+import './forgotPassword.css';
 
 const ForgotPasswordPage = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');

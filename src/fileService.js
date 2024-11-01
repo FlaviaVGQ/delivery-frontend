@@ -140,19 +140,43 @@ export const updateProduct = async (id, productData) => {
     }
 };
 
-export const saveCompanyInfo = async (userId, name, openingHours, address, contact) => {
+export const saveCompanyInfo = async (userId, name, openingHours, address, contact, description, image) => {
     try {
-        const response = await api.post('/company-info/', {
-            user_id: userId,  // Passando o userId
-            name,
-            opening_hours: openingHours,
-            address,
-            contact,
+        const formData = new FormData();
+
+        formData.append('user_id', userId);
+        formData.append('name', name);
+        formData.append('opening_hours', openingHours);
+        formData.append('address', address);
+        formData.append('contact', contact);
+        formData.append('description', description);
+
+        // Supondo que image seja um File ou Blob
+        if (image) {
+            formData.append('image', image, 'restaurant-image.png'); // Ou apenas image se já for um File
+        }
+
+        const response = await api.post('/company-info/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         });
+
         return response.data;
     } catch (error) {
-        console.error('Erro ao salvar informações da empresa:', error);
+        console.error('Erro ao salvar informações da empresa:', error.response?.data || error.message);
         throw error;
     }
 };
 
+
+
+export const getCompanyByUser = async (userId) => {
+    try {
+        const response = await api.get(`/company-info/get`, { params: { user_id: userId } });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar restaurante: ', error);
+        throw error;
+    }
+};
