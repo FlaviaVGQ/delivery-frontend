@@ -14,28 +14,31 @@ import MenuPage from "./menuPage/menuPage";
 import RestaurantPage from "./restaurantPage";
 import CartPage from "./cartPage";
 import CheckoutPage from "./checkoutPage";
+import { CartProvider } from './CartContext';
 
 const App = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/createUser" element={<CreateUserPage />} />
-                <Route path="/forgotPassword" element={<ForgotPasswordPage />} />
-                <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/products/" element={<ProductsPage />} />
-                <Route path="/category" element={<CategoryPage />} />
-                <Route path="/addProduct" element={<AddProductPage />} />
-                <Route path="/deleteProduct" element={<ProductsPage />} />
-                <Route path="/link" element={<LinkPage />} />
-                <Route path="/editProduct/:id" element={<EditProductPage />} />
-                <Route path="/menu/:userId" element={<MenuPage />} />
-                <Route path="/restaurante" element={<RestaurantPage />} />
-                <Route path="/cartPage" element={<CartPage />} />
-                <Route path="/checkoutPage" element={<CheckoutPage />} />
-            </Routes>
-        </Router>
+        <CartProvider> {/* Envolvemos todo o aplicativo com o CartProvider */}
+            <Router>
+                <Routes>
+                    <Route path="/" element={<LoginPage />} />
+                    <Route path="/createUser" element={<CreateUserPage />} />
+                    <Route path="/forgotPassword" element={<ForgotPasswordPage />} />
+                    <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/products/" element={<ProductsPage />} />
+                    <Route path="/category" element={<CategoryPage />} />
+                    <Route path="/addProduct" element={<AddProductPage />} />
+                    <Route path="/deleteProduct" element={<ProductsPage />} />
+                    <Route path="/link" element={<LinkPage />} />
+                    <Route path="/editProduct/:id" element={<EditProductPage />} />
+                    <Route path="/restaurante" element={<RestaurantPage />} />
+                    <Route path="/menu/:userId" element={<MenuPage />} />
+                    <Route path="/cartPage" element={<CartPage />} />
+                    <Route path="/checkoutPage" element={<CheckoutPage />} />
+                </Routes>
+            </Router>
+        </CartProvider>
     );
 };
 

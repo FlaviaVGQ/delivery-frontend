@@ -46,9 +46,6 @@ export const changePassword = async (token, password) => {
     }
 };
 
-
-
-
 export const sendResetPasswordEmail = async (emailOrUsername) => {
     try {
         const response = await api.post('/forgotpassword/', { emailOrUsername });
@@ -68,7 +65,6 @@ export const sendCategory = async (category, userId) => {
         throw error;
     }
 };
-
 
 export const fetchCategoriesByUser = async (userId) => {
     try {

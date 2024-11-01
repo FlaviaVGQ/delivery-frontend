@@ -1,64 +1,30 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaTrash, FaBoxOpen, FaMinus, FaPlus } from "react-icons/fa";
+import { useCart } from "../CartContext"; // Verifique esta importação
 import "./cartPage.css";
 
 const CartPage = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const [cartItems, setCartItems] = useState(
-        location.state?.cart.map(item => ({
-            ...item,
-            quantity: item.quantity || 1 
-        })) || []
-    );
+    const { cart, removeFromCart, updateQuantity } = useCart();
     const [observation, setObservation] = useState("");
 
-    const handleRemoveItem = (id) => {
-        const updatedCartItems = cartItems.filter(item => item.id !== id);
-        setCartItems(updatedCartItems);
+    const handleIncreaseQuantity = (id, quantity) => {
+        updateQuantity(id, quantity + 1);
     };
 
-    const handleIncreaseQuantity = (id) => {
-        const updatedCartItems = cartItems.map(item => {
-            if (item.id === id) {
-                return { ...item, quantity: item.quantity + 1 };
-            }
-            return item;
-        });
-        setCartItems(updatedCartItems);
-    };
-
-    const handleDecreaseQuantity = (id) => {
-        const updatedCartItems = cartItems.map(item => {
-            if (item.id === id && item.quantity > 1) {
-                return { ...item, quantity: item.quantity - 1 };
-            }
-            return item;
-        });
-        setCartItems(updatedCartItems);
+    const handleDecreaseQuantity = (id, quantity) => {
+        if (quantity > 1) updateQuantity(id, quantity - 1);
     };
 
     const calculateTotal = () => {
-        return cartItems
-            .reduce((total, item) => {
-                const price = parseFloat(item.price) || 0;
-                const quantity = parseInt(item.quantity) || 1;
-                return total + (price * quantity);
-            }, 0)
-            .toFixed(2);
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
 
     const handleCheckout = () => {
-        // Navigate to the checkout page with cart items and observation
-        navigate("/checkoutPage", {
-            state: {
-                cartItems: cartItems,
-                observation: observation
-            }
-        });
+        navigate("/checkoutPage", { state: { cartItems: cart, observation } });
     };
-    
+
     return (
         <div className="cart-page-container">
             <header className="cart-page-header">
@@ -72,35 +38,33 @@ const CartPage = () => {
                     </ul>
                 </nav>
             </header>
-    
+
             <div className="cart-items-container">
-                {cartItems.length === 0 ? (
+                {cart.length === 0 ? (
                     <div className="empty-cart-message">
                         <p>Seu carrinho está vazio!</p>
                     </div>
                 ) : (
-                    cartItems.map(item => (
+                    cart.map(item => (
                         <div key={item.id} className="cart-item-card">
                             <div className="cart-item-info">
                                 <img src={item.image} alt={item.name} className="cart-item-image" />
                                 <div className="cart-item-details">
                                     <p className="cart-item-name">{item.name}</p>
-                                    <p className="cart-item-price">
-                                        R$ {Number(item.price).toFixed(2)}
-                                    </p>
+                                    <p className="cart-item-price">R$ {Number(item.price).toFixed(2)}</p>
                                 </div>
                             </div>
                             <div className="cart-item-quantity">
-                                <button className="quantity-button" onClick={() => handleDecreaseQuantity(item.id)}>
+                                <button className="quantity-button" onClick={() => handleDecreaseQuantity(item.id, item.quantity)}>
                                     <FaMinus />
                                 </button>
-                                <span className="quantity-value">{item.quantity}</span> 
-                                <button className="quantity-button" onClick={() => handleIncreaseQuantity(item.id)}>
+                                <span className="quantity-value">{item.quantity}</span>
+                                <button className="quantity-button" onClick={() => handleIncreaseQuantity(item.id, item.quantity)}>
                                     <FaPlus />
                                 </button>
                             </div>
                             <button
-                                onClick={() => handleRemoveItem(item.id)}
+                                onClick={() => removeFromCart(item.id)}
                                 className="cart-item-remove"
                                 aria-label="Remover item"
                             >
@@ -110,8 +74,8 @@ const CartPage = () => {
                     ))
                 )}
             </div>
-    
-            {cartItems.length > 0 && (
+
+            {cart.length > 0 && (
                 <div className="cart-summary">
                     <div className="cart-summary-item">
                         <h3>Total:</h3>
@@ -122,11 +86,10 @@ const CartPage = () => {
                             id="observation"
                             value={observation}
                             onChange={(e) => setObservation(e.target.value)}
-                            placeholder="Digite alguma observação para o pedido"
-                            className="observation-textarea"
+                            placeholder="Digite alguma observação..."
                         />
                     </div>
-                    <button className="checkout-button" onClick={handleCheckout}>Finalizar Compra</button>
+                    <button onClick={handleCheckout} className="checkout-button">Finalizar Compra</button>
                 </div>
             )}
         </div>

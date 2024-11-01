@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { getProductsByUser } from '../fileService';
+import { useCart } from '../CartContext';
 import './menuPage.css';
 
 const MenuPage = () => {
-    const location = useLocation();
     const navigate = useNavigate();
+    const { cart, addToCart } = useCart();
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [cart, setCart] = useState([]);
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         if (userId) {
             getProductsByUser(userId)
-                .then((fetchedProducts) => {
-                    setProducts(fetchedProducts); 
-                })
-                .catch((error) => {
-                    console.error('Erro ao carregar os produtos:', error);
-                });
+                .then(fetchedProducts => setProducts(fetchedProducts))
+                .catch(error => console.error('Erro ao carregar os produtos:', error));
         }
     }, [userId]);
 
@@ -33,12 +29,10 @@ const MenuPage = () => {
         return acc;
     }, {});
 
-    const addToCart = (product) => {
-        setCart(prevCart => [...prevCart, product]);
-    };
-
     const handleCheckout = () => {
-        navigate('/cartPage', { state: { cart } });
+        // Limpa o carrinho
+        addToCart([]); // Isso mantém o cardápio intacto
+        navigate('/cartPage');
     };
 
     return (
@@ -48,7 +42,7 @@ const MenuPage = () => {
                 <h1 className="menu-cover-title">Nome do Restaurante</h1>
                 <div className="cart-icon" onClick={handleCheckout}>
                     <FaShoppingCart />
-                    <span className="cart-count">{cart.length}</span>
+                    <span className="cart-count">{cart.reduce((total, item) => total + item.quantity, 0)}</span>
                 </div>
             </header>
 

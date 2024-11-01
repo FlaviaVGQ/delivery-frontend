@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useCart } from '../CartContext';
 import "./checkoutPage.css";
 
 const CheckoutPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { cart, setCart } = useCart(); // Obtenha o carrinho do contexto
 
+    // Definir estados
     const [currentStep, setCurrentStep] = useState(1);
     const [deliveryInfo, setDeliveryInfo] = useState({
         fullName: "",
@@ -18,22 +21,18 @@ const CheckoutPage = () => {
         state: ""
     });
     const [paymentMethod, setPaymentMethod] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-    const cartItems = location.state?.cartItems || [];
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const observation = location.state?.observation || "";
-
-    const nextStep = () => {
-        setCurrentStep(prev => prev + 1);
-    };
 
     const finalizeOrder = () => {
         console.log("Pedido finalizado com sucesso!");
-        setIsModalOpen(true); // Open the modal
+        setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
-        navigate("/menu/:userId"); // Redirect after closing the modal
+        setCart([]); // Limpa o carrinho no contexto
+        navigate("/menu/3");
     };
 
     return (
@@ -42,7 +41,6 @@ const CheckoutPage = () => {
                 <div className="delivery-info">
                     <h2>Informações de Entrega</h2>
                     <form>
-                        {/* Input fields for delivery information */}
                         <input type="text" placeholder="Nome completo" value={deliveryInfo.fullName} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, fullName: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Telefone" value={deliveryInfo.phone} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Rua" value={deliveryInfo.street} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, street: e.target.value })} className="input-field" />
@@ -51,7 +49,7 @@ const CheckoutPage = () => {
                         <input type="text" placeholder="Bairro" value={deliveryInfo.district} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, district: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Cidade" value={deliveryInfo.city} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, city: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Estado" value={deliveryInfo.state} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, state: e.target.value })} className="input-field" />
-                        <button type="button" onClick={nextStep} className="next-step-button">Próximo</button>
+                        <button type="button" onClick={() => setCurrentStep(2)} className="next-step-button">Próximo</button>
                     </form>
                 </div>
             )}
@@ -71,7 +69,7 @@ const CheckoutPage = () => {
                         <input type="radio" name="paymentMethod" value="Dinheiro" checked={paymentMethod === "Dinheiro"} onChange={(e) => setPaymentMethod(e.target.value)} />
                         Dinheiro
                     </label>
-                    <button type="button" onClick={nextStep} className="next-step-button">Próximo</button>
+                    <button type="button" onClick={() => setCurrentStep(3)} className="next-step-button">Próximo</button>
                 </div>
             )}
 
@@ -80,7 +78,7 @@ const CheckoutPage = () => {
                     <h2>Resumo do Pedido</h2>
                     <h3>Itens:</h3>
                     <ul>
-                        {cartItems.map(item => (
+                        {cart.map(item => (
                             <li key={item.id}>
                                 {item.name} - {item.quantity} x R$ {parseFloat(item.price).toFixed(2)}
                             </li>
@@ -98,13 +96,10 @@ const CheckoutPage = () => {
                 </div>
             )}
 
-            {/* Modal for order success */}
             {isModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <button className="close-button" onClick={closeModal}>
-                            &times;
-                        </button>
+                        <button className="close-button" onClick={closeModal}>&times;</button>
                         <h2>Pedido realizado com sucesso!</h2>
                         <p>Obrigado pela sua compra!</p>
                         <button className="close-modal-button" onClick={closeModal}>Fechar</button>
