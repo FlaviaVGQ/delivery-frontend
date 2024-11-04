@@ -1,90 +1,95 @@
-.login-container {
+/* Estilos principais para o layout de login */
+.login-page .login-container {
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
-    height: 605px;
-    width: 100%;
+    align-items: center;
+    height: 100vh;
     background-color: rgba(193, 91, 0, 0.85);
 }
 
-.login-box {
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
+.login-page .login-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 450px;
-    height: 550px;
+    width: 280px; /* Ajusta a largura do contêiner para deixá-lo mais compacto */
     text-align: center;
 }
 
-.login-logo {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: -35px;
+.login-page .login-logo {
+    width: 125px; /* Aumenta o tamanho da logo */
+    height: 125px; /* Aumenta o tamanho da logo */
+    margin-bottom: 10px;
 }
 
-
-.login-form {
+.login-page .login-form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
-    margin-top: -20px;
+    gap: 10px; /* Reduz o espaçamento entre os campos */
 }
 
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-    height: 100%;
+.login-page .form-group {
+    margin: 0; /* Remover margens desnecessárias */
+    padding: 0; /* Remover padding se houver */
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 15px;
+.login-page .form-group label {
+    margin: 0; /* Remover margens para o label */
     font-weight: bold;
     color: #555;
+    font-size: 16px; /* Aumenta o tamanho da fonte */
+    line-height: 1.2; /* Ajustar line-height para reduzir altura */
 }
 
-.input-field {
-    width: 419px !important;
-    padding: 10px !important;
+.login-page .input-field {
+    width: 100%;
+    padding: 6px; /* Aumentar o padding para melhor usabilidade */
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 16px; /* Aumenta o tamanho da fonte para os campos de entrada */
+    line-height: 1.2; /* Ajustar line-height para o campo de entrada */
 }
 
-.login-button {
+.login-page .login-button {
     background-color: rgba(255, 109, 0, 0.93);
     color: white;
-    padding: 10px;
+    padding: 10px; /* Aumentar o padding do botão */
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 16px; /* Aumenta o tamanho da fonte do botão */
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: -3px;
+    margin-top: 10px;
 }
 
-.login-button:hover {
+.login-page .login-button:hover {
     background-color: rgb(218, 76, 0);
 }
 
-.login-message {
-    margin-top: 10px;
+.login-page .login-message {
+    margin-top: 8px;
     color: #e74c3c;
+    font-size: 14px; /* Ajusta o tamanho da mensagem de login */
 }
 
-.return-login {
-    margin-top: 15px;
+.login-page .return-login {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.return-login a {
+.login-page .return-login p {
+    font-size: 14px; /* Aumenta o tamanho da fonte do parágrafo */
+}
+
+.login-page .return-login a {
     color: #df551a;
     text-decoration: none;
     font-weight: bold;
+    font-size: 14px; /* Aumenta o tamanho da fonte do link */
 }
 
-.return-login a:hover {
+.login-page .return-login a:hover {
     text-decoration: underline;
 }

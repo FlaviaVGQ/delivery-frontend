@@ -1,32 +1,30 @@
+/* Estilos principais para a página de redefinição de senha */
 .reset-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(163, 77, 0); 
+    background-color: rgba(193, 91, 0, 0.85);
 }
 
 .reset-box {
     background-color: white;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 20px; /* Mantive o padding do box */
+    border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 500px;
-    height: 600px; 
+    width: 280px; /* Ajusta a largura do contêiner para deixá-lo mais compacto */
     text-align: center;
 }
 
 .reset-logo {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: -10px;
+    width: 125px; /* Ajuste de tamanho da logo */
+    height: 125px; /* Ajuste de tamanho da logo */
+    margin-bottom: 10px;
 }
 
 .reset-title {
-    font-size: 24px;
-    margin-bottom: -10px; 
+    font-size: 20px; /* Tamanho da fonte */
+    margin-bottom: 10px; /* Espaço abaixo do título */
     color: #333;
 }
 
@@ -36,42 +34,46 @@
 }
 
 .form-group {
-    margin-bottom: -30px; 
-    text-align: left;
+    margin: 0; /* Remover margens desnecessárias */
+    padding: 0; /* Remover padding se houver */
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
+    display: block; /* Faz com que o label ocupe toda a largura */
+    margin-bottom: 2px; /* Pequeno espaçamento abaixo do label */
     font-weight: bold;
     color: #555;
+    font-size: 14px; /* Tamanho da fonte */
 }
 
 .input-field {
     width: 100%;
-    padding: 5px;
+    padding: 4px; /* Reduzir ainda mais o padding */
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 14px; /* Tamanho da fonte consistente */
+    height: 30px; /* Altura do campo de entrada reduzida */
+    box-sizing: border-box; /* Para incluir o padding e border na altura total */
 }
 
 .reset-button {
-    background-color: #ff6d00;
+    background-color: rgba(255, 109, 0, 0.93);
     color: white;
     padding: 8px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espaçamento acima do botão */
 }
 
 .reset-button:hover {
-    background-color: #e65100;
+    background-color: rgb(218, 76, 0);
 }
 
 .reset-message {
-    margin-top: 8px; 
+    margin-top: 8px;
     color: #e74c3c;
 }
 
@@ -87,4 +89,9 @@
 
 .back-login a:hover {
     text-decoration: underline;
+}
+
+/* Ajustes para reduzir o espaço entre campos e melhorar a aparência */
+.reset-form > .form-group {
+    margin-bottom: 0px; /* Espaçamento reduzido entre os campos */
 }
