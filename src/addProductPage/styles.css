@@ -4,6 +4,7 @@
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
     background-color: #ffe2c2;
+    
 }
 
 
@@ -15,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19); 
+ 
 }
 
 .admin-homepage-logo {
@@ -53,7 +55,7 @@
 
 .form-container {
     max-width: 500px; 
-    margin: 50px auto; 
+    margin: 100px auto; 
     padding: 20px; 
     background-color: white; 
     border-radius: 8px; 
@@ -116,5 +118,5 @@ button[type="submit"]:hover {
     font-size: 0.9rem; 
     font-family: 'Verdana', sans-serif; 
     padding-top: 100px;
-    margin-top: 200px;
+    margin-top: 300px;
 }

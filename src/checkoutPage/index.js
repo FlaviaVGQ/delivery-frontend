@@ -6,9 +6,9 @@ import "./checkoutPage.css";
 const CheckoutPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cart, setCart } = useCart(); // Obtenha o carrinho do contexto
+    const { cart, setCart } = useCart(); 
 
-    // Definir estados
+    
     const [currentStep, setCurrentStep] = useState(1);
     const [deliveryInfo, setDeliveryInfo] = useState({
         fullName: "",
@@ -31,7 +31,7 @@ const CheckoutPage = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setCart([]); // Limpa o carrinho no contexto
+        setCart([]); 
         navigate("/menu/3");
     };
 

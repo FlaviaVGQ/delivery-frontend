@@ -4,7 +4,7 @@ import { fetchCategoriesByUser, getProductById, updateProduct } from '../fileSer
 import './stylesEditaPage.css';
 
 const EditProductPage = () => {
-    const { id } = useParams(); // Pega o ID do produto da URL
+    const { id } = useParams(); 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -34,7 +34,7 @@ const EditProductPage = () => {
         const fetchData = async () => {
             try {
                 const productResponse = await getProductById(id);
-                console.log("Produto Response:", productResponse); // Busca o produto pelo ID
+                console.log("Produto Response:", productResponse); 
                 setName(productResponse.name);
                 
                 setDescription(productResponse.description);
@@ -54,8 +54,8 @@ const EditProductPage = () => {
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         try {
-            await updateProduct(id, { name, description, price, categoryId }); // Atualiza o produto
-            navigate('/products'); // Redireciona para a página de produtos
+            await updateProduct(id, { name, description, price, categoryId }); 
+            navigate('/products'); 
         } catch (error) {
             console.error("Erro ao atualizar produto: ", error);
         }

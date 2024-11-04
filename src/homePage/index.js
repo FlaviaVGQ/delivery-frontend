@@ -11,12 +11,12 @@ import {
     FaHome
 } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { getProductsByUser } from '../fileService'; // Importa a função do seu arquivo de serviços
+import { getProductsByUser } from '../fileService'; 
 
 const AdminHomePage = () => {
     const [menuLink, setMenuLink] = useState('');
     const userId = localStorage.getItem('userId');
-    const navigate = useNavigate(); // Hook para navegação
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         if (userId) {
@@ -27,12 +27,12 @@ const AdminHomePage = () => {
 
     const handleViewStore = async () => {
         try {
-            const products = await getProductsByUser(userId); // Busca os produtos
-            // Passa os produtos para a nova página
+            const products = await getProductsByUser(userId); 
+          
             navigate(`/menu/${userId}`, { state: { products } });
         } catch (error) {
             console.error('Erro ao carregar produtos: ', error);
-            // Trate o erro conforme necessário (ex: mostrar mensagem de erro ao usuário)
+            
         }
     };
 
@@ -72,7 +72,7 @@ const AdminHomePage = () => {
                         <p>Veja uma pré-visualização da loja online.</p>
                         <button
                             className="action-button"
-                            onClick={handleViewStore} // Chama a função de redirecionamento
+                            onClick={handleViewStore} 
                         >
                             Visualizar Loja
                         </button>
@@ -84,12 +84,6 @@ const AdminHomePage = () => {
                         <Link to="/link">
                             <button className="action-button">Gerar Link</button>
                         </Link>
-                    </div>
-
-                    <div className="admin-homepage-card" id="settings">
-                        <h2><FaCog /> Configurações</h2>
-                        <p>Atualize configurações da conta e preferências do sistema.</p>
-                        <button className="action-button">Configurações</button>
                     </div>
                 </section>
             </main>

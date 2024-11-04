@@ -12,7 +12,7 @@ const RestaurantPage = () => {
         phone: '',
         hours: [8, 20],
         description: 'Restaurante ...',
-        image: null, // Inicialmente null para imagens
+        image: null, 
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -32,10 +32,10 @@ const RestaurantPage = () => {
                     phone: contact || '',
                     hours: opening_hours ? opening_hours.split(' - ').map(h => parseInt(h, 10)) : [0, 0],
                     description: description || '',
-                    image: image || null, // Mantenha como null se não houver imagem
+                    image: image || null, 
                 });
 
-                setImagePreview(image || '/default-restaurant.jpg'); // Use uma imagem padrão se não houver imagem
+                setImagePreview(image || '/default-restaurant.jpg'); 
             } catch (error) {
                 console.error('Erro ao buscar informações do restaurante:', error);
             }
@@ -68,7 +68,7 @@ const RestaurantPage = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: file })); // Armazena o arquivo
+                setRestaurantData(prevData => ({ ...prevData, image: file })); 
             };
             reader.readAsDataURL(file);
         }
@@ -82,7 +82,7 @@ const RestaurantPage = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: file })); // Armazena o arquivo
+                setRestaurantData(prevData => ({ ...prevData, image: file })); 
             };
             reader.readAsDataURL(file);
         }
@@ -263,7 +263,7 @@ const RestaurantPage = () => {
             </main>
 
             <footer className="restaurant-page-footer">
-                <p>&copy; 2024 Don Lisita. Todos os direitos reservados.</p>
+                <p>&copy; 2024 Delivery Express. Todos os direitos reservados.</p>
             </footer>
         </div>
     );

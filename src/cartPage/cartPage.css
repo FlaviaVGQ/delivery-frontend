@@ -8,24 +8,24 @@
 
 .cart-page-header {
     display: flex;
-    justify-content: space-between; /* Espaça os itens ao longo da linha */
+    justify-content: space-between; 
     align-items: center;
-    width: 100%; /* Faz o cabeçalho ocupar a largura inteira */
-    background-color: #ff6d00; /* Fundo laranja */
-    padding: 20px 0; /* Ajuste o padding conforme necessário */
+    width: 100%; 
+    background-color: #ff6d00; 
+    padding: 20px 0; 
     color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .cart-title-container {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo dentro do container */
-    flex-grow: 1; /* Faz com que esse container ocupe o espaço disponível */
+    justify-content: center; 
+    flex-grow: 1; 
 }
 
 
 .cart-icon {
-    font-size: 2.5rem; /* Tamanho do ícone do carrinho */
+    font-size: 2.5rem; 
     color: white;
 }
 
@@ -157,29 +157,29 @@
 }
 
 .trash-icon {
-    font-size: 1.5rem; /* Tamanho do ícone de lixeira */
-    color: #ff6d00; /* Cor do ícone */
+    font-size: 1.5rem; 
+    color: #ff6d00; 
 }
 
 .cart-item-quantity {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    background-color: #fff; /* Fundo branco */
-    border: 1px solid #000; /* Borda preta */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 5px; /* Padding interno */
-    width: 120px; /* Largura fixa */
-    margin-left: auto; /* Move para o lado direito */
+    justify-content: center; 
+    background-color: #fff; 
+    border: 1px solid #000; 
+    border-radius: 5px; 
+    padding: 5px; 
+    width: 120px;
+    margin-left: auto; 
 }
 
 .quantity-button {
-    width: 30px; /* Largura do botão */
-    height: 30px; /* Altura do botão */
-    background-color: #fff; /* Fundo branco */
-    color: #000; /* Cor do ícone */
-    border: 1px solid #000; /* Borda preta */
-    border-radius: 5px; /* Bordas arredondadas */
+    width: 30px; 
+    height: 30px; 
+    background-color: #fff; 
+    color: #000; 
+    border: 1px solid #000; 
+    border-radius: 5px; 
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -187,14 +187,14 @@
 .quantity-value {
     font-size: 1.2rem;
     color: #333;
-    width: 30px; /* Largura do número */
-    text-align: center; /* Centraliza o número */
-    margin: 0 5px; /* Margem para espaçamento */
+    width: 30px; 
+    text-align: center; 
+    margin: 0 5px; 
 }
 
 
 .page-nav {
-    margin-left: auto; /* Move a navegação para a extrema direita */
+    margin-left: auto; 
 }
 
 .nav-list {
@@ -202,7 +202,7 @@
     display: flex;
     gap: 20px; 
     padding: 0;
-    margin: 0; /* Remove a margem padrão */
+    margin: 0; 
 }
 
 .nav-list a {

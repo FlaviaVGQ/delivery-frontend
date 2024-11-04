@@ -1,10 +1,9 @@
-/* restaurantPage.css */
 .restaurant-page-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
+    background-color: #ffe2c2;
 }
 
 .restaurant-page-header {
@@ -39,9 +38,9 @@
 
 .form-group {
     margin-bottom: 15px;
-    background-color: rgba(255, 140, 61, 0.15);
+    background-color: white;
     border-radius: 10px;
-    padding: 5px;
+    padding: 20px;
 }
 
 .form-group input,
@@ -51,6 +50,12 @@
     border-radius: 4px;
     border: 1px solid #ccc;
 
+}
+
+.time-range {
+    margin-top: 50px; 
+    font-size: 14px;
+    color: #333;
 }
 
 .edit-button, .save-button {
@@ -69,32 +74,32 @@
 }
 
 .restaurant-page-footer {
-    background-color: #333;
+    background-color: #ff6d00;
     color: white;
     text-align: center;
     padding: 5px 0;
 }
 
-/* Slider customizado */
+
 .MuiSlider-root {
-    color: #ff8c00 !important; /* Slider principal laranja */
+    color: #ff8c00 !important; 
 }
 
 .MuiSlider-markLabel {
-    color: #333 !important; /* Cor do texto dos marcadores */
+    color: #333 !important; 
 }
 
 .MuiSlider-thumb {
     background-color: white !important;
-    border: 2px solid #ff8c00 !important; /* Círculo branco com borda laranja */
+    border: 2px solid #ff8c00 !important; 
 }
 
 .MuiSlider-track {
-    background-color: #ff8c00 !important; /* Cor da trilha */
+    background-color: #ff8c00 !important; 
 }
 
 .MuiSlider-rail {
-    background-color: #ccc !important; /* Cor do fundo da trilha */
+    background-color: #ccc !important; 
 }
 .image-upload {
     border: 2px dashed #ccc;
@@ -133,12 +138,12 @@
     color: #666;
 }
 .restaurant-image {
-    width: 150px; /* ajuste o tamanho conforme necessário */
+    width: 150px; 
     height: 150px;
     object-fit: cover;
-    border-radius: 50%; /* isso transforma a imagem em um círculo */
-    display: block; /* necessário para centralizar */
-    margin: 0 auto; /* centraliza horizontalmente */
+    border-radius: 50%; 
+    display: block; 
+    margin: 0 auto; 
 }
 
 

@@ -57,10 +57,10 @@
     font-size: 1rem;
 }
 
-/* src/checkoutPage/checkoutPage.css */
+
 
 .checkout-page-container {
-    /* Your existing styles for the checkout page */
+   
 }
 
 .modal-overlay {
@@ -73,7 +73,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensures the modal is above other elements */
+    z-index: 1000; 
 }
 
 .modal-content {
@@ -97,7 +97,7 @@
 .close-modal-button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -105,8 +105,8 @@
 }
 
 .close-modal-button:hover {
-    background-color: #45a049; /* Darker green */
+    background-color: #45a049; 
 }
 
-/* Add any other existing styles for the checkout page */
+
 

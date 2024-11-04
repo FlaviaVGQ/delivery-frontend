@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import './reset.css';
 import { FaLock } from 'react-icons/fa';
-import { changePassword } from '../fileService'; // Certifique-se de que esta função está definida corretamente
+import { changePassword } from '../fileService'; 
 
 const ResetPasswordPage = () => {
     const {token } = useParams();
@@ -10,7 +10,7 @@ const ResetPasswordPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState('');
-    const navigate = useNavigate(); // Substituindo useHistory
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,14 +22,14 @@ const ResetPasswordPage = () => {
         }
 
         try {
-            const response = await changePassword(token, newPassword); // Passando o token e a nova senha
+            const response = await changePassword(token, newPassword); 
             if (response.success) {
                 setMessage('Senha alterada com sucesso!');
                 setMessageType('success');
                 setNewPassword('');
                 setConfirmPassword('');
                 setTimeout(() => {
-                    navigate('/'); // Redirecionar para a página de login após alguns segundos
+                    navigate('/'); 
                 }, 3000);
             } else {
                 setMessage(response.message || 'Ocorreu um erro ao alterar a senha.');

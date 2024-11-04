@@ -80,10 +80,10 @@ const ProductsPage = () => {
 
     const handleDeleteProduct = async (id) => {
         try {
-            await deleteProduct(id); // Chama o serviço para remover o produto do banco de dados
+            await deleteProduct(id); 
             const filteredProducts = products.filter(product => product.id !== id);
-            setProducts(filteredProducts); // Atualiza a lista de produtos na interface
-            setShowModal(false); // Fecha o modal
+            setProducts(filteredProducts); 
+            setShowModal(false); 
         } catch (error) {
             console.error("Erro ao excluir o produto: ", error);
         }
@@ -147,14 +147,13 @@ const ProductsPage = () => {
                             <div className="category-products">
                                 {categorizedProducts[category.name]?.map(product => (
                                     <div key={product.id} className="product-item">
-                                        {/* Renderize a imagem aqui */}
                                         <img src={product.image || '/default-image.png'} alt={product.name}
                                              className="product-image"/>
-                                        <div className="product-details">
-                                            <h3>{product.name}</h3>
-                                            <p>{product.description}</p>
-                                            <p className="product-price">R$ {product.price}</p>
-                                        </div>
+                                        <div className="product-info">
+                                                <h2 className="product-name">{product.name}</h2>
+                                                <p className="product-description">Descrição: {product.description}</p>
+                                                <p className="product-price">Preço: R$ {product.price}</p>
+                                            </div>
                                         <div className="product-buttons">
                                             <button className="edit-button"
                                                     onClick={() => handleEditProduct(product.id)}>
@@ -180,10 +179,10 @@ const ProductsPage = () => {
                         <div className="modal-content">
                             <h2>Confirmar Exclusão</h2>
                             <p>Você tem certeza que deseja excluir o produto "{productNameToDelete}"?</p>
-                            <button className="button-confirm"
-                                    onClick={() => handleDeleteProduct(productIdToDelete)}>Sim
-                            </button>
-                            <button className="button-confirm" onClick={closeModal}>Cancelar</button>
+                            <div class="modal-buttons">
+                                <button class="button button-confirm" onClick={() => handleDeleteProduct(productIdToDelete)}>Sim</button>
+                                <button class="button button-cancel"  onClick={closeModal}>Cancelar</button>
+                            </div>
                         </div>
                     </div>
                 )}

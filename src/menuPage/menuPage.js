@@ -30,8 +30,7 @@ const MenuPage = () => {
     }, {});
 
     const handleCheckout = () => {
-        // Limpa o carrinho
-        addToCart([]); // Isso mantém o cardápio intacto
+        addToCart([]); 
         navigate('/cartPage');
     };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaTrash, FaBoxOpen, FaMinus, FaPlus } from "react-icons/fa";
-import { useCart } from "../CartContext"; // Verifique esta importação
+import { useCart } from "../CartContext"; 
 import "./cartPage.css";
 
 const CartPage = () => {
