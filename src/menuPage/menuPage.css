@@ -83,12 +83,17 @@ body {
 .cart-icon {
     font-size: 1.8rem;
     position: relative;
-    color: #ff6d00;
+    color: #ff6d00; 
     cursor: pointer;
 }
 
+
 .cart-icon:hover {
-    color: rgba(255, 109, 0, 0.65);
+    color: #ff6d00; 
+}
+
+.cart-icon, .fa-cart {
+    color: #ff6d00 !important;
 }
 
 .cart-count {

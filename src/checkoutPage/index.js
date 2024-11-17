@@ -1,28 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
+import { useCheckout } from '../CheckoutContext';
 import "./checkoutPage.css";
 
 const CheckoutPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cart, setCart } = useCart(); 
+    const { cart, setCart } = useCart();
+    const { deliveryInfo, setDeliveryInfo, paymentMethod, setPaymentMethod } = useCheckout();
 
-    
     const [currentStep, setCurrentStep] = useState(1);
-    const [deliveryInfo, setDeliveryInfo] = useState({
-        fullName: "",
-        phone: "",
-        street: "",
-        number: "",
-        complement: "",
-        district: "",
-        city: "",
-        state: ""
-    });
-    const [paymentMethod, setPaymentMethod] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [error, setError] = useState("");
     const observation = location.state?.observation || "";
+
+    const validateDeliveryInfo = () => {
+        const { fullName, phone, street, number, district, city, state } = deliveryInfo;
+        if (!fullName || !phone || !street || !number || !district || !city || !state) {
+            setError("Por favor, preencha todos os campos obrigatórios.");
+            return false;
+        }
+        setError("");
+        return true;
+    };
+
+    const validatePaymentMethod = () => {
+        if (!paymentMethod) {
+            setError("Por favor, selecione uma forma de pagamento.");
+            return false;
+        }
+        setError("");
+        return true;
+    };
 
     const finalizeOrder = () => {
         console.log("Pedido finalizado com sucesso!");
@@ -31,8 +41,19 @@ const CheckoutPage = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setCart([]); 
-        navigate("/menu/3");
+        setCart([]);
+        setDeliveryInfo({
+            fullName: "",
+            phone: "",
+            street: "",
+            number: "",
+            complement: "",
+            district: "",
+            city: "",
+            state: ""
+        });
+        setPaymentMethod("");
+        navigate("/menu/:userId");
     };
 
     return (
@@ -40,16 +61,17 @@ const CheckoutPage = () => {
             {currentStep === 1 && (
                 <div className="delivery-info">
                     <h2>Informações de Entrega</h2>
+                    {error && <p className="error-message">{error}</p>}
                     <form>
                         <input type="text" placeholder="Nome completo" value={deliveryInfo.fullName} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, fullName: e.target.value })} className="input-field" />
-                        <input type="text" placeholder="Telefone" value={deliveryInfo.phone} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: e.target.value })} className="input-field" />
+                        <input type="text" placeholder="Telefone" value={deliveryInfo.phone} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: e.target.value.replace(/[^0-9]/g, '') })} className="input-field" />
                         <input type="text" placeholder="Rua" value={deliveryInfo.street} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, street: e.target.value })} className="input-field" />
-                        <input type="text" placeholder="Número" value={deliveryInfo.number} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, number: e.target.value })} className="input-field" />
+                        <input type="text" placeholder="Número" value={deliveryInfo.number} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, number: e.target.value.replace(/[^0-9]/g, '') })} className="input-field" />
                         <input type="text" placeholder="Complemento" value={deliveryInfo.complement} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, complement: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Bairro" value={deliveryInfo.district} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, district: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Cidade" value={deliveryInfo.city} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, city: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Estado" value={deliveryInfo.state} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, state: e.target.value })} className="input-field" />
-                        <button type="button" onClick={() => setCurrentStep(2)} className="next-step-button">Próximo</button>
+                        <button type="button" onClick={() => validateDeliveryInfo() && setCurrentStep(2)} className="next-step-button">Próximo</button>
                     </form>
                 </div>
             )}
@@ -57,6 +79,7 @@ const CheckoutPage = () => {
             {currentStep === 2 && (
                 <div className="payment-method">
                     <h2>Forma de Pagamento</h2>
+                    {error && <p className="error-message">{error}</p>}
                     <label className="payment-option">
                         <input type="radio" name="paymentMethod" value="Cartão" checked={paymentMethod === "Cartão"} onChange={(e) => setPaymentMethod(e.target.value)} />
                         Cartão
@@ -69,7 +92,7 @@ const CheckoutPage = () => {
                         <input type="radio" name="paymentMethod" value="Dinheiro" checked={paymentMethod === "Dinheiro"} onChange={(e) => setPaymentMethod(e.target.value)} />
                         Dinheiro
                     </label>
-                    <button type="button" onClick={() => setCurrentStep(3)} className="next-step-button">Próximo</button>
+                    <button type="button" onClick={() => validatePaymentMethod() && setCurrentStep(3)} className="next-step-button">Próximo</button>
                 </div>
             )}
 
@@ -92,7 +115,30 @@ const CheckoutPage = () => {
                     <p>Telefone: {deliveryInfo.phone}</p>
                     <h3>Forma de Pagamento:</h3>
                     <p>{paymentMethod}</p>
-                    <button type="button" onClick={finalizeOrder} className="finalize-button">Finalizar Compra</button>
+                    <div className="buttons-container">
+                        <button type="button" onClick={finalizeOrder} className="finalize-button">Finalizar Compra</button>
+                        <button type="button" onClick={() => navigate('/cartPage')} className="edit-order-button">Alterar Pedido</button>
+                        <button 
+                            type="button" 
+                            onClick={() => {
+                                setCart([]);
+                                setDeliveryInfo({
+                                    fullName: "",
+                                    phone: "",
+                                    street: "",
+                                    number: "",
+                                    complement: "",
+                                    district: "",
+                                    city: "",
+                                    state: ""
+                                });
+                                setPaymentMethod("");
+                                navigate('/menu/:userId');
+                            }} 
+                            className="cancel-order-button">
+                            Cancelar Pedido
+                        </button>
+                    </div>
                 </div>
             )}
 

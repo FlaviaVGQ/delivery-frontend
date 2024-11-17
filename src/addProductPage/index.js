@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchCategoriesByUser, addProduct } from '../fileService';
-import {FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome} from 'react-icons/fa';
+import { FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome } from 'react-icons/fa';
 import './styles.css';
 
 const AddProductPage = () => {
@@ -15,7 +15,6 @@ const AddProductPage = () => {
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
     console.log(userId);
-
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -42,7 +41,6 @@ const AddProductPage = () => {
         if (!image) newErrors.image = 'Imagem é obrigatória.';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
-
     };
 
     const handleSubmit = async (event) => {
@@ -67,10 +65,10 @@ const AddProductPage = () => {
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
-                        <li><Link to="/home"><FaHome/> Início</Link></li>
-                        <li><a href="/products"><FaBoxOpen/> Voltar</a></li>
-                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome /> Início</Link></li>
+                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
                     </ul>
                 </nav>
             </header>
@@ -128,6 +126,7 @@ const AddProductPage = () => {
                     <button type="submit">Adicionar Produto</button>
                 </form>
             </div>
+
             <footer className="admin-homepage-footer">
                 <p>&copy; 2024 Delivery Express. | Todos os direitos reservados</p>
             </footer>
