@@ -159,9 +159,6 @@ const ProductsPage = () => {
                                                     onClick={() => handleEditProduct(product.id)}>
                                                 <FaEdit className="product-icon"/>
                                             </button>
-                                            <button className="view-button" onClick={() => handleViewProduct(product)}>
-                                                <FaEye className="product-icon"/>
-                                            </button>
                                             <button className="delete-button"
                                                     onClick={() => openModal(product.id, product.name)}>
                                                 <FaTrash className="product-icon"/>

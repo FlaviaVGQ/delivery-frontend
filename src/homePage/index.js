@@ -8,7 +8,8 @@ import {
     FaBoxOpen,
     FaStore,
     FaLink,
-    FaHome
+    FaHome,
+    FaClipboardList
 } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { getProductsByUser } from '../fileService'; 
@@ -77,12 +78,18 @@ const AdminHomePage = () => {
                             Visualizar Loja
                         </button>
                     </div>
-
                     <div className="admin-homepage-card" id="generate-link">
                         <h2><FaLink /> Gerar Link de Compartilhamento</h2>
                         <p>Crie um link para compartilhar a loja com clientes.</p>
                         <Link to="/link">
                             <button className="action-button">Gerar Link</button>
+                        </Link>
+                    </div>
+                    <div className="admin-homepage-card" id="view-orders">
+                        <h2><FaClipboardList /> Visualizar Pedidos</h2>
+                        <p>Veja os pedidos feitos pelos clientes na loja online.</p>
+                        <Link to="/orders">
+                            <button className="action-button">Visualizar Pedidos</button>
                         </Link>
                     </div>
                 </section>
