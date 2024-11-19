@@ -147,8 +147,7 @@ const ProductsPage = () => {
                             <div className="category-products">
                                 {categorizedProducts[category.name]?.map(product => (
                                     <div key={product.id} className="product-item">
-                                        <img src={product.image || '/default-image.png'} alt={product.name}
-                                             className="product-image"/>
+                                        <img src={`http://localhost:8000/${product.image}`} alt={product.name} class="product-image"/>
                                         <div className="product-info">
                                                 <h2 className="product-name">{product.name}</h2>
                                                 <p className="product-description">Descrição: {product.description}</p>
