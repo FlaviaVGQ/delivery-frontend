@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaShoppingCart } from 'react-icons/fa';
-import { getProductsByUser } from '../fileService';
+import { getProductsByUser, getCompanyByUser } from '../fileService';
 import { useCart } from '../CartContext';
 import './menuPage.css';
 
@@ -9,8 +9,11 @@ const MenuPage = () => {
     const navigate = useNavigate();
     const { cart, addToCart } = useCart();
     const [products, setProducts] = useState([]);
+    const [restaurantData, setRestaurantData] = useState({});
+    const [imagePreview, setImagePreview] = useState('/default-restaurant.jpg');
     const [searchTerm, setSearchTerm] = useState('');
     const userId = localStorage.getItem('userId');
+
 
     useEffect(() => {
         if (userId) {
@@ -18,6 +21,38 @@ const MenuPage = () => {
                 .then(fetchedProducts => setProducts(fetchedProducts))
                 .catch(error => console.error('Erro ao carregar os produtos:', error));
         }
+    }, [userId]);
+
+
+    useEffect(() => {
+        const fetchRestaurantData = async () => {
+            try {
+                const response = await getCompanyByUser(userId);
+                const { name, address, contact, opening_hours, description, image } = response.data;
+
+                setRestaurantData({
+                    name: name || '',
+                    address: address || '',
+                    phone: contact || '',
+                    hours: opening_hours
+                        ? opening_hours.split(' - ').map(h => parseInt(h, 10))
+                        : [0, 0],
+                    description: description || '',
+                    image: image || null,
+                });
+
+
+                if (image) {
+                    setImagePreview(`data:image/png;base64,${image}`);
+                } else {
+                    setImagePreview('/default-restaurant.jpg');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar informações do restaurante:', error);
+            }
+        };
+
+        fetchRestaurantData();
     }, [userId]);
 
     const filteredProducts = products.filter(product =>
@@ -30,15 +65,15 @@ const MenuPage = () => {
     }, {});
 
     const handleCheckout = () => {
-        addToCart([]); 
+        addToCart([]);
         navigate('/cartPage');
     };
 
     return (
         <div className="menu-page-container">
             <header className="menu-page-header">
-                <img src="/logo.png" alt="Logo" className="menu-logo" />
-                <h1 className="menu-cover-title">Nome do Restaurante</h1>
+                <img src={imagePreview} alt="Logo do Restaurante" className="menu-logo" />
+                <h2 className="menu-cover-title">{restaurantData.name}</h2>
                 <div className="cart-icon" onClick={handleCheckout}>
                     <FaShoppingCart />
                     <span className="cart-count">{cart.reduce((total, item) => total + item.quantity, 0)}</span>
@@ -71,18 +106,21 @@ const MenuPage = () => {
                                 <div className="products-container">
                                     {items.map(product => (
                                         <div key={product.id} className="product-card">
-                                             <img src={`http://localhost:8000/${product.image}`} alt={product.name} className="product-image"/>
-                                            <div className="product-info">
-                                                <h2 className="product-name">{product.name}</h2>
-                                                <p className="product-description">Descrição: {product.description}</p>
-                                                <p className="product-price">Preço: R$ {product.price}</p>
+                                            <img src={`http://localhost:8000/${product.image}`} alt={product.name}
+                                                 className="product-image"/>
+                                            <div className="product-content">
+                                                <div className="product-info">
+                                                    <h2 className="product-name">{product.name}</h2>
+                                                    <p className="product-description">Descrição: {product.description}</p>
+                                                    <p className="product-price">Preço: R$ {product.price}</p>
+                                                </div>
+                                                <button
+                                                    className="add-to-cart-button"
+                                                    onClick={() => addToCart(product)}
+                                                >
+                                                    <FaShoppingCart/>
+                                                </button>
                                             </div>
-                                            <button
-                                                className="add-to-cart-button"
-                                                onClick={() => addToCart(product)}
-                                            >
-                                                <FaShoppingCart />
-                                            </button>
                                         </div>
                                     ))}
                                 </div>

@@ -12,7 +12,7 @@ const RestaurantPage = () => {
         phone: '',
         hours: [8, 20],
         description: 'Restaurante ...',
-        image: null, 
+        image: null,
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -25,6 +25,7 @@ const RestaurantPage = () => {
             try {
                 const response = await getCompanyByUser(userId);
                 const { name, address, contact, opening_hours, description, image } = response.data;
+                console.log(response.data)
 
                 setRestaurantData({
                     name: name || '',
@@ -32,10 +33,15 @@ const RestaurantPage = () => {
                     phone: contact || '',
                     hours: opening_hours ? opening_hours.split(' - ').map(h => parseInt(h, 10)) : [0, 0],
                     description: description || '',
-                    image: image || null, 
+                    image: image || null,
                 });
 
-                setImagePreview(image || '/default-restaurant.jpg'); 
+                // Verifica se a imagem existe e cria o preview
+                if (image) {
+                    setImagePreview(`data:image/png;base64,${image}`);
+                } else {
+                    setImagePreview('/default-restaurant.jpg');
+                }
             } catch (error) {
                 console.error('Erro ao buscar informações do restaurante:', error);
             }
@@ -68,7 +74,7 @@ const RestaurantPage = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: file })); 
+                setRestaurantData(prevData => ({ ...prevData, image: file }));
             };
             reader.readAsDataURL(file);
         }
@@ -82,7 +88,7 @@ const RestaurantPage = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: file })); 
+                setRestaurantData(prevData => ({ ...prevData, image: file }));
             };
             reader.readAsDataURL(file);
         }
@@ -237,34 +243,27 @@ const RestaurantPage = () => {
                                 <textarea
                                     name="description"
                                     value={restaurantData.description}
-                                    onChange={(e) => setRestaurantData({
-                                        ...restaurantData,
-                                        description: e.target.value
-                                    })}
+                                    onChange={(e) => setRestaurantData({ ...restaurantData, description: e.target.value })}
+                                    rows="4"
                                 />
                             ) : (
                                 <p>{restaurantData.description}</p>
                             )}
                         </div>
 
-                        {isEditing && (
-                            <button type="button" className="save-button" onClick={handleSave}>
-                                Salvar
-                            </button>
+                        {isEditing ? (
+                            <div className="form-actions">
+                                <button type="button" onClick={handleSave}>Salvar</button>
+                                <button type="button" onClick={() => setIsEditing(false)}>Cancelar</button>
+                            </div>
+                        ) : (
+                            <div className="form-actions">
+                                <button type="button" onClick={() => setIsEditing(true)}>Editar</button>
+                            </div>
                         )}
                     </form>
-
-                    {!isEditing && (
-                        <button className="edit-button" onClick={() => setIsEditing(true)}>
-                            Editar Informações
-                        </button>
-                    )}
                 </div>
             </main>
-
-            <footer className="restaurant-page-footer">
-                <p>&copy; 2024 Delivery Express. Todos os direitos reservados.</p>
-            </footer>
         </div>
     );
 };
