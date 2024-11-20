@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCategoriesByUser, getProductById, updateProduct } from '../fileService'; 
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { fetchCategoriesByUser, getProductById, updateProduct } from '../fileService';
+import { FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome } from 'react-icons/fa';
 import './stylesEditaPage.css';
 
 const EditProductPage = () => {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [categoryId, setCategoryId] = useState('');
+    const [image, setImage] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
 
@@ -18,9 +21,8 @@ const EditProductPage = () => {
         const fetchCategories = async () => {
             try {
                 if (userId) {
-                    const response = await fetchCategoriesByUser(userId); 
+                    const response = await fetchCategoriesByUser(userId);
                     setCategories(response);
-                    console.log('Categorias:', response); 
                 }
             } catch (error) {
                 console.error("Erro ao buscar categorias: ", error);
@@ -34,69 +36,85 @@ const EditProductPage = () => {
         const fetchData = async () => {
             try {
                 const productResponse = await getProductById(id);
-                console.log("Produto Response:", productResponse); 
                 setName(productResponse.name);
-                
                 setDescription(productResponse.description);
                 setPrice(productResponse.price);
                 setCategoryId(productResponse.categoryId);
-
-                const categoriesResponse = await fetchCategoriesByUser(userId);
-                setCategories(categoriesResponse);
+                setImage(productResponse.image);
             } catch (error) {
                 console.error("Erro ao buscar dados do produto: ", error);
             }
         };
 
         fetchData();
-    }, [id, userId]);
+    }, [id]);
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         try {
-            await updateProduct(id, { name, description, price, categoryId }); 
-            navigate('/products'); 
+            await updateProduct(id, { name, description, price, categoryId, image });
+            navigate('/products');
         } catch (error) {
             console.error("Erro ao atualizar produto: ", error);
         }
     };
 
     return (
-        <div className="edit-product-container">
-            <h1 className="edit-product-title">Editar Produto</h1>
-            <form className="edit-product-form" onSubmit={handleSaveChanges}>
-                <div className="form-group">
-                    <label className="form-label">Nome:</label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className="form-input"
-                    />
-                </div>
-                <div className="form-group">
-                    <label className="form-label">Descrição:</label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                        className="form-textarea"
-                    ></textarea>
-                </div>
-                <div className="form-group">
-                    <label className="form-label">Preço:</label>
-                    <input
-                        type="number"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                        className="form-input"
-                    />
-                </div>
-                <div>
-                    <label>Categoria:</label>
-                    <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required className="form-select">
+        <div className="edit-product-page">
+            <header className="admin-homepage-header">
+                <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
+                <nav className="admin-homepage-nav">
+                    <ul className="nav-list">
+                        <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome /> Início</Link></li>
+                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                    </ul>
+                </nav>
+            </header>
+
+
+            <div className="edit-product-container">
+                <form className="edit-product-form" onSubmit={handleSaveChanges}>
+                <h1 className="edit-product-title">Editar Produto</h1>
+                    <div className="form-group">
+                        <label className="form-label">Nome:</label>
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        {errors.name && <p className="error">{errors.name}</p>}
+                    </div>
+                    
+                    <div className="form-group">
+                        <label className="form-label">Descrição:</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                        {errors.description && <p className="error">{errors.description}</p>}
+                    </div>
+                    
+                    <div className="form-group">
+                        <label className="form-label">Preço:</label>
+                        <input
+                            className="form-input"
+                            type="number"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+                        {errors.price && <p className="error">{errors.price}</p>}
+                    </div>
+                    
+                    <div className="form-group">
+                        <label className="form-label">Categoria:</label>
+                        <select
+                            className="form-select"
+                            value={categoryId}
+                            onChange={(e) => setCategoryId(e.target.value)}
+                        >
                             <option value="">Selecione uma categoria</option>
                             {categories.map((category) => (
                                 <option key={category.id} value={category.id}>
@@ -104,9 +122,25 @@ const EditProductPage = () => {
                                 </option>
                             ))}
                         </select>
+                        {errors.categoryId && <p className="error">{errors.categoryId}</p>}
                     </div>
-                <button type="submit" className="primary-button">Salvar Alterações</button>
-            </form>
+                    
+                    <div className="form-group">
+                        <label className="form-label">Imagem:</label>
+                        <input
+                            className="form-input"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setImage(e.target.files[0])}
+                        />
+                        {image && <p>Imagem atual: {typeof image === 'string' ? image : image.name}</p>}
+                    </div>
+                    <button type="submit" className="primary-button">Salvar Alterações</button>
+                </form>
+            </div>
+            <footer className="admin-homepage-footer">
+                <p>&copy; 2024 Delivery Express. | Todos os direitos reservados</p>
+            </footer>
         </div>
     );
 };

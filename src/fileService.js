@@ -132,7 +132,26 @@ export const getProductById = async (id) => {
 
 export const updateProduct = async (id, productData) => {
     try {
-        const response = await api.put(`/editProduct/${id}/`, productData); // Altere o endpoint conforme necessário
+        const formData = new FormData();
+
+        // Adiciona os campos do produto ao FormData
+        formData.append('name', productData.name);
+        formData.append('description', productData.description);
+        formData.append('price', productData.price);
+        formData.append('categoryId', productData.categoryId);
+
+        // Adiciona a imagem ao FormData (se existir)
+        if (productData.image) {
+            formData.append('image', productData.image);
+        }
+
+        // Faz a requisição PUT, enviando os dados com o cabeçalho apropriado
+        const response = await api.put(`/editProduct/${id}/`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Essencial para envio de arquivos
+            },
+        });
+
         return response.data;
     } catch (error) {
         console.error('Erro ao atualizar produto: ', error);
