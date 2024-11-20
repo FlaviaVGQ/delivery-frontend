@@ -136,9 +136,8 @@ const RestaurantPage = () => {
 
             <main className="restaurant-page-content">
                 <div className="restaurant-info">
-                    <h2>Informações do Restaurante</h2>
-
                     <div className="form-group">
+                    <h2>Informações do Restaurante</h2>
                         {isEditing ? (
                             <div
                                 className={`image-upload ${dragging ? 'dragging' : ''}`}
@@ -251,16 +250,16 @@ const RestaurantPage = () => {
                             )}
                         </div>
 
-                        {isEditing ? (
-                            <div className="form-actions">
-                                <button type="button" onClick={handleSave}>Salvar</button>
-                                <button type="button" onClick={() => setIsEditing(false)}>Cancelar</button>
-                            </div>
-                        ) : (
-                            <div className="form-actions">
+                        <div className="form-group">
+                            {isEditing ? (
+                                <>
+                                    <button type="button" onClick={handleSave}>Salvar</button>
+                                    <button type="button" onClick={() => setIsEditing(false)}>Cancelar</button>
+                                </>
+                            ) : (
                                 <button type="button" onClick={() => setIsEditing(true)}>Editar</button>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </form>
                 </div>
             </main>
