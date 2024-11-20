@@ -2,7 +2,7 @@
 .create-category-page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Garante que a página ocupe toda a altura da janela */
+    min-height: 100vh;
 }
 
 /* Contêiner principal (caixa de categorias) */
@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex-grow: 1; /* O conteúdo principal ocupa o espaço restante */
+    flex-grow: 1;
     padding: 20px;
     background-color: #f9f9f9;
 }
@@ -29,27 +29,24 @@
     margin: 0 auto;
 }
 
-/* Restante do seu código permanece o mesmo */
-
-/* Alinhamento da seção "Criar Categoria" no topo */
 .form-container-category {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: flex-start; /* Fica no topo */
+    align-items: center;
+    justify-content: flex-start;
     padding: 20px;
-    border-right: 1px solid #ddd; /* Linha de separação */
+    border-right: 1px solid #ddd;
 }
 
 /* Campo de entrada menor */
 .category-input-category {
-    width: 80%; /* Ajuste o tamanho do input, se necessário */
+    width: 80%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
-    transform: translateX(-11px); /* Move o input mais para a esquerda */
+    transform: translateX(-11px);
 }
 
 /* Botão ajustado */
@@ -106,19 +103,19 @@
 
 /* Botão de Excluir */
 .delete-category-button {
-    background-color: transparent; /* Remove a cor de fundo */
-    border: none; /* Remove a borda */
-    padding: 0; /* Remove o espaço interno */
-    margin: 0; /* Remove qualquer espaço externo */
-    color: #ff6d00; /* Mantém a cor do texto */
-    cursor: pointer; /* Garante o cursor de botão */
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #ff6d00;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .delete-category-button:hover {
-    color: #e65100; /* Cor alterada ao passar o mouse */
+    color: #e65100;
 }
 
 /* Footer */
@@ -129,7 +126,7 @@
     padding: 15px;
     font-size: 0.9rem;
     font-family: 'Verdana', sans-serif;
-    margin-top: auto; /* Isso garante que o footer ficará no final da página */
+    margin-top: auto;
 }
 
 /* Modal de Confirmação */
@@ -157,7 +154,8 @@
 
 .modal-buttons-category {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around; /* Alinha os botões horizontalmente */
+    gap: 20px; /* Espaçamento entre os botões */
     margin-top: 20px;
 }
 
