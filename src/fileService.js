@@ -169,7 +169,17 @@ export const saveCompanyInfo = async (userId, name, openingHours, address, conta
     }
 };
 
-
+export const deleteCategory = async (categoryId, userId) => {
+    try {
+        const response = await api.delete(`/category/${categoryId}/`, {
+            data: { user_id: userId }, // Inclui o user_id no corpo
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao excluir categoria:', error.response?.data || error.message);
+        throw error;
+    }
+};
 
 export const getCompanyByUser = async (userId) => {
     try {
