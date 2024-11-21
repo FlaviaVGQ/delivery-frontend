@@ -35,6 +35,26 @@ const CheckoutPage = () => {
         return true;
     };
 
+    const formatPhoneNumber = (phone) => {
+        // Remove todos os caracteres não numéricos
+        let cleaned = phone.replace(/\D/g, '');
+        
+        // Limita o número de caracteres para 11 (considerando DD e número)
+        if (cleaned.length > 11) {
+            cleaned = cleaned.slice(0, 11);
+        }
+    
+        // Aplica a máscara para o formato (XX) XXXXX-XXXX
+        if (cleaned.length <= 2) {
+            return `(${cleaned}`;
+        } else if (cleaned.length <= 6) {
+            return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2)}`;
+        } else {
+            return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7, 11)}`;
+        }
+    };
+    
+
     const finalizeOrder = async () => {
         const orderData = {
             customer_name: deliveryInfo.fullName,
@@ -92,7 +112,7 @@ const CheckoutPage = () => {
                     {error && <p className="error-message">{error}</p>}
                     <form>
                         <input type="text" placeholder="Nome completo" value={deliveryInfo.fullName} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, fullName: e.target.value })} className="input-field" />
-                        <input type="text" placeholder="Telefone" value={deliveryInfo.phone} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: e.target.value.replace(/[^0-9]/g, '') })} className="input-field" />
+                        <input type="text" placeholder="Telefone" value={deliveryInfo.phone} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: formatPhoneNumber(e.target.value) })} className="input-field" />
                         <input type="text" placeholder="Rua" value={deliveryInfo.street} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, street: e.target.value })} className="input-field" />
                         <input type="text" placeholder="Número" value={deliveryInfo.number} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, number: e.target.value.replace(/[^0-9]/g, '') })} className="input-field" />
                         <input type="text" placeholder="Complemento" value={deliveryInfo.complement} onChange={(e) => setDeliveryInfo({ ...deliveryInfo, complement: e.target.value })} className="input-field" />

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 865px;
+    height: 100vh;
     width: 100%;
     background-color: rgba(193, 91, 0, 0.85);
 }
@@ -13,7 +13,7 @@
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 450px;
-    height: 675px;
+    height: 600px;
     text-align: center;
 }
 
@@ -33,20 +33,20 @@
 }
 
 
-.create-form {
+.create-form-create {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-.form-group {
+.form-group-create {
     margin-bottom: -15px;
     text-align: left;
-    margin-top: -30px;
+    margin-top: 40px;
 }
 
 
-.form-group label {
+.form-group-create label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -70,7 +70,7 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 1px;
+    margin-top: 40px;
 }
 
 .create-button:hover {

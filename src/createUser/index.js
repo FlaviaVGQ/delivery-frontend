@@ -29,8 +29,8 @@ const CreateUserPage = () => {
             <div className="create-box">
                 <img src="/logo.png" alt="Logo" className="create-logo" /> {}
                 <h1 className="create-title">Criar Conta</h1>
-                <form onSubmit={handleSubmit} className="create-form">
-                    <div className="form-group">
+                <form onSubmit={handleSubmit} className="create-form-create">
+                    <div className="form-group-create">
                         <label htmlFor="username"><FaUser /> Usuário</label>
                         <input
                             type="text"
@@ -42,7 +42,7 @@ const CreateUserPage = () => {
                             placeholder="Digite seu usuário"
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-create">
                         <label htmlFor="email"><FaEnvelope /> Email</label>
                         <input
                             type="email"
@@ -54,7 +54,7 @@ const CreateUserPage = () => {
                             placeholder="Digite seu email"
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-create">
                         <label htmlFor="password"><FaLock /> Senha</label>
                         <input
                             type="password"

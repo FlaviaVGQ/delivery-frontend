@@ -62,7 +62,7 @@ const LoginPage = () => {
                 <div className="login-box">
                     <img src="/logo.png" alt="Logo" className="login-logo" />
                     <form onSubmit={handleSubmit} className="login-form">
-                        <div className="form-group">
+                        <div className="form-group-login">
                             <label htmlFor="username"><FaUser /> Usuário</label>
                             <input
                                 type="text"
@@ -74,7 +74,7 @@ const LoginPage = () => {
                                 placeholder="Digite seu usuário"
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-login">
                             <label htmlFor="password"><FaLock /> Senha</label>
                             <input
                                 type="password"
