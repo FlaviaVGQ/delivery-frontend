@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { fetchCategoriesByUser, getProductById, updateProduct } from '../fileService';
+import { fetchCategoriesByUser, getProductById, updateProduct, fetchProductById } from '../fileService';
 import { FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome } from 'react-icons/fa';
 import './stylesEditaPage.css';
 
@@ -17,6 +17,17 @@ const EditProductPage = () => {
     const userId = localStorage.getItem('userId');
 
 
+    const [productData, setProductData] = useState({
+        name: '',
+        description: '',
+        price: '',
+        categoryId: '',
+        image: null,
+    });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -31,6 +42,25 @@ const EditProductPage = () => {
 
         fetchCategories();
     }, [userId]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const productResponse = await getProductById(id);
+                setName(productResponse.name);
+                setDescription(productResponse.description);
+                setPrice(productResponse.price);
+                setCategoryId(productResponse.categoryId);
+                setImage(productResponse.image);
+            } catch (error) {
+                console.error("Erro ao buscar dados do produto: ", error);
+            }
+        };
+    
+        fetchData();
+    }, [id]); 
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -72,8 +102,6 @@ const EditProductPage = () => {
                     </ul>
                 </nav>
             </header>
-
-
             <div className="edit-product-container">
                 <form className="edit-product-form" onSubmit={handleSaveChanges}>
                 <h1 className="edit-product-title">Editar Produto</h1>

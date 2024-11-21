@@ -37,7 +37,6 @@ export const createUser = async (username, email, password) => {
 export const changePassword = async (token, password) => {
 
     try {
-        // Certifique-se de que o token esteja sendo passado corretamente na URL
         const response = await api.post(`/reset-password/${token}/`, { password });
         return response.data;
     } catch (error) {
@@ -122,7 +121,7 @@ export const deleteProduct = async (id) => {
 
 export const getProductById = async (id) => {
     try {
-        const response = await api.get(`/products/${id}/`); // Altere o endpoint conforme necessário
+        const response = await api.get(`/products/${id}/`); 
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar produto: ', error);
@@ -134,21 +133,21 @@ export const updateProduct = async (id, productData) => {
     try {
         const formData = new FormData();
 
-        // Adiciona os campos do produto ao FormData
+        
         formData.append('name', productData.name);
         formData.append('description', productData.description);
         formData.append('price', productData.price);
         formData.append('categoryId', productData.categoryId);
 
-        // Adiciona a imagem ao FormData (se existir)
+        
         if (productData.image) {
             formData.append('image', productData.image);
         }
 
-        // Faz a requisição PUT, enviando os dados com o cabeçalho apropriado
+        
         const response = await api.put(`/editProduct/${id}/`, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data', // Essencial para envio de arquivos
+                'Content-Type': 'multipart/form-data', 
             },
         });
 
@@ -170,9 +169,8 @@ export const saveCompanyInfo = async (userId, name, openingHours, address, conta
         formData.append('contact', contact);
         formData.append('description', description);
 
-        // Supondo que image seja um File ou Blob
         if (image) {
-            formData.append('image', image, 'restaurant-image.png'); // Ou apenas image se já for um File
+            formData.append('image', image, 'restaurant-image.png'); 
         }
 
         const response = await api.post('/company-info/', formData, {
@@ -191,7 +189,7 @@ export const saveCompanyInfo = async (userId, name, openingHours, address, conta
 export const deleteCategory = async (categoryId, userId) => {
     try {
         const response = await api.delete(`/category/${categoryId}/`, {
-            data: { user_id: userId }, // Inclui o user_id no corpo
+            data: { user_id: userId }, 
         });
         return response.data;
     } catch (error) {
@@ -209,3 +207,15 @@ export const getCompanyByUser = async (userId) => {
         throw error;
     }
 };
+
+
+export const fetchProductById = async (id) => {
+    try {
+        const response = await api.get(`/product/${id}/`); 
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar produto: ', error);
+        throw error;
+    }
+};
+
