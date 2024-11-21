@@ -3,10 +3,12 @@ import './stylesProductsPage.css';
 import {FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaUserCircle, FaHome, FaSignOutAlt} from 'react-icons/fa';
 import {Link, useNavigate} from 'react-router-dom';
 import { fetchCategoriesByUser, getProductsByUser, deleteProduct  } from '../fileService';
+import { useProduct } from '../ProductContext'; // Importar o contexto
 
 const ProductsPage = () => {
     const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
+    const { products, updateProducts } = useProduct(); 
+    const [productsState, setProducts] = useState([]); 
     const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
@@ -23,18 +25,22 @@ const ProductsPage = () => {
                     const categoriesResponse = await fetchCategoriesByUser(userId);
                     setCategories(categoriesResponse);
                     console.log('Categorias:', categoriesResponse);
-
+    
                     const productsResponse = await getProductsByUser(userId);
-                    setProducts(productsResponse);
-                    console.log('Produtos:', productsResponse);
+                    if (JSON.stringify(products) !== JSON.stringify(productsResponse)) {
+                        setProducts(productsResponse);
+                        updateProducts(productsResponse);
+                        console.log('Produtos:', productsResponse);
+                    }
                 }
             } catch (error) {
                 console.error("Erro ao buscar dados: ", error);
             }
         };
-
+    
         fetchData();
-    }, [userId]);
+    }, [userId, updateProducts]); 
+    
 
     const handleEditProduct = (id) => {
         navigate(`/editProduct/${id}`);
@@ -42,6 +48,7 @@ const ProductsPage = () => {
     const handleDeleteProducts = (id) => {
         const filteredProducts = products.filter(product => product.id !== id);
         setProducts(filteredProducts);
+        updateProducts(filteredProducts);
     };
 
     const handleViewProduct = (product) => {
@@ -64,30 +71,19 @@ const ProductsPage = () => {
         acc[category.name] = filteredProducts.filter(product => product.category === category.name);
         return acc;
     }, {});
-
-    /*
+    
     const handleDeleteProduct = async (id) => {
-        try {
-            await deleteProduct(id); // Call the delete service with the product ID
-            const filteredProducts = products.filter(product => product.id !== id);
-            setProducts(filteredProducts); // Update the product list in the UI
-        } catch (error) {
-            console.error("Erro ao excluir o produto: ", error);
-        }
-    };
+    try {
+        await deleteProduct(id);
+        const filteredProducts = products.filter(product => product.id !== id);
+        setProducts(filteredProducts);
+        updateProducts(filteredProducts);
+        setShowModal(false);
+    } catch (error) {
+        console.error("Erro ao excluir o produto: ", error);
+    }
+};
 
-    */
-
-    const handleDeleteProduct = async (id) => {
-        try {
-            await deleteProduct(id); 
-            const filteredProducts = products.filter(product => product.id !== id);
-            setProducts(filteredProducts); 
-            setShowModal(false); 
-        } catch (error) {
-            console.error("Erro ao excluir o produto: ", error);
-        }
-    };
 
     const openModal = (id, name) => {
         setProductIdToDelete(id);

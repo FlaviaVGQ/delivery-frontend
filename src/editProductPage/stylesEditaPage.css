@@ -65,17 +65,17 @@
     flex-direction: column;
 }
 
-.form-group {
-    margin-bottom: -30px;
+.form-group-edit {
+    margin-bottom: 20px;
 }
 
-.form-label {
+.form-label-edit{
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.form-input,
-.form-textarea,
+.form-input-edit,
+.form-textarea-edit,
 .form-select {
     width: 100%;
     padding: 10px;
@@ -85,7 +85,7 @@
     margin-bottom: 15px;
 }
 
-.form-textarea {
+.form-textarea-edit {
     resize: vertical; 
    
 }

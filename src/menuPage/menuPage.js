@@ -4,11 +4,13 @@ import { FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { getProductsByUser, getCompanyByUser } from '../fileService';
 import { useCart } from '../CartContext';
 import './menuPage.css';
+import { useProduct } from '../ProductContext';
+
 
 const MenuPage = () => {
     const navigate = useNavigate();
-    const { cart, addToCart } = useCart();
     const [products, setProducts] = useState([]);
+    const { cart, addToCart } = useCart();
     const [restaurantData, setRestaurantData] = useState({});
     const [imagePreview, setImagePreview] = useState('/default-restaurant.jpg');
     const [searchTerm, setSearchTerm] = useState('');
@@ -16,12 +18,16 @@ const MenuPage = () => {
 
 
     useEffect(() => {
+    const intervalId = setInterval(() => {
         if (userId) {
             getProductsByUser(userId)
                 .then(fetchedProducts => setProducts(fetchedProducts))
                 .catch(error => console.error('Erro ao carregar os produtos:', error));
         }
-    }, [userId]);
+    }, 2000); 
+    
+    return () => clearInterval(intervalId);
+}, [userId]);
 
 
     useEffect(() => {

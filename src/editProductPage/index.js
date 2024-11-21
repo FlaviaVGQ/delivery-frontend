@@ -77,10 +77,10 @@ const EditProductPage = () => {
             <div className="edit-product-container">
                 <form className="edit-product-form" onSubmit={handleSaveChanges}>
                 <h1 className="edit-product-title">Editar Produto</h1>
-                    <div className="form-group">
-                        <label className="form-label">Nome:</label>
+                    <div className="form-group-edit">
+                        <label className="form-label-edit">Nome:</label>
                         <input
-                            className="form-input"
+                            className="form-input-edit"
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -88,19 +88,20 @@ const EditProductPage = () => {
                         {errors.name && <p className="error">{errors.name}</p>}
                     </div>
                     
-                    <div className="form-group">
-                        <label className="form-label">Descrição:</label>
+                    <div className="form-group-edit">
+                        <label className="form-label-edit">Descrição:</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            className="form-textarea-edit"
                         />
                         {errors.description && <p className="error">{errors.description}</p>}
                     </div>
                     
-                    <div className="form-group">
-                        <label className="form-label">Preço:</label>
+                    <div className="form-group-edit">
+                        <label className="form-label-edit">Preço:</label>
                         <input
-                            className="form-input"
+                            className="form-input-edit"
                             type="number"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
@@ -108,8 +109,8 @@ const EditProductPage = () => {
                         {errors.price && <p className="error">{errors.price}</p>}
                     </div>
                     
-                    <div className="form-group">
-                        <label className="form-label">Categoria:</label>
+                    <div className="form-group-edit">
+                        <label className="form-label-edit">Categoria:</label>
                         <select
                             className="form-select"
                             value={categoryId}
@@ -125,10 +126,10 @@ const EditProductPage = () => {
                         {errors.categoryId && <p className="error">{errors.categoryId}</p>}
                     </div>
                     
-                    <div className="form-group">
-                        <label className="form-label">Imagem:</label>
+                    <div className="form-group-edit">
+                        <label className="form-label-edit">Imagem:</label>
                         <input
-                            className="form-input"
+                            className="form-input-edit"
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage(e.target.files[0])}

@@ -37,7 +37,7 @@ const LinkPage = () => {
             </header>
 
             <main className="create-link-main">
-                <div className="form-container-link">
+                <div className="form-container">
                     <h1>Link do Cardápio</h1>
                     <form className="create-link-form">
                         <div className="link-display">
