@@ -17,6 +17,7 @@ import CheckoutPage from "./checkoutPage";
 import { CartProvider } from './CartContext';
 import { CheckoutProvider } from "./CheckoutContext";
 import { ProductProvider } from './ProductContext';
+import OrdersPage from "./orderPage/ordersPage";
 
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
                             <Route path="/menu/:userId" element={<MenuPage />} />
                             <Route path="/cartPage" element={<CartPage />} />
                             <Route path="/checkoutPage" element={<CheckoutPage />} />
+                            <Route path="/orders" element={<OrdersPage />} />
                         </Routes>
                     </Router>
                 </CartProvider>

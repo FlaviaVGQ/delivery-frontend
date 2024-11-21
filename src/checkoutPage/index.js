@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
 import { useCheckout } from '../CheckoutContext';
 import "./checkoutPage.css";
+import axios from "axios";
 
 const CheckoutPage = () => {
     const location = useLocation();
@@ -34,9 +35,36 @@ const CheckoutPage = () => {
         return true;
     };
 
-    const finalizeOrder = () => {
-        console.log("Pedido finalizado com sucesso!");
-        setIsModalOpen(true);
+    const finalizeOrder = async () => {
+        const orderData = {
+            customer_name: deliveryInfo.fullName,
+            observation: observation,
+            total_price: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+            items: cart.map((item) => ({
+                name: item.name,
+                quantity: item.quantity,
+                price: item.price
+            })),
+            address: {
+                street: deliveryInfo.street,
+                number: deliveryInfo.number,
+                complement: deliveryInfo.complement,
+                district: deliveryInfo.district,
+                city: deliveryInfo.city,
+                state: deliveryInfo.state,
+            },
+            payment_method: paymentMethod,
+            phone: deliveryInfo.phone,
+        };
+
+        try {
+            const response = await axios.post("http://localhost:8000/orders/create/", orderData);
+            console.log("Pedido enviado com sucesso:", response.data);
+            setIsModalOpen(true); // Abrir modal de sucesso
+        } catch (error) {
+            console.error("Erro ao enviar pedido:", error);
+            setError("Erro ao processar o pedido. Tente novamente.");
+        }
     };
 
     const closeModal = () => {
