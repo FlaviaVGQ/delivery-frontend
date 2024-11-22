@@ -3,24 +3,24 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 // Criação do contexto
 const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children, userId }) => {
     const [cart, setCart] = useState(() => {
-        // Tenta carregar o carrinho do localStorage
-        const savedCart = localStorage.getItem('cart');
+        if (!userId) return [];
+        const savedCart = localStorage.getItem(`cart_${userId}`);
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
     useEffect(() => {
-        // Atualiza o localStorage sempre que o carrinho mudar
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
+        if (userId) {
+            localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+        }
+    }, [cart, userId]);
 
     const addToCart = (product) => {
-        // Verifica se o preço é um número válido
         const validPrice = parseFloat(product.price);
         if (isNaN(validPrice) || validPrice <= 0) {
             console.error("Preço inválido para o produto:", product);
-            return; // Não adiciona o produto se o preço não for válido
+            return;
         }
 
         setCart((prevCart) => {

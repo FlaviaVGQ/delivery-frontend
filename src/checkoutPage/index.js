@@ -70,22 +70,38 @@ const CheckoutPage = () => {
                 number: deliveryInfo.number,
                 complement: deliveryInfo.complement,
                 district: deliveryInfo.district,
-                city: deliveryInfo.city,
+                city: deliveryInfo.city, 
                 state: deliveryInfo.state,
             },
             payment_method: paymentMethod,
             phone: deliveryInfo.phone,
         };
-
+    
         try {
             const response = await axios.post("http://localhost:8000/orders/create/", orderData);
             console.log("Pedido enviado com sucesso:", response.data);
+    
+            // Esvaziar o carrinho e resetar informações de entrega após o pedido ser finalizado com sucesso
+            setCart([]);
+            setDeliveryInfo({
+                fullName: "",
+                phone: "",
+                street: "",
+                number: "",
+                complement: "",
+                district: "",
+                city: "",
+                state: ""
+            });
+            setPaymentMethod("");
+    
             setIsModalOpen(true); // Abrir modal de sucesso
         } catch (error) {
             console.error("Erro ao enviar pedido:", error);
             setError("Erro ao processar o pedido. Tente novamente.");
         }
     };
+    
 
     const closeModal = () => {
         setIsModalOpen(false);
