@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCategoriesByUser, deleteCategory, sendCategory } from '../fileService';
-import {FaHome, FaSignOutAlt, FaTrashAlt, FaUserCircle} from 'react-icons/fa';
+import {FaBoxOpen, FaHome, FaSignOutAlt, FaTrashAlt, FaUserCircle} from 'react-icons/fa';
 import './category.css';
 import {Link} from "react-router-dom";
 
@@ -80,6 +80,7 @@ const CategoryPage = () => {
                     <ul className="nav-list">
                         <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
                         <li><Link to="/home"><FaHome/> Início</Link></li>
+                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
                         <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
                     </ul>
                 </nav>
