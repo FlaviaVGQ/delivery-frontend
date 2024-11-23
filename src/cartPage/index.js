@@ -22,7 +22,8 @@ const CartPage = () => {
     };
 
     const handleCheckout = () => {
-        navigate("/checkoutPage", { state: { cartItems: cart, observation } });
+        const userId = localStorage.getItem('userId');  
+        navigate("/checkoutPage", { state: { cartItems: cart, observation, userId } });
     };
 
     return (

@@ -236,3 +236,40 @@ export const fetchProductById = async (id) => {
     }
 };
 
+export const getOrdersByUser = async (userId) => {
+    try {
+        const response = await api.get('/get/orders/', { params: { user_id: userId } });  
+        return response;
+    } catch (error) {
+        console.error('Erro ao buscar pedidos:', error);
+        throw error;
+    }
+};
+
+export const sendOrder = async (orderData) => {
+    try {
+        const token = localStorage.getItem('authToken');  
+        const response = await api.post('/orders/', orderData, {
+        headers: {
+            'Authorization': `Bearer ${token}`  
+        }
+        });
+        return response.data;  
+    } catch (error) {
+        console.error('Erro ao enviar pedido:', error);
+        throw new Error('Erro ao processar o pedido. Tente novamente.');
+    }
+};
+
+
+export const deleteOrder = async (orderId, userId) => {
+    try {
+        const response = await api.delete(`/orders/${orderId}/`, {
+            data: { user_id: userId }  
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao excluir pedido:', error);
+        throw error;
+    }
+};

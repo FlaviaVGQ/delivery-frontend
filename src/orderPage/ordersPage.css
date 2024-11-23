@@ -186,3 +186,69 @@ h1 {
     color: red;
     font-weight: bold;
 }
+
+.order-status {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-status label {
+    font-size: 16px;
+    color: #444;
+}
+
+.order-status select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    outline: none;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 5px;
+}
+
+.order-card.feito {
+    background-color: #d4edda; 
+}
+
+.order-card.nao-feito {
+    background-color: #f8d7da; 
+}
+
+.order-card.em-andamento {
+    background-color: #fff3cd; 
+}
+
+.order-status {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.order-status label {
+    font-size: 16px;
+}
+
+.order-status input {
+    margin-right: 5px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+

@@ -1,30 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './ordersPage.css';
-import {FaBoxOpen, FaHome, FaSignOutAlt, FaUserCircle} from "react-icons/fa"; // Importação do arquivo CSS
+import { useNavigate } from 'react-router-dom';
+import { FaBoxOpen, FaHome, FaSignOutAlt, FaUserCircle,  FaTrash } from "react-icons/fa"; 
+import { getOrdersByUser, deleteOrder} from '../fileService'; 
 
 const OrdersPage = () => {
-    const { restaurantId } = useParams(); // Captura o ID do restaurante da URL
-    const [orders, setOrders] = useState([]);
+    const { restaurantId } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [orders, setOrders] = useState([]);
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/orders/?restaurant_id=${restaurantId}`);
-                if (!response.ok) throw new Error('Erro ao buscar pedidos.');
-                const data = await response.json();
-                setOrders(data);
-            } catch (err) {
-                setError('Não foi possível carregar os pedidos. Tente novamente mais tarde.');
+                if (userId) {
+                    const response = await getOrdersByUser(userId);
+                    setOrders(response.data);
+                } else {
+                    console.error('Usuário não logado');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar pedidos:', error);
+                setError('Erro ao buscar pedidos');
             } finally {
                 setLoading(false);
             }
         };
 
         fetchOrders();
-    }, [restaurantId]);
+    }, [userId]);
+
+    const handleStatusChange = (orderId, status) => {
+        setOrders(prevOrders =>
+            prevOrders.map(order =>
+                order.id === orderId ? { ...order, status } : order
+            )
+        );
+    };
+
+    const handleDelete = async (orderId) => {
+        try {
+            await deleteOrder(orderId, userId); 
+            setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));  
+        } catch (error) {
+            console.error('Erro ao excluir pedido:', error);
+        }
+    };
 
     if (loading) return <div className="loading">Carregando pedidos...</div>;
     if (error) return <div className="error">{error}</div>;
@@ -43,37 +66,80 @@ const OrdersPage = () => {
                 </nav>
             </header>
 
-            <main className="orderpage-main">
-                <div className="orderpage-card">
-                    {orders.map(order => (
-                        <div key={order.id} className="order-card">
-                            <h2>Pedido #{order.id}</h2>
-                            <div className="order-info">
-                                <p><strong>Cliente:</strong> {order.customer_name || 'Não informado'}</p>
-                                <p><strong>Endereço:</strong> {order.address || 'Não informado'}</p>
-                                <p><strong>Telefone:</strong> {order.phone || 'Não informado'}</p>
-                                <p><strong>Observação:</strong> {order.observation || 'Nenhuma observação'}</p>
-                                <p><strong>Total:</strong> R${parseFloat(order.total_price).toFixed(2)}</p>
-                                <p><strong>Método de Pagamento:</strong> {order.payment_method || 'Não informado'}</p>
-                            </div>
-                            <div className="order-items">
-                                <h3>Itens do Pedido:</h3>
-                                <ul>
-                                    {order.items && order.items.length > 0 ? (
-                                        order.items.map((item, index) => (
-                                            <li key={index}>
-                                                Produto: {item.product_name} - Quantidade: {item.quantity} - Preço: R${parseFloat(item.price).toFixed(2)}
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <li>Sem itens no pedido.</li>
-                                    )}
-                                </ul>
-                            </div>
+            <div>
+                <h2>Meus Pedidos</h2>
+                {orders.length > 0 ? (
+                    <main className="orderpage-main">
+                        <div className="orderpage-card">
+                            {orders.map((order) => (
+                                <div key={order.id} className={`order-card ${order.status}`}>
+                                    <div className="order-info">
+                                        <p><strong>Cliente:</strong> {order.customer_name || 'Não informado'}</p>
+                                        <p><strong>Endereço:</strong> {order.address || 'Não informado'}</p>
+                                        <p><strong>Telefone:</strong> {order.phone || 'Não informado'}</p>
+                                        <p><strong>Observação:</strong> {order.observation || 'Nenhuma observação'}</p>
+                                        <p><strong>Total:</strong> R${parseFloat(order.total_price).toFixed(2)}</p>
+                                        <p><strong>Método de Pagamento:</strong> {order.payment_method || 'Não informado'}</p>
+                                    </div>
+                                    <div className="order-items">
+                                        <h3>Itens do Pedido:</h3>
+                                        <ul>
+                                            {order.items && order.items.length > 0 ? (
+                                                order.items.map((item, index) => (
+                                                    <li key={index}>
+                                                        Produto: {item.product_name} - Quantidade: {item.quantity} - Preço: R${parseFloat(item.price).toFixed(2)}
+                                                    </li>
+                                                ))
+                                            ) : (
+                                                <li>Sem itens no pedido.</li>
+                                            )}
+                                        </ul>
+                                    </div>
+
+                                    <div className="order-status">
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name={`status-${order.id}`}
+                                                value="feito"
+                                                checked={order.status === 'feito'}
+                                                onChange={() => handleStatusChange(order.id, 'feito')}
+                                            />
+                                            Feito
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name={`status-${order.id}`}
+                                                value="nao-feito"
+                                                checked={order.status === 'nao-feito'}
+                                                onChange={() => handleStatusChange(order.id, 'nao-feito')}
+                                            />
+                                            Não Feito
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name={`status-${order.id}`}
+                                                value="em-andamento"
+                                                checked={order.status === 'em-andamento'}
+                                                onChange={() => handleStatusChange(order.id, 'em-andamento')}
+                                            />
+                                            Em Andamento
+                                        </label>
+                                    </div>
+
+                                    <button onClick={() => handleDelete(order.id)} className="delete-button">
+                                        <FaTrash /> Excluir
+                                    </button>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </main>
+                    </main>
+                ) : (
+                    <p>Você não tem pedidos.</p>
+                )}
+            </div>
 
             <footer className="orderpage-footer">
                 &copy; 2024 Delivery Express | Todos os direitos reservados

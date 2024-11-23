@@ -15,6 +15,7 @@ const MenuPage = () => {
     const [imagePreview, setImagePreview] = useState('/default-restaurant.jpg');
     const [searchTerm, setSearchTerm] = useState('');
     const userId = localStorage.getItem('userId');
+    
 
 
     useEffect(() => {

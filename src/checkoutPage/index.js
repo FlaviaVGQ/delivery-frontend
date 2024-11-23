@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
 import { useCheckout } from '../CheckoutContext';
+import { sendOrder } from '../fileService'; 
 import "./checkoutPage.css";
 import axios from "axios";
 
@@ -15,6 +16,9 @@ const CheckoutPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [error, setError] = useState("");
     const observation = location.state?.observation || "";
+    const userId = localStorage.getItem('userId');
+    console.log("USER :", localStorage.getItem('userId'));
+
 
     const validateDeliveryInfo = () => {
         const { fullName, phone, street, number, district, city, state } = deliveryInfo;
@@ -36,15 +40,13 @@ const CheckoutPage = () => {
     };
 
     const formatPhoneNumber = (phone) => {
-        // Remove todos os caracteres não numéricos
         let cleaned = phone.replace(/\D/g, '');
         
-        // Limita o número de caracteres para 11 (considerando DD e número)
         if (cleaned.length > 11) {
             cleaned = cleaned.slice(0, 11);
         }
     
-        // Aplica a máscara para o formato (XX) XXXXX-XXXX
+
         if (cleaned.length <= 2) {
             return `(${cleaned}`;
         } else if (cleaned.length <= 6) {
@@ -54,7 +56,6 @@ const CheckoutPage = () => {
         }
     };
     
-
     const finalizeOrder = async () => {
         const orderData = {
             customer_name: deliveryInfo.fullName,
@@ -70,18 +71,22 @@ const CheckoutPage = () => {
                 number: deliveryInfo.number,
                 complement: deliveryInfo.complement,
                 district: deliveryInfo.district,
-                city: deliveryInfo.city, 
+                city: deliveryInfo.city,
                 state: deliveryInfo.state,
             },
             payment_method: paymentMethod,
             phone: deliveryInfo.phone,
+            user_id: userId,  
         };
     
-        try {
-            const response = await axios.post("http://localhost:8000/orders/create/", orderData);
-            console.log("Pedido enviado com sucesso:", response.data);
+        console.log(orderData);
     
-            // Esvaziar o carrinho e resetar informações de entrega após o pedido ser finalizado com sucesso
+        try {
+            const response = await sendOrder(orderData);
+            console.log("Resposta da API:", response);  
+            console.log("Pedido enviado com sucesso:", response);
+    
+            
             setCart([]);
             setDeliveryInfo({
                 fullName: "",
@@ -95,7 +100,7 @@ const CheckoutPage = () => {
             });
             setPaymentMethod("");
     
-            setIsModalOpen(true); // Abrir modal de sucesso
+            setIsModalOpen(true);  
         } catch (error) {
             console.error("Erro ao enviar pedido:", error);
             setError("Erro ao processar o pedido. Tente novamente.");

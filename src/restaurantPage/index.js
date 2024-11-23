@@ -136,6 +136,7 @@ const RestaurantPage = () => {
 
             <main className="restaurant-page-content">
                 <div className="restaurant-info">
+                    <div className="form-group">
                     <h2>Informações do Restaurante</h2>
                     {isEditing ? (
                         <div
@@ -162,8 +163,9 @@ const RestaurantPage = () => {
                     ) : (
                         <img src={imagePreview || '/default-restaurant.jpg'} alt="imagem" className="restaurant-image" />
                     )}
+                </div>
                     <form className="restaurant-form">
-                        <div className="form-group">
+                        <div className="form-group-restaurant">
                             <label>Nome do Restaurante:</label>
                             {isEditing ? (
                                 <input
@@ -178,7 +180,7 @@ const RestaurantPage = () => {
                             )}
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group-restaurant">
                             <label>Endereço:</label>
                             {isEditing ? (
                                 <input
@@ -193,7 +195,7 @@ const RestaurantPage = () => {
                             )}
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group-restaurant">
                             <label>Telefone:</label>
                             {isEditing ? (
                                 <input
@@ -209,7 +211,7 @@ const RestaurantPage = () => {
                             )}
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group-restaurant">
                             <label>Horário de Funcionamento:</label>
                             {isEditing ? (
                                 <div className="slider-container">
@@ -236,7 +238,7 @@ const RestaurantPage = () => {
                             )}
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group-restaurant">
                             <label>Descrição:</label>
                             {isEditing ? (
                                 <textarea
@@ -250,7 +252,7 @@ const RestaurantPage = () => {
                             )}
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group-restaurant">
                             {isEditing ? (
                                 <>
                                     <button type="button" onClick={handleSave}>Salvar</button>
