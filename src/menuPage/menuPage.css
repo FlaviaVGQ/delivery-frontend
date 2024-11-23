@@ -90,7 +90,7 @@ body {
 .search-bar button {
     position: absolute;
     right: 5px;
-    top: 50%;
+    top: 100%;
     transform: translateY(-150%);
     background-color: transparent;
     border: none;
@@ -128,8 +128,10 @@ body {
 
 .menu-main-content {
     flex: 1;
-    padding: 20px;
+    padding: 2px;
     background-color: rgba(255, 109, 0, 0.07);
+    height:0px;
+
 }
 
 .menu-actions {
@@ -143,6 +145,7 @@ body {
     font-size: 2rem;
     font-weight: bold;
     color: #333;
+    padding: 10px;
 }
 
 .back-button {
@@ -318,3 +321,26 @@ body {
 .checkout-button:hover {
     background-color: #e65c00;
 }
+.restaurant-info {
+    position: relative;
+    top: -40px;
+    left: -450px;
+    padding: -30px;
+    width: 400px;
+    height: 0px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+}
+
+
+.restaurant-info p {
+    margin: 5px 0;
+}
+
+.restaurant-description {
+    font-weight: bold;
+    font-size: 16px;
+}
+

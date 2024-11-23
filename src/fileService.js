@@ -121,7 +121,7 @@ export const deleteProduct = async (id) => {
 
 export const getProductById = async (id) => {
     try {
-        const response = await api.get(`/products/${id}/`); 
+        const response = await api.get(`/products/${id}/`);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar produto: ', error);
@@ -133,21 +133,21 @@ export const updateProduct = async (id, productData) => {
     try {
         const formData = new FormData();
 
-        
+
         formData.append('name', productData.name);
         formData.append('description', productData.description);
         formData.append('price', productData.price);
         formData.append('categoryId', productData.categoryId);
 
-        
+
         if (productData.image) {
             formData.append('image', productData.image);
         }
 
-        
+
         const response = await api.put(`/editProduct/${id}/`, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data', 
+                'Content-Type': 'multipart/form-data',
             },
         });
 
@@ -158,19 +158,35 @@ export const updateProduct = async (id, productData) => {
     }
 };
 
-export const saveCompanyInfo = async (userId, name, openingHours, address, contact, description, image) => {
+export const saveCompanyInfo = async (
+    userId,
+    name,
+    openingHours = '',
+    address = '',
+    contact = '',
+    description = '',
+    image = null
+) => {
     try {
         const formData = new FormData();
 
+
         formData.append('user_id', userId);
         formData.append('name', name);
-        formData.append('opening_hours', openingHours);
-        formData.append('address', address);
-        formData.append('contact', contact);
-        formData.append('description', description);
+
+
+        if (openingHours) formData.append('opening_hours', openingHours);
+        if (address) formData.append('address', address);
+        if (contact) formData.append('contact', contact);
+        if (description) formData.append('description', description);
+
 
         if (image) {
-            formData.append('image', image, 'restaurant-image.png'); 
+            if (image instanceof File || image instanceof Blob) {
+                formData.append('image', image, 'restaurant-image.png');
+            } else {
+                console.warn('O parâmetro "image" não é válido. Ele deve ser um arquivo ou um Blob.');
+            }
         }
 
         const response = await api.post('/company-info/', formData, {
@@ -186,10 +202,11 @@ export const saveCompanyInfo = async (userId, name, openingHours, address, conta
     }
 };
 
+
 export const deleteCategory = async (categoryId, userId) => {
     try {
         const response = await api.delete(`/category/${categoryId}/`, {
-            data: { user_id: userId }, 
+            data: { user_id: userId },
         });
         return response.data;
     } catch (error) {
@@ -211,7 +228,7 @@ export const getCompanyByUser = async (userId) => {
 
 export const fetchProductById = async (id) => {
     try {
-        const response = await api.get(`/product/${id}/`); 
+        const response = await api.get(`/product/${id}/`);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar produto: ', error);

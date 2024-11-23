@@ -7,11 +7,11 @@ import { saveCompanyInfo, getCompanyByUser } from '../fileService';
 
 const RestaurantPage = () => {
     const [restaurantData, setRestaurantData] = useState({
-        name: 'Restaurante',
-        address: 'Rua ...',
+        name: '',
+        address: '',
         phone: '',
-        hours: [8, 20],
-        description: 'Restaurante ...',
+        hours: [0, 0],
+        description: '',
         image: null,
     });
 
@@ -25,7 +25,6 @@ const RestaurantPage = () => {
             try {
                 const response = await getCompanyByUser(userId);
                 const { name, address, contact, opening_hours, description, image } = response.data;
-                console.log(response.data)
 
                 setRestaurantData({
                     name: name || '',
@@ -36,7 +35,6 @@ const RestaurantPage = () => {
                     image: image || null,
                 });
 
-                // Verifica se a imagem existe e cria o preview
                 if (image) {
                     setImagePreview(`data:image/png;base64,${image}`);
                 } else {
@@ -49,6 +47,7 @@ const RestaurantPage = () => {
 
         fetchRestaurantData();
     }, [userId]);
+
 
     const handlePhoneChange = (e) => {
         let value = e.target.value.replace(/\D/g, '');
@@ -68,17 +67,7 @@ const RestaurantPage = () => {
         setRestaurantData(prevData => ({ ...prevData, hours: newValue }));
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result);
-                setRestaurantData(prevData => ({ ...prevData, image: file }));
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+
 
     const handleDrop = (e) => {
         e.preventDefault();
@@ -101,19 +90,30 @@ const RestaurantPage = () => {
 
     const handleDragLeave = () => setDragging(false);
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+                setRestaurantData(prevData => ({ ...prevData, image: file }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSave = async () => {
         setIsEditing(false);
-        const { name, address, phone, hours, description, image } = restaurantData;
 
         try {
             await saveCompanyInfo(
                 userId,
-                name,
-                `${hours[0]}:00 - ${hours[1]}:00`,
-                address,
-                phone,
-                description,
-                image
+                restaurantData.name,
+                restaurantData.hours.length > 0 ? `${restaurantData.hours[0]}:00 - ${restaurantData.hours[1]}:00` : '',
+                restaurantData.address || '',
+                restaurantData.phone || '',
+                restaurantData.description || '',
+                restaurantData.image
             );
             console.log('Informações da empresa salvas com sucesso!');
         } catch (error) {
@@ -136,32 +136,32 @@ const RestaurantPage = () => {
 
             <main className="restaurant-page-content">
                 <div className="restaurant-info">
-                    <div className="form-group">
                     <h2>Informações do Restaurante</h2>
-                        {isEditing ? (
-                            <div
-                                className={`image-upload ${dragging ? 'dragging' : ''}`}
-                                onDragOver={handleDragOver}
-                                onDragLeave={handleDragLeave}
-                                onDrop={handleDrop}
-                            >
-                                <input type="file" accept="image/*" onChange={handleImageChange}
-                                       style={{ display: 'none' }} id="imageInput" />
-                                <label htmlFor="imageInput">
-                                    <div className="upload-area">
-                                        {imagePreview ? (
-                                            <img src={imagePreview} alt="imagem" className="restaurant-image-preview" />
-                                        ) : (
-                                            <FaUpload className="upload-icon" />
-                                        )}
-                                        <p>{imagePreview ? 'Alterar Imagem' : 'Arraste ou clique para enviar uma imagem'}</p>
-                                    </div>
-                                </label>
-                            </div>
-                        ) : (
-                            <img src={imagePreview || '/default-restaurant.jpg'} alt="imagem" className="restaurant-image" />
-                        )}
-                    </div>
+                    {isEditing ? (
+                        <div
+                            className={`image-upload ${dragging ? 'dragging' : ''}`}
+                        >
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                style={{ display: 'none' }}
+                                id="imageInput"
+                            />
+                            <label htmlFor="imageInput">
+                                <div className="upload-area">
+                                    {imagePreview ? (
+                                        <img src={imagePreview} alt="imagem" className="restaurant-image-preview" />
+                                    ) : (
+                                        <FaUpload className="upload-icon" />
+                                    )}
+                                    <p>{imagePreview ? 'Alterar Imagem' : 'Arraste ou clique para enviar uma imagem'}</p>
+                                </div>
+                            </label>
+                        </div>
+                    ) : (
+                        <img src={imagePreview || '/default-restaurant.jpg'} alt="imagem" className="restaurant-image" />
+                    )}
                     <form className="restaurant-form">
                         <div className="form-group">
                             <label>Nome do Restaurante:</label>
