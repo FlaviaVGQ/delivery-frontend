@@ -88,15 +88,15 @@ const MenuPage = () => {
             </header>
 
             <main className="menu-main-content">
-                <div className="restaurant-info">
-                    <p className="restaurant-description">{restaurantData.description}</p>
-                    <p className="restaurant-address">{restaurantData.address}</p>
-                    <p className="restaurant-hours">
+                <div className="-menu-restaurant-info">
+                    <p className="menu-description">{restaurantData.description}</p>
+                    <p className="menu-address">{restaurantData.address}</p>
+                    <p className="menu-hours">
                         {Array.isArray(restaurantData.hours) && restaurantData.hours.length === 2
                             ? `${String(restaurantData.hours[0]).padStart(2, '0')}:00 - ${String(restaurantData.hours[1]).padStart(2, '0')}:00`
                             : 'Horário não disponível'}
                     </p>
-                    <p className="restaurant-phone">{restaurantData.phone}</p>
+                    <p className="menu-phone">{restaurantData.phone}</p>
                 </div>
 
                 <div className="menu-actions">

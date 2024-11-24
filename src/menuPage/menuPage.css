@@ -302,10 +302,10 @@ body {
 .checkout-button:hover {
     background-color: #e65c00;
 }
-.restaurant-info {
+.menu-restaurant-info {
     position: relative;
     top: -40px;
-    left: -450px;
+    left: -580px;
     padding: -30px;
     width: 400px;
     height: 0px;
@@ -316,11 +316,11 @@ body {
 }
 
 
-.restaurant-info p {
+.menu-info p {
     margin: 5px 0;
 }
 
-.restaurant-description {
+.menu-description {
     font-weight: bold;
     font-size: 16px;
 }
