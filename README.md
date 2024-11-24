@@ -48,11 +48,10 @@ npm --version
  ```
 
 ### IDE de Desenvolvimento
-Para começar a executar o projeto, é importante ter uma IDE de sua escolha. Abaixo estão algumas opções que podem ser utilizadas: 
+Para executar o projeto, é importante utilizar uma IDE de sua preferência. Abaixo está a IDE utilizada pela equipe durante o desenvolvimento:
 
- * IntelliJ IDEA (com suporte a JavaScript): https://www.jetbrains.com/idea/
- * Visual Studio Code: https://code.visualstudio.com/
-
+* IntelliJ IDEA (com suporte a JavaScript): https://www.jetbrains.com/idea/
+ 
 <h2 align="center"> Passos para Configuração do Projeto em sua Máquina Local </h2>
 Você pode configurar o projeto de 2 formas pelo arquivo .ZIP ou pelo link do GitHub.
 
