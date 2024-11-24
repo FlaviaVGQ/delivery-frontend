@@ -98,7 +98,10 @@ const AddProductPage = () => {
                         <input
                             type="number"
                             value={price}
-                            onChange={(e) => setPrice(e.target.value)}
+                            onChange={(e) => {
+                                const value = parseFloat(e.target.value);
+                                setPrice(value >= 0 ? value : '');
+                            }}
                         />
                         {errors.price && <p className="error">{errors.price}</p>}
                     </div>

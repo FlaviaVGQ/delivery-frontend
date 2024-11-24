@@ -126,8 +126,8 @@ const MenuPage = () => {
                                         <div key={product.id} className="product-card">
                                             <img src={`http://localhost:8000/${product.image}`} alt={product.name}
                                                  className="product-image"/>
-                                            <div className="product-content">
-                                                <div className="product-info">
+                                            <div className="product-content-menu">
+                                                <div className="product-info-menu">
                                                     <h2 className="product-name">{product.name}</h2>
                                                     <p className="product-description">Descrição: {product.description}</p>
                                                     <p className="product-price">Preço: R$ {product.price}</p>

@@ -125,6 +125,10 @@ const CheckoutPage = () => {
         navigate("/menu/:userId");
     };
 
+    const calculateTotal = () => {
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    };
+
     return (
         <div className="checkout-page-container">
             {currentStep === 1 && (
@@ -184,6 +188,8 @@ const CheckoutPage = () => {
                     <p>Telefone: {deliveryInfo.phone}</p>
                     <h3>Forma de Pagamento:</h3>
                     <p>{paymentMethod}</p>
+                    <h3>Total:</h3>
+                    <p>R$ {calculateTotal()}</p> 
                     <div className="buttons-container">
                         <button type="button" onClick={finalizeOrder} className="finalize-button">Finalizar Compra</button>
                         <button type="button" onClick={() => navigate('/cartPage')} className="edit-order-button">Alterar Pedido</button>

@@ -67,10 +67,10 @@ const OrdersPage = () => {
             </header>
 
             <div>
-                <h2>Meus Pedidos</h2>
                 {orders.length > 0 ? (
                     <main className="orderpage-main">
                         <div className="orderpage-card">
+                            <h2>Pedidos</h2>
                             {orders.map((order) => (
                                 <div key={order.id} className={`order-card ${order.status}`}>
                                     <div className="order-info">
