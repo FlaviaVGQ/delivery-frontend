@@ -37,25 +37,30 @@ Este guia tem como objetivo fornecer instruções passo a passo para configurar 
 
 ### Instalando o Node.js e o npm
 
-1. Acesse o site oficial do Node.js: https://nodejs.org/.
-2. Baixe e instale a versão LTS (Long Term Support) recomendada para o seu sistema operacional.
-3. Durante a instalação, inclua o npm (gerenciador de pacotes do Node.js) — ele é instalado automaticamente junto com o Node.js.
-4. Verifique a instalação executando os comandos abaixo no terminal:
+1. Abra o terminal e atualize os pacotes do sistema:
 
- ```bash
+sudo apt update && sudo apt upgrade -y
+
+
+2. Instale o Node.js e o npm com o gerenciador de pacotes:
+
+sudo apt install nodejs npm -y
+
+3. Confirme a instalação verificando as versões instaladas:
+
 node --version
 npm --version
- ```
+
 
 ### IDE de Desenvolvimento
 Para executar o projeto, é importante utilizar uma IDE de sua preferência. Abaixo está a IDE utilizada pela equipe durante o desenvolvimento:
 
 * IntelliJ IDEA Community(com suporte a JavaScript): https://www.jetbrains.com/idea/
- 
-<h2 align="center"> Passos para Configuração do Projeto em sua Máquina Local </h2>
-Você pode configurar o projeto de 2 formas pelo arquivo .ZIP ou pelo link do GitHub.
 
-### Descompactando o Projeto pelo arquivo .ZIP 
+<h2 align="center"> Passos para Configuração do Projeto em sua Máquina Local </h2>
+Você pode configurar o projeto de 2 formas pelo arquivo .ZIP OU pelo link do GitHub.
+
+### Descompactando o Projeto pelo arquivo .ZIP
 
 1. Realize o download da pasta (LINK PASTA)
 2. Localize o arquivo ZIP do projeto no seu computador.
@@ -72,7 +77,7 @@ Você pode abrir o projeto em sua IDE de preferência de 2 formas :
 2.  * Clique com o botão direito na pasta que foi descompactada
     * E clique em "Abrir com" e selecione a sua IDE de preferência
 
-### Configurando o Projeto pelo link do GitHub 
+### Configurando o Projeto pelo link do GitHub
 
 1. Abra o terminal ou prompt de comando da sua IDE.
 2. Execute o seguinte comando para clonar o repositório:
@@ -80,6 +85,11 @@ Você pode abrir o projeto em sua IDE de preferência de 2 formas :
 ```bash
 git clone https://github.com/FlaviaVGQ/delivery-frontend.git
  ```
+
+3. Acesse a pasta do projeto:
+
+cd delivery-frontend
+
 
 <h2 align="center"> Instalando as Dependências do Projeto </h2>
 
@@ -93,7 +103,7 @@ npm install
 <h2 align="center"> Iniciando o Servidor </h2>
 
 1. Após instalar as dependências, inicie o servidor de desenvolvimento com o comando:
-   
+
 ```bash
 npm start
  ```
