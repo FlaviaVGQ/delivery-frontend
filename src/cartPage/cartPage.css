@@ -8,24 +8,24 @@
 
 .cart-page-header {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    width: 100%; 
-    background-color: #ff6d00; 
-    padding: 20px 0; 
+    width: 100%;
+    background-color: #ff6d00;
+    padding: 20px 0;
     color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .cart-title-container {
     display: flex;
     align-items: center;
-    justify-content: center; 
-    flex-grow: 1; 
+    justify-content: center;
+    flex-grow: 1;
 }
 
-
 .cart-icon {
-    font-size: 2.5rem; 
+    font-size: 2.5rem;
     color: white;
 }
 
@@ -57,6 +57,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-grow: 1;
 }
 
 .cart-item-image {
@@ -81,19 +82,70 @@
     color: #ff6d00;
 }
 
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .cart-item-quantity {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
     gap: 10px;
+    width: auto;
+}
+
+.cart-quantity-button {
+    width: 35px;
+    height: 35px;
+    background-color: #ff6d00;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 0;
+}
+
+.cart-quantity-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    background-color: #e65c00;
+}
+
+.cart-quantity-value {
+    font-size: 1.2rem;
+    color: #333;
+    width: 50px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .cart-item-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #ff6d00;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.5rem;
     border: none;
     background-color: transparent;
     transition: color 0.3s;
+    padding: 0;
+    margin: 0 0 0 15px;
 }
 
 .cart-item-remove:hover {
@@ -124,11 +176,11 @@
     color: #ff6d00;
 }
 
-.observation-section {
+.cart-observation-section {
     margin-top: 15px;
 }
 
-.observation-textarea {
+.cart-observation-textarea {
     width: 100%;
     height: 100px;
     padding: 10px;
@@ -138,7 +190,7 @@
     font-size: 1rem;
 }
 
-.checkout-button {
+.cart-checkout-button {
     width: 100%;
     padding: 15px;
     margin-top: 20px;
@@ -152,68 +204,34 @@
     transition: background-color 0.3s;
 }
 
-.checkout-button:hover {
+.cart-checkout-button:hover {
     background-color: #e65c00;
 }
 
-.trash-icon {
-    font-size: 1.5rem; 
-    color: #ff6d00; 
+.cart-trash-icon {
+    font-size: 1.5rem;
+    color: #ff6d00;
 }
 
-.cart-item-quantity {
+.cart-page-nav {
+    margin-left: auto;
+}
+
+.cart-nav-list {
+    list-style: none;
     display: flex;
-    align-items: center;
-    justify-content: center; 
-    background-color: #fff; 
-    border: 1px solid #000; 
-    border-radius: 5px; 
-    padding: 5px; 
-    width: 120px;
-    margin-left: auto; 
-}
-
-.quantity-button {
-    width: 30px; 
-    height: 30px; 
-    background-color: #fff; 
-    color: #000; 
-    border: 1px solid #000; 
-    border-radius: 5px; 
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.quantity-value {
-    font-size: 1.2rem;
-    color: #333;
-    width: 30px; 
-    text-align: center; 
-    margin: 0 5px; 
-}
-
-
-.page-nav {
-    margin-left: auto; 
-}
-
-.nav-list {
-    list-style: none; 
-    display: flex;
-    gap: 20px; 
+    gap: 20px;
     padding: 0;
-    margin: 0; 
+    margin: 0;
 }
 
-.nav-list a {
-    text-decoration: none; 
-    color: #fafafa; 
-    font-weight: bold; 
-    transition: color 0.3s ease; 
+.cart-nav-list a {
+    text-decoration: none;
+    color: #fafafa;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-.nav-list a:hover {
-    color: rgb(243, 182, 141); 
+.cart-nav-list a:hover {
+    color: rgb(243, 182, 141);
 }
-
-
