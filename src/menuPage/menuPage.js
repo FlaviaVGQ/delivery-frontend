@@ -148,7 +148,7 @@ const MenuPage = () => {
                         <p className="no-products-message">Não há produtos disponíveis.</p>
                     )}
                 </div>
-                <button onClick={handleCheckout} className="checkout-button">
+                <button onClick={handleCheckout} className="checkout-button-menu">
                     Finalizar Compra
                 </button>
             </main>
