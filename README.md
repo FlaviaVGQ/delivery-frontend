@@ -35,23 +35,6 @@ Para o desenvolvimento do Frontend, foram utilizadas as seguintes tecnologias e 
 
 Este guia tem como objetivo fornecer instruções passo a passo para configurar o ambiente de desenvolvimento e executar o Sistema Delivery Express em sua máquina local. Siga as instruções abaixo para garantir que tudo esteja corretamente configurado.
 
-### Instalando o Node.js e o npm
-
-1. Abra o terminal e atualize os pacotes do sistema:
-
-sudo apt update && sudo apt upgrade -y
-
-
-2. Instale o Node.js e o npm com o gerenciador de pacotes:
-
-sudo apt install nodejs npm -y
-
-3. Confirme a instalação verificando as versões instaladas:
-
-node --version
-npm --version
-
-
 ### IDE de Desenvolvimento
 Para executar o projeto, é importante utilizar uma IDE de sua preferência. Abaixo está a IDE utilizada pela equipe durante o desenvolvimento:
 
