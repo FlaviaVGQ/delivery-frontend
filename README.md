@@ -71,8 +71,9 @@ git clone https://github.com/FlaviaVGQ/delivery-frontend.git
 
 3. Acesse a pasta do projeto:
 
+```bash
 cd delivery-frontend
-
+ ```
 
 <h2 align="center"> Instalando as Dependências do Projeto </h2>
 
