@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { fetchCategoriesByUser, getProductById, updateProduct, fetchProductById } from '../fileService';
+import { fetchCategoriesByUser, getProductById, updateProduct} from '../fileService';
 import { FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome } from 'react-icons/fa';
 import './stylesEditaPage.css';
 
@@ -12,21 +12,9 @@ const EditProductPage = () => {
     const [categoryId, setCategoryId] = useState('');
     const [image, setImage] = useState(null);
     const [categories, setCategories] = useState([]);
-    const [errors, setErrors] = useState({});
+    const [errors] = useState({});
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
-
-
-    const [productData, setProductData] = useState({
-        name: '',
-        description: '',
-        price: '',
-        categoryId: '',
-        image: null,
-    });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
 
     useEffect(() => {
         const fetchCategories = async () => {

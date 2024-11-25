@@ -4,7 +4,7 @@ import { FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { getProductsByUser, getCompanyByUser } from '../fileService';
 import { useCart } from '../CartContext';
 import './menuPage.css';
-import { useProduct } from '../ProductContext';
+
 
 
 const MenuPage = () => {

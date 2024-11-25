@@ -1,11 +1,10 @@
-/* Container da página */
 .create-category-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* Contêiner principal (caixa de categorias) */
+
 .create-category-main {
     display: flex;
     flex-direction: column;
@@ -15,7 +14,7 @@
     background-color: #ffe2c2;
 }
 
-/* Caixa principal contendo as duas seções */
+
 .category-box {
     display: flex;
     width: 80%;
@@ -39,7 +38,7 @@
     border-right: 1px solid #ddd;
 }
 
-/* Campo de entrada menor */
+
 .category-input-category {
     width: 80%;
     padding: 10px;
@@ -49,7 +48,7 @@
     transform: translateX(-11px);
 }
 
-/* Botão ajustado */
+
 .create-category-button {
     width: 80%;
     max-width: 300px;
@@ -66,7 +65,7 @@
     background-color: #e65100;
 }
 
-/* Lista de Categorias */
+
 .categories-list {
     flex: 2;
     padding: 20px;
@@ -101,7 +100,7 @@
     color: #ff6d00;
 }
 
-/* Botão de Excluir */
+
 .delete-category-button {
     background-color: transparent;
     border: none;
@@ -118,7 +117,7 @@
     color: #e65100;
 }
 
-/* Footer */
+
 .admin-homepage-footer {
     background-color: #ff6d00;
     color: white;
@@ -129,7 +128,7 @@
     margin-top: auto;
 }
 
-/* Modal de Confirmação */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -154,8 +153,8 @@
 
 .modal-buttons-category {
     display: flex;
-    justify-content: space-around; /* Alinha os botões horizontalmente */
-    gap: 20px; /* Espaçamento entre os botões */
+    justify-content: space-around; 
+    gap: 20px; 
     margin-top: 20px;
 }
 

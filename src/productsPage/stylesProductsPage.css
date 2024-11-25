@@ -251,9 +251,9 @@
 }
 
 .product-image {
-    width: 900%; /* Ajuste ao tamanho do contêiner */
-    height: 500%; /* Proporção quadrada */
-    object-fit: cover; /* Evita distorção da imagem */
+    width: 900%;
+    height: 500%; 
+    object-fit: cover; 
     border-radius: 5px;
 }
 
@@ -265,7 +265,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-bottom: 10px;
-    width: auto; /* Ajusta a largura para acomodar o conteúdo */
+    width: auto; 
 }
 
 .modal-overlay-buttons  {
@@ -307,8 +307,6 @@
     width: 100%; 
 }
 
-
-
 .button {
     flex: 1; 
     margin: 0 5px; 
@@ -323,13 +321,4 @@
 
 .button:hover {
     background-color: #e65c00; 
-}
-
-
-.button-confirm {
-
-}
-
-.button-cancel {
-
 }

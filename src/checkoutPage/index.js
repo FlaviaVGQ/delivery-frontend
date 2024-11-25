@@ -4,7 +4,6 @@ import { useCart } from '../CartContext';
 import { useCheckout } from '../CheckoutContext';
 import { sendOrder } from '../fileService'; 
 import "./checkoutPage.css";
-import axios from "axios";
 
 const CheckoutPage = () => {
     const location = useLocation();

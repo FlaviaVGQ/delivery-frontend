@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import './ordersPage.css';
-import { useNavigate } from 'react-router-dom';
-import { FaBoxOpen, FaHome, FaSignOutAlt, FaUserCircle,  FaTrash } from "react-icons/fa"; 
+import { FaHome, FaSignOutAlt, FaUserCircle,  FaTrash } from "react-icons/fa"; 
 import { getOrdersByUser, deleteOrder} from '../fileService'; 
 
 const OrdersPage = () => {
-    const { restaurantId } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [orders, setOrders] = useState([]);

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './homePage.css';
 import {
     FaUserCircle,
-    FaCog,
     FaSignOutAlt,
     FaInfoCircle,
     FaBoxOpen,

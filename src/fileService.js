@@ -100,6 +100,7 @@ export const addProduct = async (productData, userId) => {
         throw error;
     }
 };
+
 export const getProductsByUser = async (userId) => {
     try {
         const response = await api.get(`/products/`, { params: { user_id: userId } });
@@ -109,6 +110,7 @@ export const getProductsByUser = async (userId) => {
         throw error;
     }
 };
+
 export const deleteProduct = async (id) => {
     try {
         const response = await api.delete(`/deleteProduct/${id}/`);

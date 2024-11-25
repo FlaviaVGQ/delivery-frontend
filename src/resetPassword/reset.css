@@ -1,4 +1,3 @@
-/* Estilos principais para a página de redefinição de senha */
 .reset-container {
     display: flex;
     justify-content: center;
@@ -9,22 +8,22 @@
 
 .reset-box {
     background-color: white;
-    padding: 20px; /* Mantive o padding do box */
+    padding: 20px; 
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 280px; /* Ajusta a largura do contêiner para deixá-lo mais compacto */
+    width: 280px; 
     text-align: center;
 }
 
 .reset-logo {
-    width: 125px; /* Ajuste de tamanho da logo */
-    height: 125px; /* Ajuste de tamanho da logo */
+    width: 125px; 
+    height: 125px; 
     margin-bottom: 10px;
 }
 
 .reset-title {
-    font-size: 20px; /* Tamanho da fonte */
-    margin-bottom: 10px; /* Espaço abaixo do título */
+    font-size: 20px; 
+    margin-bottom: 10px; 
     color: #333;
 }
 
@@ -34,26 +33,26 @@
 }
 
 .form-group {
-    margin: 0; /* Remover margens desnecessárias */
-    padding: 0; /* Remover padding se houver */
+    margin: 0; 
+    padding: 0; 
 }
 
 .form-group label {
-    display: block; /* Faz com que o label ocupe toda a largura */
-    margin-bottom: 2px; /* Pequeno espaçamento abaixo do label */
+    display: block; 
+    margin-bottom: 2px; 
     font-weight: bold;
     color: #555;
-    font-size: 14px; /* Tamanho da fonte */
+    font-size: 14px; 
 }
 
 .input-field {
     width: 100%;
-    padding: 4px; /* Reduzir ainda mais o padding */
+    padding: 4px; 
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px; /* Tamanho da fonte consistente */
-    height: 30px; /* Altura do campo de entrada reduzida */
-    box-sizing: border-box; /* Para incluir o padding e border na altura total */
+    font-size: 14px; 
+    height: 30px; 
+    box-sizing: border-box; 
 }
 
 .reset-button {
@@ -65,7 +64,7 @@
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Espaçamento acima do botão */
+    margin-top: 10px; 
 }
 
 .reset-button:hover {
@@ -87,11 +86,12 @@
     font-weight: bold;
 }
 
+
 .back-login a:hover {
     text-decoration: underline;
 }
 
-/* Ajustes para reduzir o espaço entre campos e melhorar a aparência */
+
 .reset-form > .form-group {
-    margin-bottom: 0px; /* Espaçamento reduzido entre os campos */
+    margin-bottom: 0px; 
 }

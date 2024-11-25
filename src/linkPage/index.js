@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import {FaUserCircle, FaCog, FaSignOutAlt, FaClipboard, FaBoxOpen, FaHome} from 'react-icons/fa';
+import {Link } from 'react-router-dom';
+import {FaUserCircle, FaSignOutAlt, FaClipboard, FaHome} from 'react-icons/fa';
 import './linkpage.css';
 
 const LinkPage = () => {

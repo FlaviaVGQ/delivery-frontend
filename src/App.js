@@ -24,7 +24,7 @@ const App = () => {
     return (
         <ProductProvider>
             <CheckoutProvider>
-                <CartProvider> {/* Envolvemos todo o aplicativo com o CartProvider */}
+                <CartProvider> 
                     <Router>
                         <Routes>
                             <Route path="/" element={<LoginPage />} />
