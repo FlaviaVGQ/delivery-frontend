@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
-import {FaPlus, FaEdit, FaTrash, FaSearch, FaUserCircle, FaHome, FaSignOutAlt} from 'react-icons/fa';
+import {FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaUserCircle, FaHome, FaSignOutAlt} from 'react-icons/fa';
 import {Link, useNavigate} from 'react-router-dom';
 import { fetchCategoriesByUser, getProductsByUser, deleteProduct  } from '../fileService';
-import { useProduct } from '../ProductContext'; 
+import { useProduct } from '../ProductContext'; // Importar o contexto
 
 const ProductsPage = () => {
     const navigate = useNavigate();
     const { products, updateProducts } = useProduct(); 
-    const [setProducts] = useState([]); 
+    const [productsState, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
