@@ -53,7 +53,7 @@ Você pode configurar o projeto de 2 formas pelo arquivo .ZIP OU pelo link do Gi
 ### Abrindo o Projeto na IDE
 Você pode abrir o projeto em sua IDE de preferência de 2 formas :
 
-1.  * Abra a sua IDE de escolha (por exemplo, Visual Studio Code, PyCharm, etc.).
+1.  * Abra a sua IDE de escolha (por exemplo, Visual Studio Code, IntelliJ IDEA , etc.).
     * No menu da IDE, selecione a opção Abrir pasta ou Open Folder.
     * Navegue até a pasta do projeto descompactado e clique em Abrir.
 
