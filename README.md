@@ -36,14 +36,14 @@ Para o desenvolvimento do Frontend, foram utilizadas as seguintes tecnologias e 
 Este guia tem como objetivo fornecer instruções passo a passo para configurar o ambiente de desenvolvimento e executar o Sistema Delivery Express em sua máquina local. Siga as instruções abaixo para garantir que tudo esteja corretamente configurado.
 
 ### IDE de Desenvolvimento
-Para executar o projeto, é importante utilizar uma IDE de sua preferência. Abaixo está a IDE utilizada pela equipe durante o desenvolvimento:
+Para executar o projeto, é importante utilizar uma IDE. Escolha uma IDE de sua preferência. Abaixo está a IDE utilizada pela equipe durante o desenvolvimento:
 
 * IntelliJ IDEA Community(com suporte a JavaScript): https://www.jetbrains.com/idea/
 
 <h2 align="center"> Passos para Configuração do Projeto em sua Máquina Local </h2>
 Você pode configurar o projeto de 2 formas pelo arquivo .ZIP OU pelo link do GitHub.
 
-### Descompactando o Projeto pelo arquivo .ZIP
+### 1) Configurando / Descompactando o Projeto pelo arquivo .ZIP
 
 1. Realize o download da pasta (LINK PASTA)
 2. Localize o arquivo ZIP do projeto no seu computador.
@@ -60,7 +60,7 @@ Você pode abrir o projeto em sua IDE de preferência de 2 formas :
 2.  * Clique com o botão direito na pasta que foi descompactada
     * E clique em "Abrir com" e selecione a sua IDE de preferência
 
-### Configurando o Projeto pelo link do GitHub
+### 2 ) Configurando o Projeto pelo link do GitHub
 
 1. Abra o terminal ou prompt de comando da sua IDE.
 2. Execute o seguinte comando para clonar o repositório:
