@@ -7,7 +7,7 @@ import { useProduct } from '../ProductContext'; // Importar o contexto
 
 const ProductsPage = () => {
     const navigate = useNavigate();
-    const { products, updateProducts } = useProduct(); 
+    const { products, updateProducts } = useProduct();
     const [productsState, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
@@ -25,7 +25,7 @@ const ProductsPage = () => {
                     const categoriesResponse = await fetchCategoriesByUser(userId);
                     setCategories(categoriesResponse);
                     console.log('Categorias:', categoriesResponse);
-    
+
                     const productsResponse = await getProductsByUser(userId);
                     if (JSON.stringify(products) !== JSON.stringify(productsResponse)) {
                         setProducts(productsResponse);
@@ -37,10 +37,10 @@ const ProductsPage = () => {
                 console.error("Erro ao buscar dados: ", error);
             }
         };
-    
+
         fetchData();
-    }, [userId, updateProducts]); 
-    
+    }, [userId, updateProducts]);
+
 
     const handleEditProduct = (id) => {
         navigate(`/editProduct/${id}`);
@@ -71,18 +71,18 @@ const ProductsPage = () => {
         acc[category.name] = filteredProducts.filter(product => product.category === category.name);
         return acc;
     }, {});
-    
+
     const handleDeleteProduct = async (id) => {
-    try {
-        await deleteProduct(id);
-        const filteredProducts = products.filter(product => product.id !== id);
-        setProducts(filteredProducts);
-        updateProducts(filteredProducts);
-        setShowModal(false);
-    } catch (error) {
-        console.error("Erro ao excluir o produto: ", error);
-    }
-};
+        try {
+            await deleteProduct(id);
+            const filteredProducts = products.filter(product => product.id !== id);
+            setProducts(filteredProducts);
+            updateProducts(filteredProducts);
+            setShowModal(false);
+        } catch (error) {
+            console.error("Erro ao excluir o produto: ", error);
+        }
+    };
 
 
     const openModal = (id, name) => {
@@ -145,10 +145,21 @@ const ProductsPage = () => {
                                     <div key={product.id} className="product-item">
                                         <img src={`http://localhost:8000/${product.image}`} alt={product.name} class="product-image"/>
                                         <div className="product-info">
-                                                <h2 className="product-name">{product.name}</h2>
-                                                <p className="product-description">Descrição: {product.description}</p>
-                                                <p className="product-price">Preço: R$ {product.price}</p>
-                                            </div>
+                                            <h2 className="product-name">{product.name}</h2>
+                                            <p className="product-description">Descrição: {product.description}</p>
+                                            {product.discount > 0 ? (
+                                                <p className="product-price">
+                                                    Preço: <span className="original-price">R$ {parseFloat(product.price).toFixed(2)}</span>
+                                                    <span className="discounted-price">
+            R$ {(parseFloat(product.price) * (1 - parseFloat(product.discount) / 100)).toFixed(2)}
+        </span>
+                                                    <span className="promotion-badge">{product.discount}% OFF</span>
+                                                </p>
+                                            ) : (
+                                                <p className="product-price">Preço: R$ {parseFloat(product.price).toFixed(2)}</p>
+                                            )}
+
+                                        </div>
                                         <div className="product-buttons">
                                             <button className="edit-button"
                                                     onClick={() => handleEditProduct(product.id)}>

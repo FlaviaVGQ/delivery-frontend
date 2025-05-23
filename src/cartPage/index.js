@@ -18,7 +18,12 @@ const CartPage = () => {
     };
 
     const calculateTotal = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    return cart.reduce((total, item) => {
+        const priceWithDiscount = item.discount
+            ? item.price * (1 - item.discount / 100)
+            : item.price;
+        return total + priceWithDiscount * item.quantity;
+    }, 0).toFixed(2);
     };
 
     const handleCheckout = () => {
@@ -52,7 +57,11 @@ const CartPage = () => {
                                 <img src={`http://localhost:8000/${item.image}`} alt={item.name} className="cart-item-image" />
                                 <div className="cart-item-details">
                                     <p className="cart-item-name">{item.name}</p>
-                                    <p className="cart-item-price">R$ {Number(item.price).toFixed(2)}</p>
+                                    <p className="cart-item-price">
+                                        R$ {item.discount
+                                                ? (item.price * (1 - item.discount / 100)).toFixed(2)
+                                                : item.price.toFixed(2)}
+                                    </p>
                                 </div>
                             </div>
                             <div className="cart-item-quantity">

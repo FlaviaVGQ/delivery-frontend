@@ -15,6 +15,9 @@ const EditProductPage = () => {
     const [errors] = useState({});
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
+    const [onSale, setOnSale] = useState(false);
+    const [discount, setDiscount] = useState('');
+
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -45,10 +48,10 @@ const EditProductPage = () => {
                 console.error("Erro ao buscar dados do produto: ", error);
             }
         };
-    
+
         fetchData();
-    }, [id]); 
-    
+    }, [id]);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -67,10 +70,32 @@ const EditProductPage = () => {
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+        const loadData = async () => {
+            const product = await getProductById(id);
+            setName(product.name);
+            setDescription(product.description);
+            setPrice(product.price);
+            setCategoryId(product.categoryId);
+            setOnSale(product.onSale || false);
+            setDiscount(product.discount || '');
+            // se houver imagem, também setar aqui
+        };
+
+        const loadCategories = async () => {
+            const data = await fetchCategoriesByUser(userId);
+            setCategories(data);
+        };
+
+        loadData();
+        loadCategories();
+    }, [id, userId]);
+
+
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         try {
-            await updateProduct(id, { name, description, price, categoryId, image });
+            await updateProduct(id, { name, description, price, categoryId, image,  discount: onSale ? discount : null });
             navigate('/products');
         } catch (error) {
             console.error("Erro ao atualizar produto: ", error);
@@ -103,7 +128,7 @@ const EditProductPage = () => {
                         />
                         {errors.name && <p className="error">{errors.name}</p>}
                     </div>
-                    
+
                     <div className="form-group-edit">
                         <label className="form-label-edit">Descrição:</label>
                         <textarea
@@ -113,7 +138,7 @@ const EditProductPage = () => {
                         />
                         {errors.description && <p className="error">{errors.description}</p>}
                     </div>
-                    
+
                     <div className="form-group-edit">
                         <label className="form-label-edit">Preço:</label>
                         <input
@@ -124,7 +149,7 @@ const EditProductPage = () => {
                         />
                         {errors.price && <p className="error">{errors.price}</p>}
                     </div>
-                    
+
                     <div className="form-group-edit">
                         <label className="form-label-edit">Categoria:</label>
                         <select
@@ -141,7 +166,7 @@ const EditProductPage = () => {
                         </select>
                         {errors.categoryId && <p className="error">{errors.categoryId}</p>}
                     </div>
-                    
+
                     <div className="form-group-edit">
                         <label className="form-label-edit">Imagem:</label>
                         <input
@@ -152,6 +177,33 @@ const EditProductPage = () => {
                         />
                         {image && <p>Imagem atual: {typeof image === 'string' ? image : image.name}</p>}
                     </div>
+                    <div className="form-group">
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                checked={onSale}
+                                onChange={() => setOnSale(!onSale)}
+                            />
+                            <span className="slider"></span>
+                        </label>
+                        <span className="promo-label">
+    <span className="star">⭐</span> Colocar em promoção
+  </span>
+                    </div>
+
+                    {onSale && (
+                        <div className="form-group" style={{ marginTop: '12px' }}>
+                            <label>Desconto (%):</label>
+                            <input
+                                type="number"
+                                min="0"
+                                max="100"
+                                value={discount}
+                                onChange={(e) => setDiscount(e.target.value)}
+                            />
+                        </div>
+                    )}
+
                     <button type="submit" className="primary-button">Salvar Alterações</button>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 .products-page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; 
+    min-height: 100vh;
     font-family: 'Arial', sans-serif;
     background-color: #ffe2c2;
 }
@@ -53,7 +53,7 @@
 
 
 .products-page-main {
-    flex: 1; 
+    flex: 1;
     padding: 40px;
     background-color: #ffffff;
 }
@@ -225,11 +225,11 @@
 }
 
 .view-button:hover {
-    color: #0056b3; 
+    color: #0056b3;
 }
 
 .delete-button:hover {
-    color: #d9534f; 
+    color: #d9534f;
 }
 
 
@@ -247,13 +247,13 @@
     text-align: center;
     padding: 15px;
     margin-top: auto;
-    margin-bottom: -200px; 
+    margin-bottom: -200px;
 }
 
 .product-image {
     width: 900%;
-    height: 500%; 
-    object-fit: cover; 
+    height: 500%;
+    object-fit: cover;
     border-radius: 5px;
 }
 
@@ -265,60 +265,81 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-bottom: 10px;
-    width: auto; 
+    width: auto;
 }
 
 .modal-overlay-buttons  {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: center; 
-    justify-content: center; 
-    z-index: 1000; 
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
 .modal-content {
-    background-color: #fff; 
-    padding: 20px; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    max-width: 400px; 
-    width: 90%; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .modal-content h2 {
-    margin: 0 0 10px; 
+    margin: 0 0 10px;
 }
 
 .modal-content p {
-    margin: 0 0 20px; 
+    margin: 0 0 20px;
 }
 
 .button-container {
-    display: flex; 
+    display: flex;
     justify-content: center;
-    width: 100%; 
+    width: 100%;
 }
 
 .button {
-    flex: 1; 
-    margin: 0 5px; 
+    flex: 1;
+    margin: 0 5px;
     padding: 10px;
     cursor: pointer;
     color: white;
     border: none;
     border-radius: 5px;
-    background-color: #ff6d00; 
-    min-width: 100px; 
+    background-color: #ff6d00;
+    min-width: 100px;
 }
 
 .button:hover {
-    background-color: #e65c00; 
+    background-color: #e65c00;
+}
+
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 8px;
+}
+
+.discounted-price {
+    color: #018308;
+    font-weight: bold;
+}
+
+.promotion-badge {
+    background-color: #56ff4a;
+    color: #000;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    margin-left: 10px;
+    border-radius: 5px;
 }

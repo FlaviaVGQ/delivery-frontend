@@ -140,12 +140,21 @@ export const updateProduct = async (id, productData) => {
         formData.append('description', productData.description);
         formData.append('price', productData.price);
         formData.append('categoryId', productData.categoryId);
+        
+
+        if (productData.discount !== undefined && productData.discount !== null && productData.discount !== '') {
+    formData.append('discount', productData.discount);
+}
+
 
 
         if (productData.image) {
             formData.append('image', productData.image);
         }
 
+        for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+        }
 
         const response = await api.put(`/editProduct/${id}/`, formData, {
             headers: {
@@ -240,7 +249,7 @@ export const fetchProductById = async (id) => {
 
 export const getOrdersByUser = async (userId) => {
     try {
-        const response = await api.get('/get/orders/', { params: { user_id: userId } });  
+        const response = await api.get('/get/orders/', { params: { user_id: userId } });
         return response;
     } catch (error) {
         console.error('Erro ao buscar pedidos:', error);
@@ -250,13 +259,13 @@ export const getOrdersByUser = async (userId) => {
 
 export const sendOrder = async (orderData) => {
     try {
-        const token = localStorage.getItem('authToken');  
+        const token = localStorage.getItem('authToken');
         const response = await api.post('/orders/', orderData, {
-        headers: {
-            'Authorization': `Bearer ${token}`  
-        }
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
-        return response.data;  
+        return response.data;
     } catch (error) {
         console.error('Erro ao enviar pedido:', error);
         throw new Error('Erro ao processar o pedido. Tente novamente.');
@@ -267,7 +276,7 @@ export const sendOrder = async (orderData) => {
 export const deleteOrder = async (orderId, userId) => {
     try {
         const response = await api.delete(`/orders/${orderId}/`, {
-            data: { user_id: userId }  
+            data: { user_id: userId }
         });
         return response.data;
     } catch (error) {

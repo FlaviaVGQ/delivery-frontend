@@ -15,7 +15,7 @@ const MenuPage = () => {
     const [imagePreview, setImagePreview] = useState('/default-restaurant.jpg');
     const [searchTerm, setSearchTerm] = useState('');
     const userId = localStorage.getItem('userId');
-    
+
 
 
     useEffect(() => {
@@ -130,7 +130,18 @@ const MenuPage = () => {
                                                 <div className="product-info-menu">
                                                     <h2 className="product-name">{product.name}</h2>
                                                     <p className="product-description">Descrição: {product.description}</p>
-                                                    <p className="product-price">Preço: R$ {product.price}</p>
+                                                    {product.discount > 0 ? (
+                                                        <p className="product-price">
+                                                            Preço: <span className="original-price">R$ {parseFloat(product.price).toFixed(2)}</span>{' '}
+                                                            <span className="discounted-price">
+            R$ {(parseFloat(product.price) * (1 - parseFloat(product.discount) / 100)).toFixed(2)}
+        </span>
+                                                            <span className="promotion-badge">{product.discount}% OFF</span>
+                                                        </p>
+                                                    ) : (
+                                                        <p className="product-price">Preço: R$ {parseFloat(product.price).toFixed(2)}</p>
+                                                    )}
+
                                                 </div>
                                                 <button
                                                     className="add-to-cart-button"

@@ -8,8 +8,8 @@
 
 .admin-homepage-header {
     background-color: #ff6d00;
-    height: 120px; 
-    padding: 20px; 
+    height: 120px;
+    padding: 20px;
     color: white;
     padding: 10px;
     display: flex;
@@ -86,8 +86,8 @@
 }
 
 .form-textarea-edit {
-    resize: vertical; 
-   
+    resize: vertical;
+
 }
 
 .form-input[type="file"] {
@@ -121,3 +121,102 @@
     padding-top: 5px;
     margin-top: auto;
 }
+/* Container promo */
+.form-group {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Toggle switch container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+/* Esconde o checkbox padrão */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+/* Slider do switch */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 28px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+}
+
+/* Bola do slider */
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+/* Estado checked */
+.switch input:checked + .slider {
+    background-color: #FFD700;
+    box-shadow: 0 0 8px #ffd700aa;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(22px);
+}
+
+/* Texto ao lado do toggle */
+.promo-label {
+    font-weight: 600;
+    color: #444;
+    font-size: 1rem;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Estrela dourada */
+.star {
+    color: #FFD700;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+/* Input desconto */
+.form-group input[type="number"] {
+    width: 110px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+}
+
+/* Focus no input desconto */
+.form-group input[type="number"]:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 8px #ffd700aa;
+    outline: none;
+}
+
+
