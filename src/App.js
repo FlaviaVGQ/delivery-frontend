@@ -18,6 +18,8 @@ import { CartProvider } from './CartContext';
 import { CheckoutProvider } from "./CheckoutContext";
 import { ProductProvider } from './ProductContext';
 import OrdersPage from "./orderPage/ordersPage";
+import ReportsPage from "./reports";
+
 
 
 const App = () => {
@@ -43,6 +45,7 @@ const App = () => {
                             <Route path="/cartPage" element={<CartPage />} />
                             <Route path="/checkoutPage" element={<CheckoutPage />} />
                             <Route path="/orders" element={<OrdersPage />} />
+                            <Route path="/reports" element={<ReportsPage />} />
                         </Routes>
                     </Router>
                 </CartProvider>

@@ -8,7 +8,8 @@ import {
     FaStore,
     FaLink,
     FaHome,
-    FaClipboardList
+    FaClipboardList,
+    FaChartBar 
 } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { getProductsByUser } from '../fileService'; 
@@ -91,11 +92,18 @@ const AdminHomePage = () => {
                             <button className="action-button">Visualizar Pedidos</button>
                         </Link>
                     </div>
+                    <div className="admin-homepage-card" id="view-orders">
+                        <h2><FaChartBar /> Relatórios</h2>
+                        <p>Acesse relatórios de vendas e produtos.</p>
+                        <Link to="/reports">
+                            <button className="action-button">Visualizar Relatórios</button>
+                        </Link>
+                    </div>
                 </section>
             </main>
 
             <footer className="admin-homepage-footer">
-                <p>&copy; 2024 Delivery Express | Todos os direitos reservados</p>
+                <p>&copy; 2025 Delivery Express | Todos os direitos reservados</p>
             </footer>
         </div>
     );

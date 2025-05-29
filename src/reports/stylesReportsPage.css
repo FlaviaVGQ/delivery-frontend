@@ -1,0 +1,78 @@
+.reportspage-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe2c2;
+}
+
+.reportspage-header {
+   background-color: #ff6d00;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19);
+}
+
+.reportspage-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.reportspage-main {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.reportspage-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.report-card {
+    background-color: #e9f0f5;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.report-info p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.delete-button {
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+.reportspage-footer {
+    background-color: #ff6d00;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    font-family: 'Verdana', sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
