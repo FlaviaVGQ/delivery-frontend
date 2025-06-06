@@ -122,6 +122,20 @@ const ReportsPage = () => {
         }, {})
     );
 
+    const totalVendas = allItems.reduce((acc, item) => {
+    return acc + (item.price * item.quantity);
+    }, 0);
+
+    const totalItensVendidos = allItems.reduce((acc, item) => {
+    return acc + item.quantity;
+    }, 0);
+
+    const totalCategorias = [...new Set(products.map(p => p.category || 'Sem Categoria'))].length;
+
+
+
+    
+
     if (loading) return <div className="loading">Carregando dados...</div>;
     if (error) return <div className="error">{error}</div>;
 
@@ -139,8 +153,130 @@ const ReportsPage = () => {
             </header>
 
             <main className="reportspage-main">
-                <h2>Relatórios Gráficos</h2>
-                
+                 {/* <h2>Relatórios Gráficos</h2> */}
+
+                <div>
+                    <div className="reportspage-summary">
+                        <div className="summary-box">
+                            <h4>Total de Vendas</h4>
+                            <p>R$ {totalVendas.toFixed(2)}</p>
+                        </div>
+                        <div className="summary-box">
+                            <h4>Total de Itens Vendidos</h4>
+                            <p>{totalItensVendidos}</p>
+                        </div>
+                        <div className="summary-box">
+                            <h4>Total de Categorias</h4>
+                            <p>{totalCategorias}</p>
+                        </div>
+                    </div>
+                    <div className="recent-orders-container">
+                        <h3>Últimos Pedidos</h3>
+                        {orders.length === 0 ? (
+                            <p>Nenhum pedido encontrado.</p>
+                        ) : (
+                            <table className="recent-orders-table">
+                            <thead>
+                                <tr>
+                                <th>Cliente</th>
+                                <th>Observação</th>
+                                <th>Itens do Pedido</th>
+                                <th>Valor Total</th>
+                                <th>Método de Pagamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders
+                                .slice(0, 5) // Pega os 5 primeiros pedidos
+                                .map((order) => (
+                                    <tr key={order.id}>
+                                    <td>{order.customer_name  || '---'}</td>
+                                    <td>{order.observation || '---'}</td>
+                                    <td>
+                                        {order.items
+                                        .map(item => `${item.product_name} (${item.quantity})`)
+                                        .join(', ')}
+                                    </td>
+                                    <td>R$ {parseFloat(order.total_price || 0).toFixed(2)}</td>
+                                    <td>{order.payment_method  || '---'}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                            </table>
+                        )}
+                    </div>
+                    <div className="charts-section">
+                        <div className="chart-container">
+                            <h3>Produtos por Categoria</h3>
+                            <div className="chart-wrapper">
+                            <ResponsiveContainer>
+                                <BarChart data={produtosPorCategoriaData}>
+                                <XAxis dataKey="name" />
+                                <YAxis allowDecimals={false} />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="quantidade" fill="#1f77b4" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            </div>
+                        </div>
+
+                        <div className="chart-container">
+                            <h3>Produtos Mais Vendidos</h3>
+                            <div className="chart-wrapper">
+                            <ResponsiveContainer>
+                                <BarChart data={produtosMaisVendidosData}>
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip
+                                    formatter={(value, name) => {
+                                    if (name === 'totalArrecadado') {
+                                        return [`R$ ${value.toFixed(2)}`, 'Valor arrecadado'];
+                                    }
+                                    if (name === 'quantidade') {
+                                        return [`${value} unid.`, 'Quantidade'];
+                                    }
+                                    return [value, name];
+                                    }}
+                                />
+                                <Legend />
+                                <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#1f77b4" />
+                                <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#d62728" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            </div>
+                        </div>
+
+                        <div className="chart-container">
+                            <h3>Preço Médio por Categoria</h3>
+                            <div className="chart-wrapper">
+                            <ResponsiveContainer>
+                                <BarChart data={precoMedioPorCategoriaData}>
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="precoMedio" fill="#2ca02c" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            </div>
+                        </div>
+                        </div>
+
+                        
+                        <div className="generate-report-container" style={{ textAlign: 'center', marginTop: '20px' }}>
+                        <button
+                            className="generate-report-button"
+                            onClick={() => {
+                            alert('Botão de gerar relatório clicado!');
+                            }}
+                        >
+                            Gerar Relatório
+                        </button>
+                        </div>
+                </div>
+
+                {/*
                 <div className="tabs" >
                     <button
                         className={activeTab === 'produtosPorCategoria' ? 'active' : ''}
@@ -161,7 +297,7 @@ const ReportsPage = () => {
                         Preço Médio por Categoria
                     </button>
                 </div>
-
+                
                 <div className="chart-container" style={{ width: '100%', height: 400 }}>
                     {activeTab === 'produtosPorCategoria' && (
                         <ResponsiveContainer>
@@ -209,11 +345,10 @@ const ReportsPage = () => {
                         </ResponsiveContainer>
                     )}
                 </div>
+                */}
             </main>
 
-            <footer className="reportspage-footer">
-                &copy; 2025 Delivery Express | Todos os direitos reservados
-            </footer>
+           
         </div>
     );
 };
