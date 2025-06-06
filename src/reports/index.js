@@ -122,6 +122,15 @@ const ReportsPage = () => {
         }, {})
     );
 
+    const pedidosPorStatusData = Object.values(
+    orders.reduce((acc, order) => {
+        const status = order.status || 'Sem Status';
+        acc[status] = acc[status] || { name: status, quantidade: 0 };
+        acc[status].quantidade += 1;
+        return acc;
+    }, {})
+    );
+
     const totalVendas = allItems.reduce((acc, item) => {
     return acc + (item.price * item.quantity);
     }, 0);
@@ -131,9 +140,6 @@ const ReportsPage = () => {
     }, 0);
 
     const totalCategorias = [...new Set(products.map(p => p.category || 'Sem Categoria'))].length;
-
-
-
     
 
     if (loading) return <div className="loading">Carregando dados...</div>;
@@ -153,8 +159,6 @@ const ReportsPage = () => {
             </header>
 
             <main className="reportspage-main">
-                 {/* <h2>Relatórios Gráficos</h2> */}
-
                 <div>
                     <div className="reportspage-summary">
                         <div className="summary-box">
@@ -183,11 +187,12 @@ const ReportsPage = () => {
                                 <th>Itens do Pedido</th>
                                 <th>Valor Total</th>
                                 <th>Método de Pagamento</th>
+                                <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {orders
-                                .slice(0, 5) // Pega os 5 primeiros pedidos
+                                .slice(0, 5) 
                                 .map((order) => (
                                     <tr key={order.id}>
                                     <td>{order.customer_name  || '---'}</td>
@@ -199,6 +204,9 @@ const ReportsPage = () => {
                                     </td>
                                     <td>R$ {parseFloat(order.total_price || 0).toFixed(2)}</td>
                                     <td>{order.payment_method  || '---'}</td>
+                                    <td className={`status ${order.status ? order.status.toLowerCase().replace(/\s/g, '-') : ''}`}>
+                                    {order.status || '---'}
+                                    </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -215,7 +223,7 @@ const ReportsPage = () => {
                                 <YAxis allowDecimals={false} />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="quantidade" fill="#1f77b4" />
+                                <Bar dataKey="quantidade" name="Quantidade" fill="#00509e" />
                                 </BarChart>
                             </ResponsiveContainer>
                             </div>
@@ -240,8 +248,8 @@ const ReportsPage = () => {
                                     }}
                                 />
                                 <Legend />
-                                <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#1f77b4" />
-                                <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#d62728" />
+                                <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#d62728" />
+                                <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#1f77b4" />
                                 </BarChart>
                             </ResponsiveContainer>
                             </div>
@@ -256,14 +264,26 @@ const ReportsPage = () => {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="precoMedio" fill="#2ca02c" />
+                                <Bar dataKey="precoMedio" name="Preço Médio" fill="#2ca02c" />
                                 </BarChart>
                             </ResponsiveContainer>
                             </div>
                         </div>
+                        <div className="chart-container">
+                            <h3>Pedidos por Status</h3>
+                            <div className="chart-wrapper" style={{ width: '100%', height: 300 }}>
+                                <ResponsiveContainer>
+                                <BarChart data={pedidosPorStatusData}>
+                                    <XAxis dataKey="name" />
+                                    <YAxis allowDecimals={false} />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="quantidade" name="Quantidade" fill="#1f77b4" />
+                                </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                            </div>
                         </div>
-
-                        
                         <div className="generate-report-container" style={{ textAlign: 'center', marginTop: '20px' }}>
                         <button
                             className="generate-report-button"
@@ -275,80 +295,7 @@ const ReportsPage = () => {
                         </button>
                         </div>
                 </div>
-
-                {/*
-                <div className="tabs" >
-                    <button
-                        className={activeTab === 'produtosPorCategoria' ? 'active' : ''}
-                        onClick={() => setActiveTab('produtosPorCategoria')}
-                    >
-                        Produtos por Categoria
-                    </button>
-                    <button
-                        className={activeTab === 'produtosMaisVendidos' ? 'active' : ''}
-                        onClick={() => setActiveTab('produtosMaisVendidos')}
-                    >
-                        Produtos Mais Vendidos
-                    </button>
-                    <button
-                        className={activeTab === 'precoMedioPorCategoria' ? 'active' : ''}
-                        onClick={() => setActiveTab('precoMedioPorCategoria')}
-                    >
-                        Preço Médio por Categoria
-                    </button>
-                </div>
-                
-                <div className="chart-container" style={{ width: '100%', height: 400 }}>
-                    {activeTab === 'produtosPorCategoria' && (
-                        <ResponsiveContainer>
-                            <BarChart data={produtosPorCategoriaData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                                <XAxis dataKey="name" />
-                                <YAxis allowDecimals={false} />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="quantidade" fill="#8884d8" />
-                            </BarChart>
-                        </ResponsiveContainer>
-                    )}
-
-                    {activeTab === 'produtosMaisVendidos' && (
-                        <ResponsiveContainer>
-                            <BarChart data={produtosMaisVendidosData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip formatter={(value, name) => {
-                                    if (name === 'totalArrecadado') {
-                                        return [`R$ ${value.toFixed(2)}`, 'Valor arrecadado'];
-                                    }
-                                    if (name === 'quantidade') {
-                                        return [`${value} unid.`, 'Quantidade'];
-                                    }
-                                    return [value, name];
-                                }} />
-
-                                <Legend />
-                                <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#82ca9d" />
-                                <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#8884d8" />
-                            </BarChart>
-                        </ResponsiveContainer>
-                    )}
-
-                    {activeTab === 'precoMedioPorCategoria' && (
-                        <ResponsiveContainer>
-                            <BarChart data={precoMedioPorCategoriaData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="precoMedio" fill="#ffc658" />
-                            </BarChart>
-                        </ResponsiveContainer>
-                    )}
-                </div>
-                */}
             </main>
-
-           
         </div>
     );
 };

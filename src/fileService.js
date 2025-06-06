@@ -143,11 +143,8 @@ export const updateProduct = async (id, productData) => {
         
 
         if (productData.discount !== undefined && productData.discount !== null && productData.discount !== '') {
-    formData.append('discount', productData.discount);
-}
-
-
-
+            formData.append('discount', productData.discount);
+        }
         if (productData.image) {
             formData.append('image', productData.image);
         }
@@ -281,6 +278,16 @@ export const deleteOrder = async (orderId, userId) => {
         return response.data;
     } catch (error) {
         console.error('Erro ao excluir pedido:', error);
+        throw error;
+    }
+};
+
+export const updateOrderStatus = async (orderId, status) => {
+    try {
+        const response = await api.patch(`/orders/${orderId}/`, { status });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao atualizar status do pedido:', error);
         throw error;
     }
 };

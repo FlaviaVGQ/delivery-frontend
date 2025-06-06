@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import './ordersPage.css';
 import { FaHome, FaSignOutAlt, FaUserCircle,  FaTrash } from "react-icons/fa"; 
-import { getOrdersByUser, deleteOrder} from '../fileService'; 
+import { getOrdersByUser, deleteOrder, updateOrderStatus} from '../fileService'; 
 
 const OrdersPage = () => {
     const [loading, setLoading] = useState(true);
@@ -30,13 +30,19 @@ const OrdersPage = () => {
         fetchOrders();
     }, [userId]);
 
-    const handleStatusChange = (orderId, status) => {
-        setOrders(prevOrders =>
-            prevOrders.map(order =>
-                order.id === orderId ? { ...order, status } : order
-            )
-        );
-    };
+    const handleStatusChange = async (orderId, status) => {
+        try {
+            await updateOrderStatus(orderId, status);
+            setOrders(prevOrders =>
+                prevOrders.map(order =>
+                    order.id === orderId ? { ...order, status } : order
+                )
+            );
+        } catch (error) {
+            console.error('Erro ao atualizar status:', error);
+            alert('Erro ao atualizar status do pedido.');
+        }
+        };
 
     const handleDelete = async (orderId) => {
         try {
