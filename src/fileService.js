@@ -291,3 +291,13 @@ export const updateOrderStatus = async (orderId, status) => {
         throw error;
     }
 };
+
+export const downloadReportPDF = async (userId) => {
+   const res = await api.get('/pdf/', {
+    params: { user_id: userId },
+    responseType: 'blob',
+  });
+  return res.data; 
+};
+
+

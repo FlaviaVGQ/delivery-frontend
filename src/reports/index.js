@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaHome, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
-import { getProductsByUser, getOrdersByUser } from '../fileService';
+import { getProductsByUser, getOrdersByUser, downloadReportPDF } from '../fileService';
 import {
     BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
@@ -15,6 +15,7 @@ const ReportsPage = () => {
     const [loadingOrders, setLoadingOrders] = useState(true);
     const [errorProducts, setErrorProducts] = useState(null);
     const [errorOrders, setErrorOrders] = useState(null);
+    
 
     useEffect(() => {
         async function fetchProducts() {
@@ -51,6 +52,23 @@ const ReportsPage = () => {
         }
         fetchOrders();
     }, [userId]);
+
+
+    const handleDownload = async () => {
+    try {
+        const blob = await downloadReportPDF(userId);
+        const url  = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'relatorio.pdf';
+        link.click();
+        URL.revokeObjectURL(url);
+    } catch (err) {
+        console.error(err);
+        alert('Erro ao baixar relatório');
+    }
+    };
+    
 
     const loading = loadingProducts || loadingOrders;
     const error = errorProducts || errorOrders;
@@ -140,7 +158,8 @@ const ReportsPage = () => {
     }, 0);
 
     const totalCategorias = [...new Set(products.map(p => p.category || 'Sem Categoria'))].length;
-    
+
+   
 
     if (loading) return <div className="loading">Carregando dados...</div>;
     if (error) return <div className="error">{error}</div>;
@@ -287,9 +306,7 @@ const ReportsPage = () => {
                         <div className="generate-report-container" style={{ textAlign: 'center', marginTop: '20px' }}>
                         <button
                             className="generate-report-button"
-                            onClick={() => {
-                            alert('Botão de gerar relatório clicado!');
-                            }}
+                           onClick={handleDownload} 
                         >
                             Gerar Relatório
                         </button>
