@@ -9,15 +9,18 @@ import {
     FaLink,
     FaHome,
     FaClipboardList,
-    FaChartBar 
+    FaChartBar,
+    FaMoon,
+    FaSun
 } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { getProductsByUser } from '../fileService'; 
+import { getProductsByUser } from '../fileService';
 
 const AdminHomePage = () => {
     const [menuLink, setMenuLink] = useState('');
+    const [darkMode, setDarkMode] = useState(false);  // Estado do modo noturno
     const userId = localStorage.getItem('userId');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (userId) {
@@ -28,24 +31,35 @@ const AdminHomePage = () => {
 
     const handleViewStore = async () => {
         try {
-            const products = await getProductsByUser(userId); 
-          
+            const products = await getProductsByUser(userId);
             navigate(`/menu/${userId}`, { state: { products } });
         } catch (error) {
             console.error('Erro ao carregar produtos: ', error);
-            
         }
     };
 
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
+
     return (
-        <div className="admin-homepage-container">
+        <div className={`admin-homepage-container ${darkMode ? 'dark' : ''}`}>
             <header className="admin-homepage-header">
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
-                        <li><Link to="/home"><FaHome/> Início</Link></li>
-                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome /> Início</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li>
+                            <button
+                                onClick={toggleDarkMode}
+                                className="dark-mode-toggle"
+                                aria-label="Toggle dark mode"
+                            >
+                                {darkMode ? <FaSun /> : <FaMoon />}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </header>
@@ -73,11 +87,12 @@ const AdminHomePage = () => {
                         <p>Veja uma pré-visualização da loja online.</p>
                         <button
                             className="action-button"
-                            onClick={handleViewStore} 
+                            onClick={handleViewStore}
                         >
                             Visualizar Loja
                         </button>
                     </div>
+
                     <div className="admin-homepage-card" id="generate-link">
                         <h2><FaLink /> Gerar Link de Compartilhamento</h2>
                         <p>Crie um link para compartilhar a loja com clientes.</p>
@@ -85,6 +100,7 @@ const AdminHomePage = () => {
                             <button className="action-button">Gerar Link</button>
                         </Link>
                     </div>
+
                     <div className="admin-homepage-card" id="view-orders">
                         <h2><FaClipboardList /> Visualizar Pedidos</h2>
                         <p>Veja os pedidos feitos pelos clientes na loja online.</p>
@@ -92,7 +108,8 @@ const AdminHomePage = () => {
                             <button className="action-button">Visualizar Pedidos</button>
                         </Link>
                     </div>
-                    <div className="admin-homepage-card" id="view-orders">
+
+                    <div className="admin-homepage-card" id="view-reports">
                         <h2><FaChartBar /> Relatórios</h2>
                         <p>Acesse relatórios de vendas e produtos.</p>
                         <Link to="/reports">
