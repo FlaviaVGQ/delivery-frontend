@@ -59,11 +59,18 @@ const CheckoutPage = () => {
         const orderData = {
             customer_name: deliveryInfo.fullName,
             observation: observation,
-            total_price: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+            total_price: cart.reduce((acc, item) => {
+                const price = item.discount > 0
+                    ? item.price * (1 - item.discount / 100)
+                    : item.price;
+                return acc + price * item.quantity;
+            }, 0),
             items: cart.map((item) => ({
                 name: item.name,
                 quantity: item.quantity,
-                price: item.price
+                price: item.discount > 0
+                    ? (item.price * (1 - item.discount / 100)).toFixed(2)
+                    : item.price.toFixed(2)
             })),
             address: {
                 street: deliveryInfo.street,
@@ -125,7 +132,12 @@ const CheckoutPage = () => {
     };
 
     const calculateTotal = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+        return cart.reduce((total, item) => {
+            const price = item.discount > 0
+                ? item.price * (1 - item.discount / 100)
+                : item.price;
+            return total + price * item.quantity;
+        }, 0).toFixed(2);
     };
 
     return (
@@ -175,7 +187,11 @@ const CheckoutPage = () => {
                     <ul>
                         {cart.map(item => (
                             <li key={item.id}>
-                                {item.name} - {item.quantity} x R$ {parseFloat(item.price).toFixed(2)}
+                                {item.name} - {item.quantity} x R$ {
+                                    item.discount > 0
+                                        ? (item.price * (1 - item.discount / 100)).toFixed(2)
+                                        : parseFloat(item.price).toFixed(2)
+                                }
                             </li>
                         ))}
                     </ul>

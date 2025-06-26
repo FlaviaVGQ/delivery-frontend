@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaHome, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { FaHome, FaSignOutAlt, FaUserCircle, FaCheck, FaClock, FaTimes, FaMinus } from "react-icons/fa";
 import { getProductsByUser, getOrdersByUser, downloadReportPDF } from '../fileService';
 import {
     BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer
@@ -117,8 +117,7 @@ const ReportsPage = () => {
         .sort((a, b) => b.quantidade - a.quantidade)
         .slice(0, 10);
 
-
-    
+        
     const precoMedioPorCategoriaData = Object.values(
         products.reduce((acc, product) => {
             const categoria = product.category || 'Sem Categoria';
@@ -159,7 +158,22 @@ const ReportsPage = () => {
 
     const totalCategorias = [...new Set(products.map(p => p.category || 'Sem Categoria'))].length;
 
-   
+    const renderStatusIcon = (status) => {
+    const lowerStatus = (status || '').toLowerCase().trim();
+    switch (lowerStatus) {
+        case 'feito':
+        case 'entregue':
+        return <FaCheck title="Feito" />;
+        case 'em-andamento':  
+        case 'pendente':
+        return <FaClock title="Em Andamento" />;
+        case 'nao-feito':   
+        case 'cancelado':
+        return <FaTimes title="Não Feito" />;
+        default:
+        return <FaMinus title="Desconhecido" />;
+    }
+    };
 
     if (loading) return <div className="loading">Carregando dados...</div>;
     if (error) return <div className="error">{error}</div>;
@@ -223,8 +237,8 @@ const ReportsPage = () => {
                                     </td>
                                     <td>R$ {parseFloat(order.total_price || 0).toFixed(2)}</td>
                                     <td>{order.payment_method  || '---'}</td>
-                                    <td className={`status ${order.status ? order.status.toLowerCase().replace(/\s/g, '-') : ''}`}>
-                                    {order.status || '---'}
+                                    <td className={`status-icon ${order.status ? order.status.toLowerCase().replace(/\s/g, '-') : ''}`}>
+                                    {renderStatusIcon(order.status)}
                                     </td>
                                     </tr>
                                 ))}

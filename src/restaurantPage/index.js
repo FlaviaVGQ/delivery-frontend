@@ -67,9 +67,6 @@ const RestaurantPage = () => {
         setRestaurantData(prevData => ({ ...prevData, hours: newValue }));
     };
 
-
-
-
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -116,8 +113,8 @@ const RestaurantPage = () => {
 
             <main className="restaurant-page-content">
                 <div className="restaurant-info">
-                    <div className="form-group">
                     <h2>Informações do Restaurante</h2>
+                    <div className="form-group">
                     {isEditing ? (
                         <div
                             className={`image-upload ${dragging ? 'dragging' : ''}`}

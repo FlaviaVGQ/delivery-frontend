@@ -173,7 +173,7 @@
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
 }
 
-/* Estado checked */
+
 .switch input:checked + .slider {
     background-color: #FFD700;
     box-shadow: 0 0 8px #ffd700aa;
@@ -183,7 +183,6 @@
     transform: translateX(22px);
 }
 
-/* Texto ao lado do toggle */
 .promo-label {
     font-weight: 600;
     color: #444;
@@ -194,14 +193,12 @@
     gap: 6px;
 }
 
-/* Estrela dourada */
 .star {
     color: #FFD700;
     font-size: 1.4rem;
     line-height: 1;
 }
 
-/* Input desconto */
 .form-group input[type="number"] {
     width: 110px;
     padding: 8px 12px;
@@ -212,7 +209,6 @@
     box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
 }
 
-/* Focus no input desconto */
 .form-group input[type="number"]:focus {
     border-color: #FFD700;
     box-shadow: 0 0 8px #ffd700aa;

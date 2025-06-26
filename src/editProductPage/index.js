@@ -79,7 +79,6 @@ const EditProductPage = () => {
             setCategoryId(product.categoryId);
             setOnSale(product.onSale || false);
             setDiscount(product.discount || '');
-            // se houver imagem, também setar aqui
         };
 
         const loadCategories = async () => {
@@ -187,10 +186,9 @@ const EditProductPage = () => {
                             <span className="slider"></span>
                         </label>
                         <span className="promo-label">
-    <span className="star">⭐</span> Colocar em promoção
-  </span>
+                            <span className="star">⭐</span> Colocar em promoção
+                        </span>
                     </div>
-
                     {onSale && (
                         <div className="form-group" style={{ marginTop: '12px' }}>
                             <label>Desconto (%):</label>
