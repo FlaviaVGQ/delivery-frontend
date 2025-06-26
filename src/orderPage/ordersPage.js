@@ -133,7 +133,7 @@ const OrdersPage = () => {
                                         </label>
                                     </div>
 
-                                    <button onClick={() => handleDelete(order.id)} className="delete-button">
+                                    <button onClick={() => handleDelete(order.id)} className="delete-button-orders">
                                         <FaTrash /> 
                                     </button>
                                 </div>
