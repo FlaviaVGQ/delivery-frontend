@@ -134,7 +134,7 @@ const OrdersPage = () => {
                                     </div>
 
                                     <button onClick={() => handleDelete(order.id)} className="delete-button">
-                                        <FaTrash /> Excluir
+                                        <FaTrash /> 
                                     </button>
                                 </div>
                             ))}
@@ -146,7 +146,7 @@ const OrdersPage = () => {
             </div>
 
             <footer className="orderpage-footer">
-                &copy; 2024 Delivery Express | Todos os direitos reservados
+                &copy; 2025 Delivery Express | Todos os direitos reservados
             </footer>
         </div>
     );
