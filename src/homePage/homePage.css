@@ -1,4 +1,3 @@
-/* Estilos padrão (modo claro) */
 .admin-homepage-container {
     display: flex;
     flex-direction: column;
@@ -38,11 +37,11 @@
     gap: 20px;
     margin: 0;
     padding: 0;
-    align-items: center;  /* Isso alinha verticalmente os itens */
+    align-items: center;  
 }
 
 .nav-list li {
-    display: flex;         /* Para alinhar ícone e texto dentro do li */
+    display: flex;         
     align-items: center;
     gap: 8px;
 }
@@ -130,19 +129,19 @@
     font-size: 0.9rem;
     font-family: 'Verdana', sans-serif;
 }
-/* Estilo base */
+
 .admin-homepage-container {
     background-color: #ffe0b6;
     color: #333;
 }
 
-/* MODO ESCURO */
+
 .admin-homepage-container.dark {
     background-color: #0e0e0e;
     color: #e4e4e4;
 }
 
-/* HEADER */
+
 .admin-homepage-container.dark .admin-homepage-header {
     background-color: #1a1a1a;
     color: #e4e4e4;
@@ -150,7 +149,7 @@
     border-bottom: 1px solid #2c2c2c;
 }
 
-/* LINKS E BOTÕES DO MENU */
+
 .admin-homepage-container.dark .nav-list a,
 .admin-homepage-container.dark .nav-list button {
     color: #dcdcdc;
@@ -162,7 +161,7 @@
     color: #ffb74d;
 }
 
-/* CARDS / SEÇÕES */
+
 .admin-homepage-container.dark .admin-homepage-card {
     background-color: #1e1e1e;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -179,7 +178,7 @@
     color: #c2c2c2;
 }
 
-/* BOTÕES DE AÇÃO */
+
 .admin-homepage-container.dark .action-button {
     background-color: #ff9800;
     color: #0e0e0e;
@@ -193,14 +192,14 @@
     color: #ffffff;
 }
 
-/* FOOTER */
+
 .admin-homepage-container.dark .admin-homepage-footer {
     background-color: #1a1a1a;
     color: #aaa;
     border-top: 1px solid #2c2c2c;
 }
 
-/* BOTÃO MODO ESCURO */
+
 .dark-mode-toggle {
     background: transparent;
     border: none;
@@ -211,7 +210,7 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    margin-top: -2px; /* ajuste de alinhamento */
+    margin-top: -2px; 
     transition: color 0.3s ease;
 }
 

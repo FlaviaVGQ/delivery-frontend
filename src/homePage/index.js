@@ -18,7 +18,7 @@ import { getProductsByUser } from '../fileService';
 
 const AdminHomePage = () => {
     const [menuLink, setMenuLink] = useState('');
-    const [darkMode, setDarkMode] = useState(false);  // Estado do modo noturno
+    const [darkMode, setDarkMode] = useState(false);  
     const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
 

@@ -29,7 +29,6 @@ const CategoryPage = () => {
         event.preventDefault();
         const categoryName = category.trim();
 
-        // Verifica se a categoria já existe (ignora maiúsculas/minúsculas)
         const isDuplicate = categories.some(
             (cat) => cat.name.toLowerCase() === categoryName.toLowerCase()
         );
@@ -51,21 +50,21 @@ const CategoryPage = () => {
 
 
     const openModal = (category) => {
-        setSelectedCategory(category); // Define a categoria a ser excluída
-        setShowModal(true); // Exibe o modal
+        setSelectedCategory(category); 
+        setShowModal(true); 
     };
 
     const closeModal = () => {
-        setSelectedCategory(null); // Reseta a categoria selecionada
-        setShowModal(false); // Oculta o modal
+        setSelectedCategory(null); 
+        setShowModal(false); 
     };
 
     const confirmDelete = async () => {
         if (selectedCategory) {
             try {
                 await deleteCategory(selectedCategory.id, userId);
-                setCategories(categories.filter((cat) => cat.id !== selectedCategory.id)); // Remove do estado
-                closeModal(); // Fecha o modal
+                setCategories(categories.filter((cat) => cat.id !== selectedCategory.id)); 
+                closeModal(); 
                 alert('Categoria excluída com sucesso!');
             } catch (error) {
                 console.error('Erro ao excluir categoria:', error);
@@ -140,7 +139,6 @@ const CategoryPage = () => {
                 <p>&copy; 2024 Delivery Express | Todos os direitos reservados</p>
             </footer>
 
-            {/* Modal de Confirmação */}
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">

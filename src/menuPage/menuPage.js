@@ -134,8 +134,8 @@ const MenuPage = () => {
                                                         <p className="product-price">
                                                             Preço: <span className="original-price">R$ {parseFloat(product.price).toFixed(2)}</span>{' '}
                                                             <span className="discounted-price">
-            R$ {(parseFloat(product.price) * (1 - parseFloat(product.discount) / 100)).toFixed(2)}
-        </span>
+                                                                 R$ {(parseFloat(product.price) * (1 - parseFloat(product.discount) / 100)).toFixed(2)}
+                                                            </span>
                                                             <span className="promotion-badge">{product.discount}% OFF</span>
                                                         </p>
                                                     ) : (

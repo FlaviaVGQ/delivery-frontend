@@ -74,7 +74,7 @@ const LinkPage = () => {
             </main>
 
             <footer className="admin-homepage-footer">
-                <p>&copy; 2024 Delivery Express | Todos os direitos reservados </p>
+                <p>&copy; 2025 Delivery Express | Todos os direitos reservados </p>
             </footer>
         </div>
     );

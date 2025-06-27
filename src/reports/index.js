@@ -16,9 +16,6 @@ const ReportsPage = () => {
     const [errorProducts, setErrorProducts] = useState(null);
     const [errorOrders, setErrorOrders] = useState(null);
 
-
-
-
     useEffect(() => {
         async function fetchProducts() {
             try {
@@ -256,10 +253,15 @@ const ReportsPage = () => {
                             <div className="chart-wrapper">
                                 <ResponsiveContainer>
                                     <BarChart data={produtosPorCategoriaData}>
-                                        <XAxis dataKey="name" />
+                                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} />
                                         <YAxis allowDecimals={false} />
                                         <Tooltip />
-                                        <Legend />
+                                        <Legend 
+                                            verticalAlign="bottom" 
+                                            align="center" 
+                                            height={36} 
+                                            wrapperStyle={{ transform: 'translateY(35px)' }}  
+                                        />
                                         <Bar dataKey="quantidade" name="Quantidade" fill="#00509e" />
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -271,7 +273,7 @@ const ReportsPage = () => {
                             <div className="chart-wrapper">
                                 <ResponsiveContainer>
                                     <BarChart data={produtosMaisVendidosData}>
-                                        <XAxis dataKey="name" />
+                                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} />
                                         <YAxis />
                                         <Tooltip
                                             formatter={(value, name) => {
@@ -285,7 +287,12 @@ const ReportsPage = () => {
                                                 return [value, name];
                                             }}
                                         />
-                                        <Legend />
+                                        <Legend 
+                                            verticalAlign="bottom" 
+                                            align="center" 
+                                            height={36} 
+                                            wrapperStyle={{ transform: 'translateY(35px)' }}  
+                                        />
                                         <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#d62728" />
                                         <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#1f77b4" />
                                     </BarChart>
@@ -298,10 +305,15 @@ const ReportsPage = () => {
                             <div className="chart-wrapper">
                                 <ResponsiveContainer>
                                     <BarChart data={precoMedioPorCategoriaData}>
-                                        <XAxis dataKey="name" />
+                                        <XAxis dataKey="name"  angle={-45} textAnchor="end" interval={0}/>
                                         <YAxis />
                                         <Tooltip />
-                                        <Legend />
+                                        <Legend 
+                                            verticalAlign="bottom" 
+                                            align="center" 
+                                            height={36} 
+                                            wrapperStyle={{ transform: 'translateY(35px)' }}  
+                                        />
                                         <Bar dataKey="precoMedio" name="Preço Médio" fill="#2ca02c" />
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -312,10 +324,15 @@ const ReportsPage = () => {
                             <div className="chart-wrapper" style={{ width: '100%', height: 300 }}>
                                 <ResponsiveContainer>
                                     <BarChart data={pedidosPorStatusData}>
-                                        <XAxis dataKey="name" />
+                                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0}/>
                                         <YAxis allowDecimals={false} />
                                         <Tooltip />
-                                        <Legend />
+                                        <Legend 
+                                            verticalAlign="bottom" 
+                                            align="center" 
+                                            height={36} 
+                                            wrapperStyle={{ transform: 'translateY(35px)' }}  
+                                        />
                                         <Bar dataKey="quantidade" name="Quantidade" fill="#1f77b4" />
                                     </BarChart>
                                 </ResponsiveContainer>
