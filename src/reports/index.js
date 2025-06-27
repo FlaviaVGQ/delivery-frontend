@@ -15,7 +15,9 @@ const ReportsPage = () => {
     const [loadingOrders, setLoadingOrders] = useState(true);
     const [errorProducts, setErrorProducts] = useState(null);
     const [errorOrders, setErrorOrders] = useState(null);
-    
+
+
+
 
     useEffect(() => {
         async function fetchProducts() {
@@ -55,20 +57,20 @@ const ReportsPage = () => {
 
 
     const handleDownload = async () => {
-    try {
-        const blob = await downloadReportPDF(userId);
-        const url  = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'relatorio.pdf';
-        link.click();
-        URL.revokeObjectURL(url);
-    } catch (err) {
-        console.error(err);
-        alert('Erro ao baixar relatório');
-    }
+        try {
+            const blob = await downloadReportPDF(userId);
+            const url  = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'relatorio.pdf';
+            link.click();
+            URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error(err);
+            alert('Erro ao baixar relatório');
+        }
     };
-    
+
 
     const loading = loadingProducts || loadingOrders;
     const error = errorProducts || errorOrders;
@@ -83,7 +85,7 @@ const ReportsPage = () => {
         }))
     );
 
-    
+
     const produtosPorCategoriaData = Object.values(
         products.reduce((acc, product) => {
             const categoria = product.category || 'Sem Categoria';
@@ -93,7 +95,7 @@ const ReportsPage = () => {
         }, {})
     );
 
-    
+
     const produtosMaisVendidosData = Object.values(
         orders.flatMap(order => order.items).reduce((acc, item) => {
             const nome = item.product_name || 'Produto Desconhecido';
@@ -117,7 +119,9 @@ const ReportsPage = () => {
         .sort((a, b) => b.quantidade - a.quantidade)
         .slice(0, 10);
 
-        
+    const produtoMaisVendido = produtosMaisVendidosData.length > 0 ? produtosMaisVendidosData[0] : null;
+
+
     const precoMedioPorCategoriaData = Object.values(
         products.reduce((acc, product) => {
             const categoria = product.category || 'Sem Categoria';
@@ -140,39 +144,39 @@ const ReportsPage = () => {
     );
 
     const pedidosPorStatusData = Object.values(
-    orders.reduce((acc, order) => {
-        const status = order.status || 'Sem Status';
-        acc[status] = acc[status] || { name: status, quantidade: 0 };
-        acc[status].quantidade += 1;
-        return acc;
-    }, {})
+        orders.reduce((acc, order) => {
+            const status = order.status || 'Sem Status';
+            acc[status] = acc[status] || { name: status, quantidade: 0 };
+            acc[status].quantidade += 1;
+            return acc;
+        }, {})
     );
 
     const totalVendas = allItems.reduce((acc, item) => {
-    return acc + (item.price * item.quantity);
+        return acc + (item.price * item.quantity);
     }, 0);
 
     const totalItensVendidos = allItems.reduce((acc, item) => {
-    return acc + item.quantity;
+        return acc + item.quantity;
     }, 0);
 
     const totalCategorias = [...new Set(products.map(p => p.category || 'Sem Categoria'))].length;
 
     const renderStatusIcon = (status) => {
-    const lowerStatus = (status || '').toLowerCase().trim();
-    switch (lowerStatus) {
-        case 'feito':
-        case 'entregue':
-        return <FaCheck title="Feito" />;
-        case 'em-andamento':  
-        case 'pendente':
-        return <FaClock title="Em Andamento" />;
-        case 'nao-feito':   
-        case 'cancelado':
-        return <FaTimes title="Não Feito" />;
-        default:
-        return <FaMinus title="Desconhecido" />;
-    }
+        const lowerStatus = (status || '').toLowerCase().trim();
+        switch (lowerStatus) {
+            case 'feito':
+            case 'entregue':
+                return <FaCheck title="Feito" />;
+            case 'em-andamento':
+            case 'pendente':
+                return <FaClock title="Em Andamento" />;
+            case 'nao-feito':
+            case 'cancelado':
+                return <FaTimes title="Não Feito" />;
+            default:
+                return <FaMinus title="Desconhecido" />;
+        }
     };
 
     if (loading) return <div className="loading">Carregando dados...</div>;
@@ -203,8 +207,8 @@ const ReportsPage = () => {
                             <p>{totalItensVendidos}</p>
                         </div>
                         <div className="summary-box">
-                            <h4>Total de Categorias</h4>
-                            <p>{totalCategorias}</p>
+                            <h4>Mais Vendido</h4>
+                            <p>{produtoMaisVendido ? produtoMaisVendido.name : '---'}</p>
                         </div>
                     </div>
                     <div className="recent-orders-container">
@@ -213,36 +217,36 @@ const ReportsPage = () => {
                             <p>Nenhum pedido encontrado.</p>
                         ) : (
                             <table className="recent-orders-table">
-                            <thead>
+                                <thead>
                                 <tr>
-                                <th>Cliente</th>
-                                <th>Observação</th>
-                                <th>Itens do Pedido</th>
-                                <th>Valor Total</th>
-                                <th>Método de Pagamento</th>
-                                <th>Status</th>
+                                    <th>Cliente</th>
+                                    <th>Observação</th>
+                                    <th>Itens do Pedido</th>
+                                    <th>Valor Total</th>
+                                    <th>Método de Pagamento</th>
+                                    <th>Status</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 {orders
-                                .slice(0, 5) 
-                                .map((order) => (
-                                    <tr key={order.id}>
-                                    <td>{order.customer_name  || '---'}</td>
-                                    <td>{order.observation || '---'}</td>
-                                    <td>
-                                        {order.items
-                                        .map(item => `${item.product_name} (${item.quantity})`)
-                                        .join(', ')}
-                                    </td>
-                                    <td>R$ {parseFloat(order.total_price || 0).toFixed(2)}</td>
-                                    <td>{order.payment_method  || '---'}</td>
-                                    <td className={`status-icon ${order.status ? order.status.toLowerCase().replace(/\s/g, '-') : ''}`}>
-                                    {renderStatusIcon(order.status)}
-                                    </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                                    .slice(0, 5)
+                                    .map((order) => (
+                                        <tr key={order.id}>
+                                            <td>{order.customer_name  || '---'}</td>
+                                            <td>{order.observation || '---'}</td>
+                                            <td>
+                                                {order.items
+                                                    .map(item => `${item.product_name} (${item.quantity})`)
+                                                    .join(', ')}
+                                            </td>
+                                            <td>R$ {parseFloat(order.total_price || 0).toFixed(2)}</td>
+                                            <td>{order.payment_method  || '---'}</td>
+                                            <td className={`status-icon ${order.status ? order.status.toLowerCase().replace(/\s/g, '-') : ''}`}>
+                                                {renderStatusIcon(order.status)}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
                             </table>
                         )}
                     </div>
@@ -250,81 +254,82 @@ const ReportsPage = () => {
                         <div className="chart-container">
                             <h3>Produtos por Categoria</h3>
                             <div className="chart-wrapper">
-                            <ResponsiveContainer>
-                                <BarChart data={produtosPorCategoriaData}>
-                                <XAxis dataKey="name" />
-                                <YAxis allowDecimals={false} />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="quantidade" name="Quantidade" fill="#00509e" />
-                                </BarChart>
-                            </ResponsiveContainer>
+                                <ResponsiveContainer>
+                                    <BarChart data={produtosPorCategoriaData}>
+                                        <XAxis dataKey="name" />
+                                        <YAxis allowDecimals={false} />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="quantidade" name="Quantidade" fill="#00509e" />
+                                    </BarChart>
+                                </ResponsiveContainer>
                             </div>
                         </div>
 
                         <div className="chart-container">
                             <h3>Produtos Mais Vendidos</h3>
                             <div className="chart-wrapper">
-                            <ResponsiveContainer>
-                                <BarChart data={produtosMaisVendidosData}>
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip
-                                    formatter={(value, name) => {
-                                    if (name === 'totalArrecadado') {
-                                        return [`R$ ${value.toFixed(2)}`, 'Valor arrecadado'];
-                                    }
-                                    if (name === 'quantidade') {
-                                        return [`${value} unid.`, 'Quantidade'];
-                                    }
-                                    return [value, name];
-                                    }}
-                                />
-                                <Legend />
-                                <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#d62728" />
-                                <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#1f77b4" />
-                                </BarChart>
-                            </ResponsiveContainer>
+                                <ResponsiveContainer>
+                                    <BarChart data={produtosMaisVendidosData}>
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <Tooltip
+                                            formatter={(value, name) => {
+                                                if (name === 'totalArrecadado') {
+                                                    return [`R$ ${value.toFixed(2)}`, 'Valor arrecadado'];
+
+                                                }
+                                                if (name === 'quantidade') {
+                                                    return [`${value} unid.`, 'Quantidade'];
+                                                }
+                                                return [value, name];
+                                            }}
+                                        />
+                                        <Legend />
+                                        <Bar dataKey="quantidade" name="Quantidade Vendida" fill="#d62728" />
+                                        <Bar dataKey="totalArrecadado" name="Total Arrecadado (R$)" fill="#1f77b4" />
+                                    </BarChart>
+                                </ResponsiveContainer>
                             </div>
                         </div>
 
                         <div className="chart-container">
                             <h3>Preço Médio por Categoria</h3>
                             <div className="chart-wrapper">
-                            <ResponsiveContainer>
-                                <BarChart data={precoMedioPorCategoriaData}>
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="precoMedio" name="Preço Médio" fill="#2ca02c" />
-                                </BarChart>
-                            </ResponsiveContainer>
+                                <ResponsiveContainer>
+                                    <BarChart data={precoMedioPorCategoriaData}>
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="precoMedio" name="Preço Médio" fill="#2ca02c" />
+                                    </BarChart>
+                                </ResponsiveContainer>
                             </div>
                         </div>
                         <div className="chart-container">
                             <h3>Pedidos por Status</h3>
                             <div className="chart-wrapper" style={{ width: '100%', height: 300 }}>
                                 <ResponsiveContainer>
-                                <BarChart data={pedidosPorStatusData}>
-                                    <XAxis dataKey="name" />
-                                    <YAxis allowDecimals={false} />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="quantidade" name="Quantidade" fill="#1f77b4" />
-                                </BarChart>
+                                    <BarChart data={pedidosPorStatusData}>
+                                        <XAxis dataKey="name" />
+                                        <YAxis allowDecimals={false} />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="quantidade" name="Quantidade" fill="#1f77b4" />
+                                    </BarChart>
                                 </ResponsiveContainer>
                             </div>
-                            </div>
                         </div>
-                        <div className="generate-report-container" style={{ textAlign: 'center', marginTop: '20px' }}>
+                    </div>
+                    <div className="generate-report-container" style={{ textAlign: 'center', marginTop: '20px' }}>
                         <button
                             className="generate-report-button"
-                           onClick={handleDownload} 
+                            onClick={handleDownload}
                         >
                             Gerar Relatório
                         </button>
-                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -332,4 +337,3 @@ const ReportsPage = () => {
 };
 
 export default ReportsPage;
-
