@@ -5,14 +5,14 @@
     font-family: 'Arial', sans-serif;
     background-color: #ffe2c2;
     overflow-y: auto;
-    
+
 }
 
 body {
-    background-color: #ffe2c2; 
+    background-color: #ffe2c2;
     margin: 0;
     padding: 0;
-    height: 100vh; 
+    height: 100vh;
 }
 
 .restaurant-page-header {
@@ -38,12 +38,12 @@ body {
 
 .form-actions {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     margin-top: 20px;
 }
 
 .form-group-restaurant button {
-    width: 250px; 
+    width: 250px;
     padding: 10px 20px;
     background-color: #ff6d00;
     border: none;
@@ -57,7 +57,7 @@ body {
 }
 
 .form-group-restaurant button:first-child {
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .restaurant-info {
@@ -88,7 +88,7 @@ body {
 }
 
 .time-range {
-    margin-top: 50px; 
+    margin-top: 50px;
     font-size: 14px;
     color: #333;
 }
@@ -117,24 +117,24 @@ body {
 
 
 .MuiSlider-root {
-    color: #ff8c00 !important; 
+    color: #ff8c00 !important;
 }
 
 .MuiSlider-markLabel {
-    color: #333 !important; 
+    color: #333 !important;
 }
 
 .MuiSlider-thumb {
     background-color: white !important;
-    border: 2px solid #ff8c00 !important; 
+    border: 2px solid #ff8c00 !important;
 }
 
 .MuiSlider-track {
-    background-color: #ff8c00 !important; 
+    background-color: #ff8c00 !important;
 }
 
 .MuiSlider-rail {
-    background-color: #ccc !important; 
+    background-color: #ccc !important;
 }
 .image-upload {
     border: 2px dashed #ccc;
@@ -173,12 +173,73 @@ body {
     color: #666;
 }
 .restaurant-image {
-    width: 150px; 
+    width: 150px;
     height: 150px;
     object-fit: cover;
-    border-radius: 50%; 
-    display: block; 
-    margin: 0 auto; 
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+.admin-homepage-container.dark {
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
+.admin-homepage-container.dark .admin-homepage-header {
+    background: linear-gradient(90deg, #1f1f1f, #2c2c2c);
+    color: #f5f5f5;
+    box-shadow: 0 8px 8px rgba(255, 255, 255, 0.05);
+}
+
+.admin-homepage-container.dark .nav-list a,
+.admin-homepage-container.dark .nav-list button {
+    color: #e0e0e0;
+}
+.admin-homepage-container.dark .nav-list a:hover,
+.admin-homepage-container.dark .nav-list button:hover {
+    color: #ffa726;
+}
+
+.admin-homepage-container.dark .admin-homepage-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+}
+.admin-homepage-container.dark .admin-homepage-card h2 {
+    color: #f5f5f5;
+}
+.admin-homepage-container.dark .admin-homepage-card p {
+    color: #bbbbbb;
+}
+
+.admin-homepage-container.dark .action-button {
+    background-color: #ffa726;
+    color: #121212;
+}
+.admin-homepage-container.dark .action-button:hover {
+    background-color: #fb8c00;
+}
+
+.admin-homepage-container.dark .admin-homepage-footer {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+}
+
+.admin-homepage-container.dark .dark-mode-toggle {
+    color: #f2f2f2;
+}
+.admin-homepage-container.dark .dark-mode-toggle:hover {
+    color: #ffd580;
+}
+.dark .form-group-restaurant {
+    color: #0e0e13;
+}
+
+.restaurant-image-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
