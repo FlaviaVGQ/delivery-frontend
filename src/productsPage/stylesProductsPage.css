@@ -343,3 +343,140 @@
     margin-left: 10px;
     border-radius: 5px;
 }
+
+.dark.admin-homepage-container {
+    background-color: #121212;
+    color: #eee;
+}
+
+.dark .admin-homepage-header {
+    background-color: #1f1f1f;
+    border-bottom-color: #333;
+}
+
+.dark .admin-homepage-nav .nav-list li a,
+.dark .admin-homepage-nav .nav-list li button {
+    color: #eee;
+}
+
+.dark .admin-homepage-nav .nav-list li a.logout-button {
+    color: #dd6618;
+}
+
+.dark .products-page-main {
+    background-color: #181818;
+}
+
+.dark .products-page-title h1,
+.dark .product-name,
+.dark .product-price,
+.dark .product-description {
+    color: #eee;
+}
+
+.dark .products-page-title p {
+    color: #bbb;
+}
+
+.dark .search-bar {
+    background-color: #2a2a2a;
+    border-color: #444;
+}
+
+.dark .search-icon {
+    color: #aaa;
+}
+
+.dark .search-input {
+    color: #eee;
+}
+
+.dark .primary-button, .dark .add-category-button {
+    color: #fafafa;
+}
+
+
+.dark .category-container {
+    border-color: #333;
+}
+
+.dark .category-products {
+    gap: 1rem;
+}
+
+.dark .product-item {
+    background-color: #242424;
+    box-shadow: none;
+}
+
+.dark .product-description {
+    color: #ccc;
+}
+
+.dark .original-price {
+    color: #777;
+}
+
+.dark .discounted-price {
+    color: rgba(255, 109, 0, 0.91);
+}
+
+.dark .promotion-badge {
+    background: rgba(255, 109, 0, 0.83);
+    color: white;
+}
+
+.dark .product-buttons button {
+    color: #fafafa;
+}
+
+
+
+.dark .category-divider {
+    border-bottom-color: #444;
+}
+
+.dark .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(18, 18, 18, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dark .modal-content {
+    background-color: #2c2c2c;
+    padding: 2rem;
+    border-radius: 10px;
+    color: #eee;
+    max-width: 400px;
+    width: 90%;
+}
+
+.dark .modal-buttons .button-confirm {
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.dark .modal-buttons .button-cancel {
+    background-color: #555;
+    color: #ddd;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.dark .page-footer {
+    background-color: #1a1a1a;
+    color: #bbb;
+}
