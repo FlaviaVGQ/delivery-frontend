@@ -153,8 +153,8 @@
 
 .modal-buttons-category {
     display: flex;
-    justify-content: space-around; 
-    gap: 20px; 
+    justify-content: space-around;
+    gap: 20px;
     margin-top: 20px;
 }
 
@@ -182,4 +182,113 @@
 
 .modal-cancel:hover {
     background-color: #999;
+}
+
+
+.admin-homepage-container.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+    min-height: 100vh;
+}
+
+
+.admin-homepage-container.dark .create-category-main {
+    background-color: #1e1e1e;
+}
+
+
+.admin-homepage-container.dark .category-box {
+    background-color: #252525;
+    border-color: #444;
+    box-shadow: 0 4px 8px rgba(255 255 255 / 0.1);
+}
+
+
+.admin-homepage-container.dark .form-container-category {
+    border-right: 1px solid #444;
+}
+
+
+.admin-homepage-container.dark .category-input-category {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
+
+.admin-homepage-container.dark .category-input-category::placeholder {
+    color: #aaa;
+}
+
+.admin-homepage-container.dark .create-category-button {
+    background-color: #ff8c00;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.admin-homepage-container.dark .create-category-button:hover {
+    background-color: #e67e00;
+}
+
+.admin-homepage-container.dark .categories-list h2 {
+    color: #ddd;
+}
+
+.admin-homepage-container.dark .category-item {
+    background-color: #2a2a2a;
+    border-color: #555;
+    color: #ddd;
+}
+
+.admin-homepage-container.dark .category-item:hover {
+    background-color: #ff8c00;
+    border-color: #ff8c00;
+    color: #121212;
+}
+
+
+.admin-homepage-container.dark .delete-category-button {
+    color: #ff8c00;
+}
+
+.admin-homepage-container.dark .delete-category-button:hover {
+    color: rgba(230, 126, 0, 0.47);
+}
+
+
+.admin-homepage-container.dark .admin-homepage-footer {
+    background-color: #ff8c00;
+    color: #121212;
+}
+
+.admin-homepage-container.dark .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.admin-homepage-container.dark h1 {
+    color: #ffffff;
+}
+
+.admin-homepage-container.dark .modal-buttons-category button {
+    color: #121212;
+}
+
+.admin-homepage-container.dark .modal-confirm {
+    background-color: #ff8c00;
+}
+
+.admin-homepage-container.dark .modal-confirm:hover {
+    background-color: #e67e00;
+}
+
+.admin-homepage-container.dark .modal-cancel {
+    background-color: #555;
+    color: #eee;
+}
+
+.admin-homepage-container.dark .modal-cancel:hover {
+    background-color: #777;
+}
+
+.admin-homepage-container.dark .modal-content p[style*="color: red"] {
+    color: #ff5555;
 }
