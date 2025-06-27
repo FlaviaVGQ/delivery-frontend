@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './stylesProductsPage.css';
-import {FaBoxOpen, FaPlus, FaEdit, FaTrash, FaEye, FaSearch, FaUserCircle, FaHome, FaSignOutAlt} from 'react-icons/fa';
+import {
+    FaBoxOpen,
+    FaPlus,
+    FaEdit,
+    FaTrash,
+    FaEye,
+    FaSearch,
+    FaUserCircle,
+    FaHome,
+    FaSignOutAlt,
+    FaSun, FaMoon
+} from 'react-icons/fa';
 import {Link, useNavigate} from 'react-router-dom';
 import { fetchCategoriesByUser, getProductsByUser, deleteProduct  } from '../fileService';
-import { useProduct } from '../ProductContext'; // Importar o contexto
+import { useProduct } from '../ProductContext';
 
 const ProductsPage = () => {
     const navigate = useNavigate();
@@ -14,6 +25,8 @@ const ProductsPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [productIdToDelete, setProductIdToDelete] = useState(null);
     const [productNameToDelete, setProductNameToDelete] = useState('');
+    const [darkMode, setDarkMode] = useState(false);
+
 
     const userId = localStorage.getItem('userId');
     console.log("usuario", userId);
@@ -96,17 +109,29 @@ const ProductsPage = () => {
         setProductIdToDelete(null);
         setProductNameToDelete('');
     };
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
 
 
     return (
-        <div className="products-page-container">
-            <header className="page-header">
-                <img src="/logo.png" alt="Logo" className="page-logo" />
-                <nav className="page-nav">
+        <div className={`admin-homepage-container ${darkMode ? 'dark' : ''}`}>
+            <header className="admin-homepage-header">
+                <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
+                <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
-                        <li><Link to="/home"><FaHome/> Início</Link></li>
-                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome /> Início</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li>
+                            <button
+                                onClick={toggleDarkMode}
+                                className="dark-mode-toggle"
+                                aria-label="Toggle dark mode"
+                            >
+                                {darkMode ? <FaSun /> : <FaMoon />}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </header>
