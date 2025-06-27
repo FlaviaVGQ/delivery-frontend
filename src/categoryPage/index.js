@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCategoriesByUser, deleteCategory, sendCategory } from '../fileService';
-import {FaBoxOpen, FaHome, FaSignOutAlt, FaTrashAlt, FaUserCircle} from 'react-icons/fa';
+import {FaBoxOpen, FaHome, FaMoon, FaSignOutAlt, FaSun, FaTrashAlt, FaUserCircle} from 'react-icons/fa';
 import './category.css';
 import {Link} from "react-router-dom";
 
 const CategoryPage = () => {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('');
-    const [showModal, setShowModal] = useState(false); // Controla a visibilidade do modal
-    const [selectedCategory, setSelectedCategory] = useState(null); // Categoria selecionada para exclusão
+    const [showModal, setShowModal] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const userId = localStorage.getItem('userId');
+    const [darkMode, setDarkMode] = useState(false);
+
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -72,20 +74,32 @@ const CategoryPage = () => {
         }
     };
 
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
+
+
     return (
-        <div className="create-category-page">
+        <div className={`admin-homepage-container ${darkMode ? 'dark' : ''}`}>
             <header className="admin-homepage-header">
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
-                        <li><Link to="/restaurante"><FaUserCircle/> Perfil</Link></li>
-                        <li><Link to="/home"><FaHome/> Início</Link></li>
-                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
-                        <li><Link to="/" className="logout-button"><FaSignOutAlt/> Sair</Link></li>
+                        <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
+                        <li><Link to="/home"><FaHome /> Início</Link></li>
+                        <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li>
+                            <button
+                                onClick={toggleDarkMode}
+                                className="dark-mode-toggle"
+                                aria-label="Toggle dark mode"
+                            >
+                                {darkMode ? <FaSun /> : <FaMoon />}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </header>
-
             <main className="create-category-main">
                 <div className="category-box">
                     <div className="form-container-category">
