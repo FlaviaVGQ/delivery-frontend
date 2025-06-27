@@ -116,3 +116,34 @@ button[type="submit"]:hover {
     padding-top: 100px;
     margin-top: 120px;
 }
+
+
+.add-product-container.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.add-product-container.dark .form-container {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+.add-product-container.dark .form-container h2 {
+    color: #ffffff;
+}
+
+.add-product-container.dark form label {
+    color: #dddddd;
+}
+
+.add-product-container.dark form input,
+.add-product-container.dark form textarea {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+.add-product-container.dark .error {
+    color: #ff6b6b;
+}
