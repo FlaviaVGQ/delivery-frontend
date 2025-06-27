@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchCategoriesByUser, addProduct } from '../fileService';
-import { FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome } from 'react-icons/fa';
+import {FaUserCircle, FaSignOutAlt, FaBoxOpen, FaHome, FaSun, FaMoon} from 'react-icons/fa';
 import './styles.css';
 
 const AddProductPage = () => {
@@ -14,6 +14,8 @@ const AddProductPage = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
+    const [darkMode, setDarkMode] = useState(false);
+
     console.log(userId);
 
     useEffect(() => {
@@ -59,20 +61,32 @@ const AddProductPage = () => {
         }
     };
 
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
+
+
     return (
-        <div className="add-product-container">
+        <div className={`add-product-container ${darkMode ? 'dark' : ''}`}>
             <header className="admin-homepage-header">
                 <img src="/logo.png" alt="Logo" className="admin-homepage-logo" />
                 <nav className="admin-homepage-nav">
                     <ul className="nav-list">
                         <li><Link to="/restaurante"><FaUserCircle /> Perfil</Link></li>
                         <li><Link to="/home"><FaHome /> Início</Link></li>
-                        <li><a href="/products"><FaBoxOpen /> Voltar</a></li>
                         <li><Link to="/" className="logout-button"><FaSignOutAlt /> Sair</Link></li>
+                        <li>
+                            <button
+                                onClick={toggleDarkMode}
+                                className="dark-mode-toggle"
+                                aria-label="Toggle dark mode"
+                            >
+                                {darkMode ? <FaSun /> : <FaMoon />}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </header>
-
             <div className="form-container">
                 <h2>Adicionar Produto</h2>
                 <form onSubmit={handleSubmit}>
